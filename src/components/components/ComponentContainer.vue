@@ -4,66 +4,66 @@
 <!-- The different modes are controlled by the props "notMoreInfo" (default true) and "isMapLayer" (default false) -->
 
 <script setup>
-import { computed, ref } from "vue";
-import { useDialogStore } from "../../store/dialogStore";
-import { useContentStore } from "../../store/contentStore";
+import { computed, ref } from 'vue'
+import { useDialogStore } from '../../store/dialogStore'
+import { useContentStore } from '../../store/contentStore'
 
-import ComponentTag from "../utilities/ComponentTag.vue";
-import { chartTypes } from "../../assets/configs/apexcharts/chartTypes";
+import ComponentTag from '../utilities/ComponentTag.vue'
+import { chartTypes } from '../../assets/configs/apexcharts/chartTypes'
 
-const dialogStore = useDialogStore();
-const contentStore = useContentStore();
+const dialogStore = useDialogStore()
+const contentStore = useContentStore()
 
 const props = defineProps({
 	// The complete config (incl. chart data) of a dashboard component will be passed in
 	content: { type: Object },
 	notMoreInfo: { type: Boolean, default: true },
 	isMapLayer: { type: Boolean, default: false },
-});
+})
 
 // The default active chart is the first one in the list defined in the dashboard component
-const activeChart = ref(props.content.chart_config.types[0]);
+const activeChart = ref(props.content.chart_config.types[0])
 
 // Parses time data into display format
 const dataTime = computed(() => {
 	if (!props.content.time_from) {
-		return "固定資料";
+		return '固定資料'
 	}
 	if (!props.content.time_to) {
-		return props.content.time_from.slice(0, 10);
+		return props.content.time_from.slice(0, 10)
 	}
 	return `${props.content.time_from.slice(
 		0,
-		10
-	)} ~ ${props.content.time_to.slice(0, 10)}`;
-});
+		10,
+	)} ~ ${props.content.time_to.slice(0, 10)}`
+})
 // Parses update frequency data into display format
 const updateFreq = computed(() => {
 	const unitRef = {
-		minute: "分",
-		hour: "時",
-		day: "天",
-		week: "週",
-		month: "月",
-		year: "年",
-	};
+		minute: '分',
+		hour: '時',
+		day: '天',
+		week: '週',
+		month: '月',
+		year: '年',
+	}
 	if (!props.content.update_freq) {
-		return "不定期更新";
+		return '不定期更新'
 	}
 	return `每${props.content.update_freq}${
 		unitRef[props.content.update_freq_unit]
-	}更新`;
-});
+	}更新`
+})
 
 // Toggles between chart types defined in the dashboard component
 function changeActiveChart(chartName) {
-	activeChart.value = chartName;
+	activeChart.value = chartName
 }
 function toggleFavorite() {
 	if (contentStore.favorites.includes(`${props.content.id}`)) {
-		contentStore.unfavoriteComponent(props.content.id);
+		contentStore.unfavoriteComponent(props.content.id)
 	} else {
-		contentStore.favoriteComponent(props.content.id);
+		contentStore.favoriteComponent(props.content.id)
 	}
 }
 </script>
@@ -87,13 +87,10 @@ function toggleFavorite() {
 			<div v-if="notMoreInfo">
 				<button
 					v-if="
-						!isMapLayer &&
-						contentStore.currentDashboard.index !== 'favorites'
+						!isMapLayer && contentStore.currentDashboard.index !== 'favorites'
 					"
 					:class="{
-						isfavorite: contentStore.favorites.includes(
-							`${content.id}`
-						),
+						isfavorite: contentStore.favorites.includes(`${content.id}`),
 					}"
 					@click="toggleFavorite"
 				>
@@ -103,9 +100,7 @@ function toggleFavorite() {
 				<button
 					title="回報問題"
 					class="show-if-mobile"
-					@click="
-						dialogStore.showReportIssue(content.id, content.name)
-					"
+					@click="dialogStore.showReportIssue(content.id, content.name)"
 				>
 					<span>flag</span>
 				</button>
@@ -120,8 +115,7 @@ function toggleFavorite() {
 				</button>
 				<button
 					v-if="
-						!isMapLayer &&
-						contentStore.currentDashboard.index === 'favorites'
+						!isMapLayer && contentStore.currentDashboard.index === 'favorites'
 					"
 					@click="contentStore.deleteComponent(content.id)"
 					class="isUnfavorite"
@@ -135,10 +129,6 @@ function toggleFavorite() {
 			v-if="props.content.chart_config.types.length > 1"
 		>
 			<button
-				:class="{
-					'componentcontainer-control-button': true,
-					'componentcontainer-control-active': activeChart === item,
-				}"
 				v-for="item in props.content.chart_config.types"
 				@click="changeActiveChart(item)"
 				:key="`${props.content.index}-${item}-button`"
@@ -183,7 +173,7 @@ function toggleFavorite() {
 					@click="
 						dialogStore.showNotification(
 							'info',
-							'本組件有篩選地圖功能，歡迎至地圖頁面嘗試'
+							'本組件有篩選地圖功能，歡迎至地圖頁面嘗試',
 						)
 					"
 					class="hide-if-mobile"
@@ -195,7 +185,7 @@ function toggleFavorite() {
 					@click="
 						dialogStore.showNotification(
 							'info',
-							'本組件有空間資料，歡迎至地圖頁面查看'
+							'本組件有空間資料，歡迎至地圖頁面查看',
 						)
 					"
 				/>
@@ -206,7 +196,7 @@ function toggleFavorite() {
 					@click="
 						dialogStore.showNotification(
 							'info',
-							'本組件有歷史資訊，點擊「組件資訊」以查看'
+							'本組件有歷史資訊，點擊「組件資訊」以查看',
 						)
 					"
 					class="history-tag"
@@ -307,12 +297,12 @@ function toggleFavorite() {
 		justify-content: center;
 		align-items: center;
 		position: absolute;
-		top: 4.2rem;
+		top: 4rem;
 		left: 0;
 		z-index: 8;
 
-		&-button {
-			margin: 0 2px;
+		button {
+			margin: 0 4px;
 			padding: 4px 4px;
 			border-radius: 5px;
 			background-color: rgb(77, 77, 77);
@@ -320,18 +310,15 @@ function toggleFavorite() {
 			color: var(--color-complement-text);
 			font-size: var(--font-s);
 			text-align: center;
-			transition: color 0.2s, opacity 0.2s;
+			transition:
+				color 0.2s,
+				opacity 0.2s;
 			user-select: none;
 
 			&:hover {
 				opacity: 1;
 				color: white;
 			}
-		}
-
-		&-active {
-			background-color: var(--color-complement-text);
-			color: white;
 		}
 	}
 

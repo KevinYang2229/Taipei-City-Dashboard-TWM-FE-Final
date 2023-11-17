@@ -1,29 +1,29 @@
 // Initial Position and Settings
 export const MapObjectConfig = {
 	antialias: true,
-	container: "mapboxBox",
+	container: 'mapboxBox',
 	center: [121.536609, 25.044808],
 	maxBounds: [
 		[121.3870596781498, 24.95733863075891], // Southwest coordinates
 		[121.6998231749096, 25.21179993640203], // Northeast coordinates
 	],
-	zoom: 12.5,
-	minZoom: 11,
+	zoom: 12,
+	minZoom: 2,
 	maxZoom: 22,
-	projection: "globe", // display the map as a 3D globe
-};
+	projection: 'globe', // display the map as a 3D globe
+}
 
 // Styles for base layer "Taipei Town"
 export const TaipeiTown = {
-	id: "taipei_town",
-	source: "taipei_town",
-	type: "symbol",
+	id: 'taipei_town',
+	source: 'taipei_town',
+	type: 'symbol',
 	layout: {
-		"text-field": ["to-string", ["get", "TNAME"]],
-		"text-size": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+		'text-field': ['to-string', ['get', 'TNAME']],
+		'text-size': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			11,
 			10,
 			13,
@@ -31,85 +31,69 @@ export const TaipeiTown = {
 			15.5,
 			14,
 		],
-		"text-allow-overlap": true,
+		'text-allow-overlap': true,
 	},
 	paint: {
-		"text-color": [
-			"interpolate",
-			["linear"],
-			["zoom"],
-			15,
-			"#aaa",
-			16,
-			"#fff",
-		],
-		"text-halo-color": "#888",
-		"text-halo-width": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 1],
-		"text-opacity": ["interpolate", ["linear"], ["zoom"], 15.99, 1, 16, 0],
+		'text-color': ['interpolate', ['linear'], ['zoom'], 15, '#aaa', 16, '#fff'],
+		'text-halo-color': '#888',
+		'text-halo-width': ['interpolate', ['linear'], ['zoom'], 15, 0, 16, 1],
+		'text-opacity': ['interpolate', ['linear'], ['zoom'], 15.99, 1, 16, 0],
 	},
-};
+}
 
 // Styles for Base Layer "Taipei Village"
 export const TaipeiVillage = {
-	id: "taipei_village",
-	source: "taipei_village",
-	type: "symbol",
+	id: 'taipei_village',
+	source: 'taipei_village',
+	type: 'symbol',
 	layout: {
-		"text-field": ["to-string", ["get", "VNAME"]],
-		"text-size": 14,
+		'text-field': ['to-string', ['get', 'VNAME']],
+		'text-size': 14,
 	},
 	paint: {
-		"text-color": "#85bdbd",
-		"text-opacity": [
-			"interpolate",
-			["linear"],
-			["zoom"],
-			15.49,
-			0,
-			15.5,
-			1,
-		],
+		'text-color': '#85bdbd',
+		'text-opacity': ['interpolate', ['linear'], ['zoom'], 15.49, 0, 15.5, 1],
 	},
-};
+}
 
 export const TaipeiBuilding = {
-	id: "taipei_building_3d",
-	source: "taipei_building_3d_source",
-	"source-layer": "tp_building_height84-18p8j0",
-	type: "fill-extrusion",
+	id: 'taipei_building_3d',
+	source: 'taipei_building_3d_source',
+	'source-layer': 'tp_building_height84-18p8j0',
+	type: 'fill-extrusion',
 	minzoom: 14,
 	paint: {
-		"fill-extrusion-height": [
-			"interpolate",
-			["linear"],
-			["get", "1_top_high"],
+		'fill-extrusion-height': [
+			'interpolate',
+			['linear'],
+			['get', '1_top_high'],
 			0,
 			0,
 			1044.14,
 			1044.14,
 		],
-		"fill-extrusion-opacity": 0.8,
-		"fill-extrusion-color": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+		'fill-extrusion-opacity': 0.8,
+		'fill-extrusion-color': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			14.4,
-			"#121212",
+			'#121212',
 			14.5,
-			"#272727",
+			'#272727',
 		],
 	},
-};
+}
 
 // Map base styles and preset variations
 
 // Paint Properties
 export const maplayerCommonPaint = {
 	circle: {
-		"circle-radius": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+		'circle-radius': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			11.99,
 			2,
 			12,
@@ -122,11 +106,11 @@ export const maplayerCommonPaint = {
 			5,
 		],
 	},
-	"circle-heatmap": {
-		"circle-radius": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+	'circle-heatmap': {
+		'circle-radius': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			11.99,
 			5,
 			12,
@@ -138,10 +122,10 @@ export const maplayerCommonPaint = {
 			22,
 			5,
 		],
-		"circle-blur": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+		'circle-blur': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			11.99,
 			1,
 			12,
@@ -151,10 +135,10 @@ export const maplayerCommonPaint = {
 			15,
 			0,
 		],
-		"circle-opacity": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+		'circle-opacity': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			11.99,
 			0.2,
 			12,
@@ -165,11 +149,11 @@ export const maplayerCommonPaint = {
 			1,
 		],
 	},
-	"circle-small": {
-		"circle-opacity": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+	'circle-small': {
+		'circle-opacity': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			11.99,
 			0.4,
 			13,
@@ -178,11 +162,11 @@ export const maplayerCommonPaint = {
 			1,
 		],
 	},
-	"circle-big": {
-		"circle-radius": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+	'circle-big': {
+		'circle-radius': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			11.99,
 			3.5,
 			12,
@@ -195,38 +179,20 @@ export const maplayerCommonPaint = {
 			7,
 		],
 	},
-	"fill-extrusion": {
-		"fill-extrusion-opacity": 0.5,
+	'fill-extrusion': {
+		'fill-extrusion-opacity': 0.5,
 	},
 	fill: {
-		"fill-opacity": [
-			"interpolate",
-			["linear"],
-			["zoom"],
-			10,
-			0.3,
-			22,
-			0.15,
-		],
+		'fill-opacity': ['interpolate', ['linear'], ['zoom'], 10, 0.3, 22, 0.15],
 	},
 	line: {
-		"line-width": [
-			"interpolate",
-			["linear"],
-			["zoom"],
-			10.99,
-			1,
-			12,
-			1,
-			18,
-			3,
-		],
+		'line-width': ['interpolate', ['linear'], ['zoom'], 10.99, 1, 12, 1, 18, 3],
 	},
-	"line-wide": {
-		"line-width": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+	'line-wide': {
+		'line-width': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			10.99,
 			0,
 			12,
@@ -235,29 +201,32 @@ export const maplayerCommonPaint = {
 			4,
 		],
 	},
-	"line-dash": {
-		"line-dasharray": [2, 4],
+	'line-dash': {
+		'line-dasharray': [2, 4],
 	},
 	symbol: {},
-};
+	'symbol-text': {
+		'text-color': '#ffffff',
+	},
+}
 
 // Layout Properties
 export const maplayerCommonLayout = {
 	line: {
-		"line-join": "round",
-		"line-cap": "round",
+		'line-join': 'round',
+		'line-cap': 'round',
 	},
 	fill: {},
-	"fill-extrusion": {},
+	'fill-extrusion': {},
 	circle: {},
 	symbol: {
-		"icon-allow-overlap": true,
-		"icon-ignore-placement": true,
-		"icon-padding": 0,
-		"icon-size": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+		'icon-allow-overlap': true,
+		'icon-ignore-placement': true,
+		'icon-padding': 0,
+		'icon-size': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			11.99,
 			0.15,
 			14,
@@ -266,12 +235,12 @@ export const maplayerCommonLayout = {
 			0.5,
 		],
 	},
-	"symbol-metro": {
-		"icon-image": "metro",
-		"icon-size": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+	'symbol-metro': {
+		'icon-image': 'metro',
+		'icon-size': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			11.99,
 			0.3,
 			14,
@@ -280,25 +249,25 @@ export const maplayerCommonLayout = {
 			0.9,
 		],
 	},
-	"symbol-triangle_green": {
-		"icon-image": "triangle_green",
+	'symbol-triangle_green': {
+		'icon-image': 'triangle_green',
 	},
-	"symbol-triangle_white": {
-		"icon-image": "triangle_white",
+	'symbol-triangle_white': {
+		'icon-image': 'triangle_white',
 	},
-	"symbol-youbike": {
-		"icon-image": [
-			"case",
-			["==", ["get", "left_bikes"], ["get", "total_bikes"]],
-			"bike_red",
-			["==", ["get", "left_bikes"], 0],
-			"bike_orange",
-			"bike_green",
+	'symbol-youbike': {
+		'icon-image': [
+			'case',
+			['==', ['get', 'left_bikes'], ['get', 'total_bikes']],
+			'bike_red',
+			['==', ['get', 'left_bikes'], 0],
+			'bike_orange',
+			'bike_green',
 		],
-		"icon-size": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+		'icon-size': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			11.99,
 			1,
 			14,
@@ -307,12 +276,12 @@ export const maplayerCommonLayout = {
 			2,
 		],
 	},
-	"symbol-bus": {
-		"icon-image": "bus",
-		"icon-size": [
-			"interpolate",
-			["linear"],
-			["zoom"],
+	'symbol-bus': {
+		'icon-image': 'bus',
+		'icon-size': [
+			'interpolate',
+			['linear'],
+			['zoom'],
 			11.99,
 			0.7,
 			14,
@@ -321,8 +290,69 @@ export const maplayerCommonLayout = {
 			1.4,
 		],
 	},
-	"symbol-metro-density": {
-		"icon-image": "metro",
+	'symbol-metro-density': {
+		'icon-image': 'metro',
+		'icon-size': [
+			'interpolate',
+			['linear'],
+			['zoom'],
+			11.99,
+			0.3,
+			14,
+			0.4,
+			22,
+			0.9,
+		],
+		'text-field': '•',
+		'text-offset': [
+			'interpolate',
+			['linear'],
+			['zoom'],
+			11.99,
+			['literal', [0.3, -0.3]],
+			14,
+			['literal', [0.4, -0.4]],
+			22,
+			['literal', [0.8, -0.8]],
+		],
+		'text-size': [
+			'interpolate',
+			['linear'],
+			['zoom'],
+			11.99,
+			32,
+			14,
+			40,
+			22,
+			60,
+		],
+	},
+	'symbol-text': {},
+	"symbol-metro-spot": {
+		"icon-image": [
+			"case",
+			["==", ["get", "type"], "CULTURE_ASSEST_SPOT"],
+			"temple",
+			[
+				"all",
+				["==", ["get", "tpye"], "MRT_STATION"],
+				["<", ["get", "closed_spot_cnt"], 20]
+			],
+			"bike_green",
+			[
+				"all",
+				["==", ["get", "tpye"], "MRT_STATION"],
+				[">=", ["get", "closed_spot_cnt"], 20]
+			],
+			"bike_orange",
+			[
+				"all",
+				["==", ["get", "tpye"], "MRT_STATION"],
+				[">=", ["get", "closed_spot_cnt"], 30]
+			],
+			"bike_red",
+			"temple",
+		],
 		"icon-size": [
 			"interpolate",
 			["linear"],
@@ -334,28 +364,5 @@ export const maplayerCommonLayout = {
 			22,
 			0.9,
 		],
-		"text-field": "•",
-		"text-offset": [
-			"interpolate",
-			["linear"],
-			["zoom"],
-			11.99,
-			["literal", [0.3, -0.3]],
-			14,
-			["literal", [0.4, -0.4]],
-			22,
-			["literal", [0.8, -0.8]],
-		],
-		"text-size": [
-			"interpolate",
-			["linear"],
-			["zoom"],
-			11.99,
-			32,
-			14,
-			40,
-			22,
-			60,
-		],
-	},
-};
+	}
+}

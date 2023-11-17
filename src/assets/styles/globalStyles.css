@@ -3,17 +3,19 @@
 :root {
 	--color-background: #090909;
 	--color-border: #494b4e;
+	--color-popup-border: #dac38e;
 	--color-highlight: #5a9cf8;
 	--color-normal-text: white;
 	--color-complement-text: #888787;
 	--color-component-background: #282a2c;
+	--color-popup-background: #bf672b;
 	--color-overlay: rgba(0, 0, 0, 0.65);
 	--font-to-icon: 1.2;
 	--font-xl: 1.5rem;
 	--font-l: 1.25rem;
-	--font-m: 18px;
+	--font-m: 1rem;
 	--font-s: 0.75rem;
-	--font-icon: "Material Icons Round";
+	--font-icon: 'Material Icons Round';
 	--vh: 1vh;
 }
 
@@ -21,8 +23,8 @@
 	margin: 0;
 	padding: 0;
 	color: var(--color-normal-text);
-	font-family: "微軟正黑體", "Microsoft JhengHei", "Droid Sans", "Open Sans",
-		"Helvetica";
+	font-family: '微軟正黑體', 'Microsoft JhengHei', 'Droid Sans', 'Open Sans',
+		'Helvetica';
 	overflow: hidden;
 }
 

@@ -1,56 +1,101 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { ref } from 'vue';
-import { useDialogStore } from '../../store/dialogStore';
-import { useContentStore } from '../../store/contentStore';
+import { ref } from 'vue'
+import { useContentStore } from '../../store/contentStore'
+import { useDialogStore } from '../../store/dialogStore'
 
-import DialogContainer from './DialogContainer.vue';
-import { validateStrInput, validateEngInput } from '../../assets/utilityFunctions/validate';
+import {
+	validateEngInput,
+	validateStrInput,
+} from '../../assets/utilityFunctions/validate'
+import DialogContainer from './DialogContainer.vue'
 
-const dialogStore = useDialogStore();
-const contentStore = useContentStore();
+const dialogStore = useDialogStore()
+const contentStore = useContentStore()
 
 // Stores the inputted dashboard name
-const name = ref('');
+const name = ref('')
 // Stores the inputted index
-const index = ref('');
+const index = ref('')
 // Stores the inputted icon
-const icon = ref('');
-const icons = ['shopping_cart', 'info', 'language', 'event', 'paid', 'account_balance', 'work', 'gavel', 'build_circle', 'circle_notifications', 'accessible',
-	'health_and_safety', 'science', 'coronavirus', 'luggage', 'flash_on', 'call', 'place', 'park', 'directions_car', 'lunch_dining', 'traffic', 'attractions',
-	'star', 'help', 'warning', 'lightbulb', 'notifications_active', 'fingerprint', 'pets', 'rocket_launch', 'sensors', 'commute', 'theaters', 'balance',
-	'sports_handball', 'flood', 'hotel', 'temple_buddhist', 'grass'];
+const icon = ref('')
+const icons = [
+	'shopping_cart',
+	'info',
+	'language',
+	'event',
+	'paid',
+	'account_balance',
+	'work',
+	'gavel',
+	'build_circle',
+	'circle_notifications',
+	'accessible',
+	'health_and_safety',
+	'science',
+	'coronavirus',
+	'luggage',
+	'flash_on',
+	'call',
+	'place',
+	'park',
+	'directions_car',
+	'lunch_dining',
+	'traffic',
+	'attractions',
+	'star',
+	'help',
+	'warning',
+	'lightbulb',
+	'notifications_active',
+	'fingerprint',
+	'pets',
+	'rocket_launch',
+	'sensors',
+	'commute',
+	'theaters',
+	'balance',
+	'sports_handball',
+	'flood',
+	'hotel',
+	'temple_buddhist',
+	'grass',
+]
 const errorMessage = ref({
 	name: null,
 	index: null,
-});
+})
 
 function handleSubmit() {
-	errorMessage.value.name = validateStrInput(name.value) === true ? null : validateStrInput(name.value);
-	errorMessage.value.index = validateEngInput(index.value) === true ? null : validateEngInput(index.value);
-	if (errorMessage.value.name || errorMessage.value.index) return;
+	errorMessage.value.name =
+		validateStrInput(name.value) === true ? null : validateStrInput(name.value)
+	errorMessage.value.index =
+		validateEngInput(index.value) === true
+			? null
+			: validateEngInput(index.value)
+	if (errorMessage.value.name || errorMessage.value.index) return
 
-	const dashboardIndexes = contentStore.dashboards.map(el => el.index);
+	const dashboardIndexes = contentStore.dashboards.map((el) => el.index)
 	if (dashboardIndexes.includes(index.value)) {
-		errorMessage.value.index = "Index不可以與其他儀表板重複";
-		return;
+		errorMessage.value.index = 'Index不可以與其他儀表板重複'
+		return
 	}
 
 	// createNewDashboard is currently a dummy function to demonstrate what creating a new dashboard may look like
 	// Connect a backend to actually implement the function or remove altogether
-	contentStore.createNewDashboard(name.value, index.value, icon.value);
-	handleClose();
+	contentStore.createNewDashboard(name.value, index.value, icon.value)
+	handleClose()
 }
 function handleClose() {
-	name.value = '';
-	index.value = '';
-	icon.value = '';
+	name.value = ''
+	index.value = ''
+	icon.value = ''
 	errorMessage.value = {
 		name: null,
 		index: null,
-	};
-	dialogStore.hideAllDialogs();
+	}
+	dialogStore.hideAllDialogs()
 }
 </script>
 
@@ -60,16 +105,12 @@ function handleClose() {
 			<h2>新增自訂儀表板</h2>
 			<div class="adddashboard-input">
 				<p v-if="errorMessage.name">{{ errorMessage.name }}</p>
-				<h3>
-					請輸入名稱*
-				</h3>
+				<h3>請輸入名稱*</h3>
 				<input type="text" v-model="name" />
 			</div>
 			<div class="adddashboard-input">
 				<p v-if="errorMessage.index">{{ errorMessage.index }}</p>
-				<h3>
-					請輸入獨特Index (僅英文)*
-				</h3>
+				<h3>請輸入獨特Index (僅英文)*</h3>
 				<input type="text" v-model="index" />
 			</div>
 			<h3>請選擇圖示*</h3>
@@ -80,8 +121,16 @@ function handleClose() {
 				</div>
 			</div>
 			<div class="adddashboard-control">
-				<button class="adddashboard-control-cancel" @click="handleClose">取消</button>
-				<button v-if="name && index && icon" class="adddashboard-control-confirm" @click="handleSubmit">確定</button>
+				<button class="adddashboard-control-cancel" @click="handleClose">
+					取消
+				</button>
+				<button
+					v-if="name && index && icon"
+					class="adddashboard-control-confirm"
+					@click="handleSubmit"
+				>
+					確定
+				</button>
 			</div>
 		</div>
 	</DialogContainer>
@@ -115,7 +164,7 @@ function handleClose() {
 
 			&:focus {
 				outline: none;
-				border: solid 1px var(--color-highlight)
+				border: solid 1px var(--color-highlight);
 			}
 		}
 	}
@@ -131,8 +180,8 @@ function handleClose() {
 			display: none;
 			transition: border 0.2s;
 
-			&:checked+label {
-				border: solid 1px var(--color-highlight)
+			&:checked + label {
+				border: solid 1px var(--color-highlight);
 			}
 		}
 
@@ -149,7 +198,7 @@ function handleClose() {
 			cursor: pointer;
 
 			&:hover {
-				border: solid 1px var(--color-border)
+				border: solid 1px var(--color-border);
 			}
 		}
 	}
@@ -165,7 +214,7 @@ function handleClose() {
 			transition: color 0.2s;
 
 			&:hover {
-				color: var(--color-highlight)
+				color: var(--color-highlight);
 			}
 		}
 

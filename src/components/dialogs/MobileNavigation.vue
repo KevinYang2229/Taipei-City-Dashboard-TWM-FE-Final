@@ -1,33 +1,54 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { useDialogStore } from '../../store/dialogStore';
-import { useContentStore } from '../../store/contentStore';
+import { useContentStore } from '../../store/contentStore'
+import { useDialogStore } from '../../store/dialogStore'
 
-import SideBarTab from '../utilities/SideBarTab.vue';
+import SideBarTab from '../utilities/SideBarTab.vue'
 
-const dialogStore = useDialogStore();
-const contentStore = useContentStore();
+const dialogStore = useDialogStore()
+const contentStore = useContentStore()
 </script>
 
 <template>
 	<Teleport to="body">
 		<Transition name="dialog">
 			<div class="dialogcontainer" v-if="dialogStore.dialogs.mobileNavigation">
-				<div class="dialogcontainer-background" @click="dialogStore.hideAllDialogs"></div>
+				<div
+					class="dialogcontainer-background"
+					@click="dialogStore.hideAllDialogs"
+				></div>
 				<div class="dialogcontainer-dialog">
 					<div class="mobilenavigation">
 						<h2>我的最愛</h2>
-						<SideBarTab icon="favorite" title="收藏組件" :expanded="true" index="favorites"
-							@click="dialogStore.hideAllDialogs" />
+						<SideBarTab
+							icon="favorite"
+							title="收藏組件"
+							:expanded="true"
+							index="favorites"
+							@click="dialogStore.hideAllDialogs"
+						/>
 						<h2>儀表板列表</h2>
 						<SideBarTab
-							v-for="item in contentStore.dashboards.filter((item) => item.index !== 'map-layers' && item.index !== 'favorites')"
-							:icon="item.icon" :title="item.name" :index="item.index" :key="item.index" :expanded="true"
-							@click="dialogStore.hideAllDialogs" />
+							v-for="item in contentStore.dashboards.filter(
+								(item) =>
+									item.index !== 'map-layers' && item.index !== 'favorites',
+							)"
+							:icon="item.icon"
+							:title="item.name"
+							:index="item.index"
+							:key="item.index"
+							:expanded="true"
+							@click="dialogStore.hideAllDialogs"
+						/>
 						<h2>基本地圖圖層</h2>
-						<SideBarTab :icon="`public`" :title="`圖資資訊`" index="map-layers" :expanded="true"
-							@click="dialogStore.hideAllDialogs" />
+						<SideBarTab
+							:icon="`public`"
+							:title="`圖資資訊`"
+							index="map-layers"
+							:expanded="true"
+							@click="dialogStore.hideAllDialogs"
+						/>
 					</div>
 				</div>
 			</div>

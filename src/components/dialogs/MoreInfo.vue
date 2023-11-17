@@ -1,37 +1,34 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { useDialogStore } from "../../store/dialogStore";
-import { useContentStore } from "../../store/contentStore";
+import { useContentStore } from '../../store/contentStore'
+import { useDialogStore } from '../../store/dialogStore'
 
-import DialogContainer from "./DialogContainer.vue";
-import ComponentContainer from "../components/ComponentContainer.vue";
-import HistoryChart from "../utilities/HistoryChart.vue";
-import DownloadData from "./DownloadData.vue";
+import ComponentContainer from '../components/ComponentContainer.vue'
+import HistoryChart from '../utilities/HistoryChart.vue'
+import DialogContainer from './DialogContainer.vue'
+import DownloadData from './DownloadData.vue'
 
-const { BASE_URL } = import.meta.env;
+const { BASE_URL } = import.meta.env
 
-const dialogStore = useDialogStore();
-const contentStore = useContentStore();
+const dialogStore = useDialogStore()
+const contentStore = useContentStore()
 
 function getLinkTag(link, index) {
-	if (link.includes("data.taipei")) {
-		return `資料集 - ${index + 1} (data.taipei)`;
-	} else if (link.includes("tuic.gov.taipei")) {
-		return `大數據中心專案網頁`;
-	} else if (link.includes("github.com")) {
-		return `GitHub 程式庫`;
+	if (link.includes('data.taipei')) {
+		return `資料集 - ${index + 1} (data.taipei)`
+	} else if (link.includes('tuic.gov.taipei')) {
+		return `大數據中心專案網頁`
+	} else if (link.includes('github.com')) {
+		return `GitHub 程式庫`
 	} else {
-		return `資料集 - ${index + 1} (其他)`;
+		return `資料集 - ${index + 1} (其他)`
 	}
 }
 </script>
 
 <template>
-	<DialogContainer
-		:dialog="`moreInfo`"
-		@on-close="dialogStore.hideAllDialogs"
-	>
+	<DialogContainer :dialog="`moreInfo`" @on-close="dialogStore.hideAllDialogs">
 		<div class="moreinfo">
 			<ComponentContainer
 				:content="dialogStore.moreInfoContent"
@@ -52,9 +49,7 @@ function getLinkTag(link, index) {
 						<h3>歷史軸</h3>
 						<h4>*點擊並拉動以檢視細部區間資料</h4>
 						<HistoryChart
-							:chart_config="
-								dialogStore.moreInfoContent.chart_config
-							"
+							:chart_config="dialogStore.moreInfoContent.chart_config"
 							:series="dialogStore.moreInfoContent.history_data"
 							:history_data_color="
 								dialogStore.moreInfoContent.history_data_color
@@ -65,15 +60,11 @@ function getLinkTag(link, index) {
 						<h3>協作者</h3>
 						<div class="moreinfo-info-contributors">
 							<div
-								v-for="contributor in dialogStore
-									.moreInfoContent.contributors"
+								v-for="contributor in dialogStore.moreInfoContent.contributors"
 								:key="contributor"
 							>
 								<a
-									:href="
-										contentStore.contributors[contributor]
-											.link
-									"
+									:href="contentStore.contributors[contributor].link"
 									target="_blank"
 									rel="noreferrer"
 									><img
@@ -81,11 +72,7 @@ function getLinkTag(link, index) {
 										:alt="`協作者-${contentStore.contributors[contributor].name}`"
 									/>
 									<p>
-										{{
-											contentStore.contributors[
-												contributor
-											].name
-										}}
+										{{ contentStore.contributors[contributor].name }}
 									</p>
 								</a>
 							</div>
@@ -95,8 +82,7 @@ function getLinkTag(link, index) {
 						<h3>相關資料</h3>
 						<div class="moreinfo-info-links">
 							<a
-								v-for="(link, index) in dialogStore
-									.moreInfoContent.links"
+								v-for="(link, index) in dialogStore.moreInfoContent.links"
 								:href="link"
 								:key="link"
 								target="_blank"
@@ -111,7 +97,7 @@ function getLinkTag(link, index) {
 						@click="
 							dialogStore.showReportIssue(
 								dialogStore.moreInfoContent.id,
-								dialogStore.moreInfoContent.name
+								dialogStore.moreInfoContent.name,
 							)
 						"
 					>
@@ -119,8 +105,7 @@ function getLinkTag(link, index) {
 					</button>
 					<button
 						v-if="
-							dialogStore.moreInfoContent.chart_config
-								.types[0] !== 'MetroChart'
+							dialogStore.moreInfoContent.chart_config.types[0] !== 'MetroChart'
 						"
 						@click="dialogStore.showDialog('downloadData')"
 					>

@@ -4,12 +4,12 @@
 <!-- The "dialog" prop defines the target dialog to control whether it is shown, the "onClose" emit allows for a closing function to be passed in  -->
 
 <script setup>
-import { useDialogStore } from '../../store/dialogStore';
+import { useDialogStore } from '../../store/dialogStore'
 
-const dialogStore = useDialogStore();
+const dialogStore = useDialogStore()
 
-defineProps({ dialog: String });
-defineEmits(['onClose']);
+defineProps({ dialog: String })
+defineEmits(['onClose'])
 </script>
 
 <template>
