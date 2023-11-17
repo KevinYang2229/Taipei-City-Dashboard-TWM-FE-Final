@@ -1,45 +1,45 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { ref, computed } from "vue";
-import { useDialogStore } from "../../store/dialogStore";
+import { computed, ref } from 'vue'
+import { useDialogStore } from '../../store/dialogStore'
 
-import { jsonToCsv } from "../../assets/utilityFunctions/jsonToCsv";
-import DialogContainer from "./DialogContainer.vue";
+import { jsonToCsv } from '../../assets/utilityFunctions/jsonToCsv'
+import DialogContainer from './DialogContainer.vue'
 
-const dialogStore = useDialogStore();
+const dialogStore = useDialogStore()
 
 // Stores the inputted dashboard name
-const name = ref(dialogStore.moreInfoContent.name);
+const name = ref(dialogStore.moreInfoContent.name)
 // Stores the file type
-const fileType = ref("JSON");
+const fileType = ref('JSON')
 
 const parsedJson = computed(() => {
-	let json = {};
-	json.data = dialogStore.moreInfoContent.chart_data;
+	let json = {}
+	json.data = dialogStore.moreInfoContent.chart_data
 	if (dialogStore.moreInfoContent.chart_config.categories) {
-		json.categories = dialogStore.moreInfoContent.chart_config.categories;
+		json.categories = dialogStore.moreInfoContent.chart_config.categories
 	}
 
-	const jsonString = encodeURIComponent(JSON.stringify(json));
+	const jsonString = encodeURIComponent(JSON.stringify(json))
 	// const base64Json = btoa(jsonString)
-	return jsonString;
-});
+	return jsonString
+})
 
 const parsedCsv = computed(() => {
 	const csvString = jsonToCsv(
 		dialogStore.moreInfoContent.chart_data,
-		dialogStore.moreInfoContent.chart_config
-	);
-	return encodeURI(csvString);
-});
+		dialogStore.moreInfoContent.chart_config,
+	)
+	return encodeURI(csvString)
+})
 
 function handleSubmit() {
-	handleClose();
+	handleClose()
 }
 function handleClose() {
-	name.value = dialogStore.moreInfoContent.name;
-	dialogStore.dialogs.downloadData = false;
+	name.value = dialogStore.moreInfoContent.name
+	dialogStore.dialogs.downloadData = false
 }
 </script>
 
@@ -77,10 +77,7 @@ function handleClose() {
 				</label>
 			</div>
 			<div class="downloaddata-control">
-				<button
-					class="downloaddata-control-cancel"
-					@click="handleClose"
-				>
+				<button class="downloaddata-control-cancel" @click="handleClose">
 					取消
 				</button>
 				<button

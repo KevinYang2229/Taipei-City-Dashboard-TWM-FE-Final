@@ -9,52 +9,72 @@
 /* Department of Information Technology, Taipei City Government */
 
 // Import the Essentials
-import { createApp } from "vue";
-import "./assets/styles/globalStyles.css";
-import "./assets/styles/chartStyles.css";
-import "./assets/styles/toggleswitch.css";
-import App from "./App.vue";
+import { createApp } from 'vue'
+import './assets/styles/globalStyles.css'
+import './assets/styles/chartStyles.css'
+import './assets/styles/toggleswitch.css'
+import App from './App.vue'
 
 // Import Core Packages: Vue-Router, Pinia, Apexcharts
-import router from "./router";
-import { createPinia } from "pinia";
-import VueApexCharts from "vue3-apexcharts";
+import router from './router'
+import { createPinia } from 'pinia'
+import VueApexCharts from 'vue3-apexcharts'
 
 // Import Global Components
-import DistrictChart from "./components/charts/DistrictChart.vue";
-import DonutChart from "./components/charts/DonutChart.vue";
-import BarChart from "./components/charts/BarChart.vue";
-import TreemapChart from "./components/charts/TreemapChart.vue";
-import ColumnChart from "./components/charts/ColumnChart.vue";
-import BarPercentChart from "./components/charts/BarPercentChart.vue";
-import GuageChart from "./components/charts/GuageChart.vue";
-import RadarChart from "./components/charts/RadarChart.vue";
-import TimelineSeparateChart from "./components/charts/TimelineSeparateChart.vue";
-import TimelineStackedChart from "./components/charts/TimelineStackedChart.vue";
-import MapLegend from "./components/charts/MapLegend.vue";
-import MetroChart from "./components/charts/MetroChart.vue";
-import HeatmapChart from "./components/charts/HeatmapChart.vue";
+import DistrictChart from './components/charts/DistrictChart.vue'
+import DonutChart from './components/charts/DonutChart.vue'
+import BarChart from './components/charts/BarChart.vue'
+import TreemapChart from './components/charts/TreemapChart.vue'
+import ColumnChart from './components/charts/ColumnChart.vue'
+import BarPercentChart from './components/charts/BarPercentChart.vue'
+import GuageChart from './components/charts/GuageChart.vue'
+import RadarChart from './components/charts/RadarChart.vue'
+import TimelineSeparateChart from './components/charts/TimelineSeparateChart.vue'
+import TimelineStackedChart from './components/charts/TimelineStackedChart.vue'
+import MapLegend from './components/charts/MapLegend.vue'
+import MetroChart from './components/charts/MetroChart.vue'
+import HeatmapChart from './components/charts/HeatmapChart.vue'
+import BoxPlotChart from './components/charts/BoxPlotChart.vue'
+import ScatterChart from './components/charts/ScatterChart.vue'
+import BubbleChart from './components/charts/BubbleChart.vue'
+import PolarAreaChart from './components/charts/PolarAreaChart.vue'
+import PolarAreaChart2 from './components/charts/PolarAreaChart2.vue'
+import MixedColumnLineChart from './components/charts/MixedColumnLineChart.vue'
+import PairDonutChart from './components/charts/PairDonutChart.vue'
+import BarChartWithGoal from './components/charts/BarChartWithGoal.vue'
+import IconPercentageChart from './components/charts/IconPercentageChart.vue'
+import SingleIconPercentageChart from './components/charts/SingleIconPercentageChart.vue'
 
-const app = createApp(App);
+const app = createApp(App)
 
 // Add Core Packages: Vue-Router, Pinia, Apexcharts
-app.use(router);
-const pinia = createPinia();
-app.use(pinia);
-app.use(VueApexCharts);
+app.use(router)
+const pinia = createPinia()
+app.use(pinia)
+app.use(VueApexCharts)
 
-app.component("DistrictChart", DistrictChart);
-app.component("DonutChart", DonutChart);
-app.component("BarChart", BarChart);
-app.component("TreemapChart", TreemapChart);
-app.component("ColumnChart", ColumnChart);
-app.component("BarPercentChart", BarPercentChart);
-app.component("GuageChart", GuageChart);
-app.component("RadarChart", RadarChart);
-app.component("TimelineSeparateChart", TimelineSeparateChart);
-app.component("TimelineStackedChart", TimelineStackedChart);
-app.component("MapLegend", MapLegend);
-app.component("MetroChart", MetroChart);
-app.component("HeatmapChart", HeatmapChart);
+app.component('DistrictChart', DistrictChart)
+app.component('DonutChart', DonutChart)
+app.component('BarChart', BarChart)
+app.component('TreemapChart', TreemapChart)
+app.component('ColumnChart', ColumnChart)
+app.component('BarPercentChart', BarPercentChart)
+app.component('GuageChart', GuageChart)
+app.component('RadarChart', RadarChart)
+app.component('TimelineSeparateChart', TimelineSeparateChart)
+app.component('TimelineStackedChart', TimelineStackedChart)
+app.component('MapLegend', MapLegend)
+app.component('MetroChart', MetroChart)
+app.component('HeatmapChart', HeatmapChart)
+app.component('ScatterChart', ScatterChart)
+app.component('BoxPlotChart', BoxPlotChart)
+app.component('BubbleChart', BubbleChart)
+app.component('PolarAreaChart', PolarAreaChart)
+app.component('PolarAreaChart2', PolarAreaChart2)
+app.component('MixedColumnLineChart', MixedColumnLineChart)
+app.component('PairDonutChart', PairDonutChart)
+app.component('BarChartWithGoal', BarChartWithGoal)
+app.component('IconPercentageChart', IconPercentageChart)
+app.component('SingleIconPercentageChart', SingleIconPercentageChart)
 
-app.mount("#app");
+app.mount('#app')

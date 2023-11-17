@@ -13,6 +13,10 @@
 .apexcharts-tooltip {
   border: solid 1px var(--color-border) !important;
 }
+.chart-tooltip td h6 {
+  max-width: 9em;
+  text-overflow: ellipsis;
+}
 .chart-tooltip h6 {
   color: var(--color-complement-text);
   font-size: 0.75rem;

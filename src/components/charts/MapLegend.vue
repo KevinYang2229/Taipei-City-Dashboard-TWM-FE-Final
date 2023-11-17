@@ -1,34 +1,32 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { ref } from "vue";
-import { useMapStore } from "../../store/mapStore";
-import { useContentStore } from "../../store/contentStore";
+import { ref } from 'vue'
+import { useMapStore } from '../../store/mapStore'
 
-const { BASE_URL } = import.meta.env;
+const { BASE_URL } = import.meta.env
 
-const props = defineProps(["chart_config", "series", "map_config"]);
-const mapStore = useMapStore();
-const contentStore = useContentStore();
+const props = defineProps(['chart_config', 'series', 'map_config'])
+const mapStore = useMapStore()
 
-const selectedIndex = ref(null);
+const selectedIndex = ref(null)
 
 function handleDataSelection(index) {
 	if (!props.chart_config.map_filter) {
-		return;
+		return
 	}
 	if (index !== selectedIndex.value) {
 		mapStore.addLayerFilter(
 			`${props.map_config[0].index}-${props.map_config[0].type}`,
 			props.chart_config.map_filter[0],
 			props.chart_config.map_filter[1][index]
-		);
-		selectedIndex.value = index;
+		)
+		selectedIndex.value = index
 	} else {
 		mapStore.clearLayerFilter(
 			`${props.map_config[0].index}-${props.map_config[0].type}`
-		);
-		selectedIndex.value = null;
+		)
+		selectedIndex.value = null
 	}
 }
 </script>
@@ -42,12 +40,7 @@ function handleDataSelection(index) {
 				@click="handleDataSelection(index)"
 				:class="{
 					'maplegend-legend-item': true,
-					'maplegend-filter':
-						contentStore.currentDashboard.mode === '/mapview' &&
-						props.chart_config.map_filter,
-					'maplegend-selected':
-						contentStore.currentDashboard.mode === '/mapview' &&
-						selectedIndex === index,
+					'maplegend-selected': selectedIndex === index,
 				}"
 			>
 				<!-- Show different icons for different map types -->
@@ -87,18 +80,17 @@ function handleDataSelection(index) {
 		width: 100%;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		column-gap: 0.5rem;
-		row-gap: 0.5rem;
+		column-gap: 1rem;
+		row-gap: 1rem;
 		overflow: visible;
 
 		&-item {
 			display: flex;
 			align-items: center;
 			padding: 5px 10px 5px 5px;
-			border: 1px solid transparent;
+			border: 1px solid var(--color-border);
 			border-radius: 5px;
 			transition: box-shadow 0.2s;
-			cursor: auto;
 
 			div:first-child,
 			img {
@@ -117,15 +109,10 @@ function handleDataSelection(index) {
 				font-weight: 400;
 				text-align: left;
 			}
-		}
-	}
 
-	&-filter {
-		border: 1px solid var(--color-border);
-		cursor: pointer;
-
-		&:hover {
-			box-shadow: 0px 0px 5px black;
+			&:hover {
+				box-shadow: 0px 0px 5px black;
+			}
 		}
 	}
 

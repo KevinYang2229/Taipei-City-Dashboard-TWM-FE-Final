@@ -11,29 +11,27 @@ Testing: Jack Huang (Data Scientist), Ian Huang (Data Analysis Intern)
 <!-- Map charts will be hidden in mobile mode and be replaced with the mobileLayers dialog -->
 
 <script setup>
-import { computed } from "vue";
-import { useContentStore } from "../store/contentStore";
-import { useDialogStore } from "../store/dialogStore";
+import { computed } from 'vue'
+import { useContentStore } from '../store/contentStore'
+import { useDialogStore } from '../store/dialogStore'
 
-import ComponentMapChart from "../components/components/ComponentMapChart.vue";
-import MapContainer from "../components/map/MapContainer.vue";
-import MoreInfo from "../components/dialogs/MoreInfo.vue";
-import ReportIssue from "../components/dialogs/ReportIssue.vue";
+import ComponentMapChart from '../components/components/ComponentMapChart.vue'
+import MapContainer from '../components/map/MapContainer.vue'
 
-const contentStore = useContentStore();
-const dialogStore = useDialogStore();
+const contentStore = useContentStore()
+const dialogStore = useDialogStore()
 
 // Separate components with maps from those without
 const parseMapLayers = computed(() => {
 	const hasMap = contentStore.currentDashboard.content.filter(
-		(item) => item.map_config
-	);
+		(item) => item.map_config,
+	)
 	const noMap = contentStore.currentDashboard.content.filter(
-		(item) => !item.map_config
-	);
+		(item) => !item.map_config,
+	)
 
-	return { hasMap: hasMap, noMap: noMap };
-});
+	return { hasMap: hasMap, noMap: noMap }
+})
 </script>
 
 <template>
@@ -76,10 +74,7 @@ const parseMapLayers = computed(() => {
 				/>
 			</div>
 			<!-- if dashboard is still loading -->
-			<div
-				v-else-if="contentStore.loading"
-				class="map-charts-nodashboard"
-			>
+			<div v-else-if="contentStore.loading" class="map-charts-nodashboard">
 				<div></div>
 			</div>
 			<!-- if dashboard failed to load -->
@@ -102,8 +97,6 @@ const parseMapLayers = computed(() => {
 			</div>
 		</div>
 		<MapContainer />
-		<MoreInfo />
-		<ReportIssue />
 	</div>
 </template>
 
