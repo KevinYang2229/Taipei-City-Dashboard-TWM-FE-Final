@@ -49,9 +49,8 @@ onMounted(() => {
 
 const toggleActive = (e) => {
 	targetItem.value = e.target.dataset.name;
-	targetData.name = e.target.childNodes[0].attributes["data-name"].nodeValue;
-	targetData.value =
-		e.target.childNodes[0].attributes["data-value"].nodeValue;
+	targetData.name = e.target.dataset.name;
+	targetData.value = e.target.dataset.value;
 };
 const initActiveToNull = () => {
 	targetItem.value = null;
@@ -163,12 +162,20 @@ const getPositon = (index) => {
 				xmlns="http://www.w3.org/2000/svg"
 			>
 				<g
-					:data-name="item"
+					:data-name="
+						index < primaryIconNumber
+							? series[0].name
+							: series[1].name
+					"
 					v-for="(item, index) in chartIconTotal"
 					:key="item"
 					:class="`initial-animation-${item} initial-animation`"
 					:transform="`translate(${getPositon(index + 1)})`"
-					:data-value="primaryPercentage"
+					:data-value="
+						index < primaryIconNumber
+							? primaryPercentage
+							: secondaryPercentage
+					"
 					:fill="
 						index < primaryIconNumber
 							? iconColorPrimary
