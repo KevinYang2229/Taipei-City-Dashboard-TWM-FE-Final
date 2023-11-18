@@ -144,7 +144,8 @@ export const useMapStore = defineStore("map", {
 				'icon-less',
 				'icon-middle',
 				'icon-full',
-				'icon-house'
+				'icon-house',
+				'icon-baby'
 			];
 			images.forEach((element) => {
 				this.map.loadImage(

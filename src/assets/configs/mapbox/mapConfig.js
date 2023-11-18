@@ -406,7 +406,7 @@ export const maplayerCommonLayout = {
 		"icon-image": [
 			"case",
 			["==", ["get", "type"], "SPOT"],
-			"icon-house",
+			"icon-baby",
 			[
 				"all",
 				["==", ["get", "tpye"], "MRT_STATION"],
@@ -426,7 +426,7 @@ export const maplayerCommonLayout = {
 				[">=", ["get", "closed_spot_cnt"], 9]
 			],
 			"icon-full",
-			"icon-house",
+			"icon-baby",
 		],
 		"icon-size": [
 			"interpolate",
