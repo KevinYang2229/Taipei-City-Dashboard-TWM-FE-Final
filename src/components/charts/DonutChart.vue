@@ -1,82 +1,82 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { computed, ref, watchEffect } from 'vue'
-import { useMapStore } from '../../store/mapStore'
+import { computed, ref, watchEffect } from "vue";
+import { useMapStore } from "../../store/mapStore";
 
-const { BASE_URL } = import.meta.env
+const { BASE_URL } = import.meta.env;
 
 const props = defineProps([
-	'chart_config',
-	'activeChart',
-	'series',
-	'map_config',
-])
-const mapStore = useMapStore()
+	"chart_config",
+	"activeChart",
+	"series",
+	"map_config",
+]);
+const mapStore = useMapStore();
 
 // How many data points to show before summing all remaining points into "other"
-const steps = ref(6)
+const steps = ref(6);
 
 // Donut charts in apexcharts uses a slightly different data format from other chart types
 // As such, the following parsing functions are required
 const parsedSeries = computed(() => {
-	const toParse = [...props.series[0].data]
+	const toParse = [...props.series[0].data];
 	if (toParse.length <= steps.value) {
-		return toParse.map((item) => item.y)
+		return toParse.map((item) => item.y);
 	}
-	let output = []
+	let output = [];
 	for (let i = 0; i < steps.value; i++) {
-		output.push(toParse[i].y)
+		output.push(toParse[i].y);
 	}
-	const toSum = toParse.splice(steps.value, toParse.length - steps.value)
-	let sum = 0
-	toSum.forEach((element) => (sum += element.y))
-	output.push(sum)
-	return output
-})
+	const toSum = toParse.splice(steps.value, toParse.length - steps.value);
+	let sum = 0;
+	toSum.forEach((element) => (sum += element.y));
+	output.push(sum);
+	return output;
+});
 const parsedLabels = computed(() => {
-	const toParse = [...props.series[0].data]
+	const toParse = [...props.series[0].data];
 	if (toParse.length <= steps.value) {
-		return toParse.map((item) => item.x)
+		return toParse.map((item) => item.x);
 	}
-	let output = []
+	let output = [];
 	for (let i = 0; i < steps.value; i++) {
-		output.push(toParse[i].x)
+		output.push(toParse[i].x);
 	}
-	output.push('其他')
-	return output
-})
+	output.push("其他");
+	return output;
+});
 const sum = computed(() => {
-	return Math.round(parsedSeries.value.reduce((a, b) => a + b) * 100) / 100
-})
+	return Math.round(parsedSeries.value.reduce((a, b) => a + b) * 100) / 100;
+});
 
-const svgContent = ref('')
+const svgContent = ref("");
 
 const loadSvgContent = async () => {
 	if (!props.chart_config.icon) {
-		return
+		return;
 	}
 
 	try {
-		const iconPath = `${BASE_URL}/images/map/${props.chart_config.icon}.svg`
-		const response = await fetch(iconPath)
+		const iconPath = `${BASE_URL}/images/map/${props.chart_config.icon}.svg`;
+		const response = await fetch(iconPath);
 		if (response.ok) {
-			svgContent.value = await response.text()
+			svgContent.value = await response.text();
 		} else {
 			console.error(
 				`Failed to fetch SVG: ${response.status} - ${response.statusText}`
-			)
+			);
 		}
 	} catch (error) {
-		console.error('Error fetching SVG:', error)
+		console.error("Error fetching SVG:", error);
 	}
-}
+};
 // 監聽 iconPath 變化，觸發載入 SVG 內容的動作
 watchEffect(() => {
 	if (props.chart_config && props.chart_config.icon) {
-		loadSvgContent()
+		loadSvgContent();
 	}
-})
+});
 // chartOptions needs to be in the bottom since it uses computed data
 const chartOptions = ref({
 	chart: {
@@ -84,12 +84,12 @@ const chartOptions = ref({
 	},
 	colors:
 		props.series.length >= steps.value
-			? [...props.chart_config.color, '#848c94']
+			? [...props.chart_config.color, "#848c94"]
 			: props.chart_config.color,
 	dataLabels: {
 		formatter: function (val, { seriesIndex, w }) {
-			let value = w.globals.labels[seriesIndex]
-			return value.length > 7 ? value.slice(0, 6) + '...' : value
+			let value = w.globals.labels[seriesIndex];
+			return value.length > 7 ? value.slice(0, 6) + "..." : value;
 		},
 	},
 	labels: parsedLabels,
@@ -102,7 +102,7 @@ const chartOptions = ref({
 				offset: 15,
 			},
 			donut: {
-				size: '77.5%',
+				size: "77.5%",
 			},
 		},
 	},
@@ -110,7 +110,7 @@ const chartOptions = ref({
 		opacity: 1,
 	},
 	stroke: {
-		colors: ['#282a2c'],
+		colors: ["#282a2c"],
 		show: true,
 		width: 3,
 	},
@@ -120,37 +120,37 @@ const chartOptions = ref({
 			// The class "chart-tooltip" could be edited in /assets/styles/chartStyles.css
 			return (
 				'<div class="chart-tooltip">' +
-				'<h6>' +
+				"<h6>" +
 				w.globals.labels[seriesIndex] +
-				'</h6>' +
-				'<span>' +
+				"</h6>" +
+				"<span>" +
 				series[seriesIndex] +
 				` ${props.chart_config.unit}` +
-				'</span>' +
-				'</div>'
-			)
+				"</span>" +
+				"</div>"
+			);
 		},
 	},
-})
+});
 
-const selectedIndex = ref(null)
+const selectedIndex = ref(null);
 
 function handleDataSelection(e, chartContext, config) {
 	if (!props.chart_config.map_filter) {
-		return
+		return;
 	}
 	if (config.dataPointIndex !== selectedIndex.value) {
 		mapStore.addLayerFilter(
 			`${props.map_config[0].index}-${props.map_config[0].type}`,
 			props.chart_config.map_filter[0],
 			props.chart_config.map_filter[1][config.dataPointIndex]
-		)
-		selectedIndex.value = config.dataPointIndex
+		);
+		selectedIndex.value = config.dataPointIndex;
 	} else {
 		mapStore.clearLayerFilter(
 			`${props.map_config[0].index}-${props.map_config[0].type}`
-		)
-		selectedIndex.value = null
+		);
+		selectedIndex.value = null;
 	}
 }
 </script>
@@ -206,13 +206,13 @@ function handleDataSelection(e, chartContext, config) {
 	}
 	&-icon {
 		display: inline-block;
-		height: 56px;
-		margin: var(--font-m) 0 0.5rem;
+		width: 76px;
+		margin-top: var(--font-m);
 		fill: #f5f5f5;
 		&:deep(svg) {
 			display: block;
-			width: auto;
-			height: 100%;
+			width: 100%;
+			height: auto;
 			fill: inherit;
 		}
 		&:deep(path) {
