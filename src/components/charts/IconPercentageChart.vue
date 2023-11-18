@@ -20,9 +20,10 @@ let iconColorSecondary = color[1];
 let iconNamePrimary = categories[0];
 let iconNameSecondary = categories[1];
 
-const chartDataTotalNumber = computed(() => {
-	return activeData.value;
-});
+// 資料總數
+// const chartDataTotalNumber = computed(() => {
+// 	return activeData.value;
+// });
 
 // calculate percentage
 const primaryPercentage = computed(() => {
@@ -42,8 +43,14 @@ const secondaryIconNumber = computed(() => {
 	return activeData.value.count - primaryIconNumber.value;
 });
 
-onMounted(() => {
-	// startAnimation();
+onMounted(() => {});
+
+const yearArray = computed(() => {
+	let newArray = [];
+	props.series.forEach((element) => {
+		newArray.push(element.year);
+	});
+	return newArray;
 });
 
 const toggleActive = (e) => {
@@ -163,7 +170,7 @@ const updateChartData = (year) => {
 				:class="activeData.year === item.year ? 'active' : ''"
 				type="button"
 				v-for="item in series"
-				key="item.year"
+				:key="item.year"
 			>
 				{{ item.year }}
 			</button>
@@ -177,8 +184,8 @@ const updateChartData = (year) => {
 				<g
 					:data-name="
 						index < primaryIconNumber
-							? series[0].name
-							: series[1].name
+							? iconNamePrimary
+							: iconNameSecondary
 					"
 					v-for="(item, index) in chartIconTotal"
 					:key="item"
