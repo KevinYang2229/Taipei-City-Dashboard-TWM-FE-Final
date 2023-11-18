@@ -102,7 +102,7 @@ const inputHandler = (e) => {
 		border-radius: 6px;
 
 		&--active {
-			background: #d68d35;
+			background: #3a69a0;
 		}
 	}
 
@@ -125,7 +125,7 @@ const inputHandler = (e) => {
 }
 [type="range"]::-webkit-slider-runnable-track {
 	height: 4px;
-	background: #d68d35;
+	background: #3a69a0;
 }
 [type="range"]::-webkit-slider-container {
 	height: 20px;
@@ -139,10 +139,10 @@ const inputHandler = (e) => {
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
-	background-color: #dac38e;
+	background-color: #a0badc;
 	border: 1px solid transparent;
 	margin-top: -8px;
-	border-image: linear-gradient(#dac38e, #dac38e) 0 fill / 8 20 8 0 / 0px 0px
+	border-image: linear-gradient(#a0badc, #a0badc) 0 fill / 8 20 8 0 / 0px 0px
 		0 2000px;
 }
 
