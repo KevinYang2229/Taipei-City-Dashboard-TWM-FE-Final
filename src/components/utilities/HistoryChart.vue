@@ -1,9 +1,9 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const props = defineProps(['chart_config', 'series', 'history_data_color'])
+const props = defineProps(["chart_config", "series", "history_data_color"]);
 
 const chartOptions = ref({
 	chart: {
@@ -11,7 +11,7 @@ const chartOptions = ref({
 			tools: {
 				download: false,
 				pan: false,
-				reset: '<p>' + '重置' + '</p>',
+				reset: "<p>" + "重置" + "</p>",
 				zoomin: false,
 				zoomout: false,
 			},
@@ -40,7 +40,7 @@ const chartOptions = ref({
 		colors: props.history_data_color
 			? props.history_data_color
 			: props.chart_config.color,
-		curve: 'smooth',
+		curve: "smooth",
 		show: true,
 		width: 2,
 	},
@@ -49,24 +49,26 @@ const chartOptions = ref({
 			// The class "chart-tooltip" could be edited in /assets/styles/chartStyles.css
 			return (
 				'<div class="chart-tooltip">' +
-				'<h6>' +
+				"<h6>" +
 				`${w.config.series[seriesIndex].data[dataPointIndex].x}` +
-				'</h6>' +
-				'<span>' +
+				"</h6>" +
+				"<span>" +
 				series[seriesIndex][dataPointIndex] +
-				` ${props.chart_config.unit}` +
-				'</span>' +
-				'</div>'
-			)
+				` ${
+					props.chart_config.history_unit ?? props.chart_config.unit
+				}` +
+				"</span>" +
+				"</div>"
+			);
 		},
 	},
 	xaxis: {
 		axisBorder: {
-			color: '#555',
-			height: '0.8',
+			color: "#555",
+			height: "0.8",
 		},
 		axisTicks: {
-			color: '#555',
+			color: "#555",
 		},
 		crosshairs: {
 			show: false,
@@ -74,9 +76,9 @@ const chartOptions = ref({
 		tooltip: {
 			enabled: false,
 		},
-		type: 'datetime',
+		type: "datetime",
 	},
-})
+});
 </script>
 
 <template>
