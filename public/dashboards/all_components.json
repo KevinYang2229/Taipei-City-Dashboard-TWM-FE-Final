@@ -5393,7 +5393,7 @@
 					"title": "共融式遊戲場地圖",
 					"type": "circle",
 					"size": null,
-					"icon": null
+					"icon": "bus"
 				}
 			],
 			"history_data": false,
@@ -6114,7 +6114,7 @@
 				}
 			],
 			"chart_config": {
-				"color": ["#2e999b", "#80e3d4", "#1f9b85"],
+				"color": ["#3A69A0", "#4B96FA"],
 				"types": ["TimelineStackedChart"],
 				"map_filter": ["hour"],
 				"unit": "個"
