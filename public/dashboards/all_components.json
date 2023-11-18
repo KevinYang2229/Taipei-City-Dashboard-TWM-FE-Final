@@ -4968,14 +4968,13 @@
 			"map_config": null,
 			"chart_config": {
 				"color": ["#4B96FA", "#F1C40F"],
-				"types": ["SingleIconPercentageChart", "IconPercentageChart"],
-				"categories": ["普通人", "老人"],
-				"itemPrimaryPercentage": 30,
+				"types": ["IconPercentageChart"],
+				"categories": ["男生", "女生"],
 				"unit": "%"
 			},
-			"name": "圖形比例",
+			"name": "【育兒】育嬰假性別比例",
 			"history_data": false,
-			"source": "自定義source",
+			"source": "主計處",
 			"time_from": "2023-01-01T08:00:18+08:00",
 			"time_to": null,
 			"update_freq": null,
@@ -4983,7 +4982,10 @@
 			"short_desc": "顯示兩種不同類型的樣本比例",
 			"long_desc": "顯示兩種不同類型的樣本比例不定期更新。",
 			"use_case": "顯示男女比例",
-			"links": null,
+			"links": [
+				"https://data.taipei/dataset/detail?id=ecf39112-832c-4b9d-9376-1ec3636d3c7f",
+				"https://www.bli.gov.tw/0013465.html"
+			],
 			"tags": [],
 			"contributors": ["tuic"]
 		},
@@ -5262,33 +5264,6 @@
 			"use_case": "臺北市兒童醫療補助時間數列統計資料。",
 			"links": [
 				"https://data.taipei/dataset/detail?id=7b6b159f-d413-43f4-914d-d77d5fe63568"
-			],
-			"tags": [],
-			"contributors": ["tuic"]
-		},
-		"2000": {
-			"id": 2000,
-			"index": "customized_chart",
-			"map_config": null,
-			"chart_config": {
-				"color": ["#4B96FA", "#F1C40F"],
-				"types": ["IconPercentageChart", "SingleIconPercentageChart"],
-				"categories": ["男生", "女生"],
-				"itemPrimaryPercentage": 13.4,
-				"unit": "%"
-			},
-			"name": "【育兒】育嬰假性別比例",
-			"history_data": false,
-			"source": "自定義source",
-			"time_from": "2023-01-01T08:00:18+08:00",
-			"time_to": null,
-			"update_freq": null,
-			"update_freq_unit": null,
-			"short_desc": "顯示兩種不同類型的樣本比例",
-			"long_desc": "顯示兩種不同類型的樣本比例不定期更新。",
-			"use_case": "顯示男女比例",
-			"links": [
-				"https://data.taipei/dataset/detail?id=ecf39112-832c-4b9d-9376-1ec3636d3c7f"
 			],
 			"tags": [],
 			"contributors": ["tuic"]

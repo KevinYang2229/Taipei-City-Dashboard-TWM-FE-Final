@@ -1,7 +1,7 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, reactive } from "vue";
 import ChartIcon from "../utilities/ChartIcon.vue";
 const targetItem = ref(null);
 const mousePosition = ref({ x: null, y: null });
@@ -11,6 +11,9 @@ let targetData = { status: null };
 
 const { color, categories, unit } = props.chart_config;
 
+const activeData = ref({ ...props.series[props.series.length - 1] });
+// const activeData = reactive(props.series[props.series.length - 1]);
+
 const chartIconTotal = 50;
 let iconColorPrimary = color[0];
 let iconColorSecondary = color[1];
@@ -18,17 +21,13 @@ let iconNamePrimary = categories[0];
 let iconNameSecondary = categories[1];
 
 const chartDataTotalNumber = computed(() => {
-	let total = 0;
-	props.series.forEach((item) => {
-		total += item.data;
-	});
-	return total;
+	return activeData.value;
 });
 
 // calculate percentage
 const primaryPercentage = computed(() => {
 	return Math.round(
-		(props.series[0].data / chartDataTotalNumber.value) * 100
+		(activeData.value.data[0].count / activeData.value.count) * 100
 	);
 });
 const secondaryPercentage = computed(() => {
@@ -37,10 +36,12 @@ const secondaryPercentage = computed(() => {
 
 // calculate how much icon number in chart
 const primaryIconNumber = computed(() => {
+	console.log(primaryPercentage.value, "primaryPercentage.value");
+	console.log(activeData.value.count, "activeData.value.count");
 	return Math.round((primaryPercentage.value * chartIconTotal) / 100);
 });
 const secondaryIconNumber = computed(() => {
-	return chartIconTotal - primaryIconNumber.value;
+	return activeData.value.count - primaryIconNumber.value;
 });
 
 onMounted(() => {
@@ -69,6 +70,8 @@ const updateMouseLocation = (e) => {
 
 let iconPositionX = 0;
 let iconPositionY = 0;
+let xWidth = 38;
+let yHeight = 38;
 const getPositon = (index) => {
 	if (index === 1) {
 		iconPositionX = 0;
@@ -78,19 +81,19 @@ const getPositon = (index) => {
 	if (index % 10 === 1) {
 		// 找出數字尾數為 1 的數字
 		iconPositionX = 0;
-		iconPositionY += 38 + 4;
+		iconPositionY += yHeight + 4;
 	} else {
-		iconPositionX += 38;
+		iconPositionX += xWidth - 8;
 	}
 	return `${iconPositionX},${iconPositionY}`;
 };
 
-// const dataRebuild = () => {
-// 	let data = [...props.series];
-
-// 	const percentageData = data;
-// 	return data;
-// };
+const updateChartData = (year) => {
+	let newData = props.series.filter((e) => e.year === year)[0];
+	activeData.value.count = newData.count;
+	activeData.value.year = newData.year;
+	activeData.value.data = newData.data;
+};
 
 // const counter = ref(0);
 // const targetValue = 10;
@@ -141,7 +144,7 @@ const getPositon = (index) => {
 						>{{ primaryPercentage }}</span
 					>%
 				</h2>
-				<p>總人數：{{ series[0].data }}</p>
+				<p>總人數：{{ activeData.data[0].count }}</p>
 			</div>
 			<div class="iconPercentageChart__content">
 				<h2>
@@ -152,12 +155,24 @@ const getPositon = (index) => {
 						>{{ secondaryPercentage }}</span
 					>%
 				</h2>
-				<p>總人數：{{ series[1].data }}</p>
+				<p>總人數：{{ activeData.data[1].count }}</p>
 			</div>
+		</div>
+		<div class="iconPercentageChart__buttons">
+			<button
+				@click="updateChartData(item.year)"
+				class="iconPercentageChart__button"
+				:class="activeData.year === item.year ? 'active' : ''"
+				type="button"
+				v-for="item in series"
+				key="item.year"
+			>
+				{{ item.year }}
+			</button>
 		</div>
 		<div class="iconPercentageChart__chart">
 			<svg
-				viewBox="0 0 382 250"
+				viewBox="0 0 310 220"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
 			>
@@ -216,6 +231,9 @@ const getPositon = (index) => {
 	max-height: 100%;
 	position: relative;
 	overflow-y: scroll;
+	&__chart {
+		margin: 0 2rem;
+	}
 	&__chart-info {
 		position: fixed;
 		z-index: 20;
@@ -227,7 +245,7 @@ const getPositon = (index) => {
 		justify-content: space-around;
 	}
 	&__percentage {
-		font-size: 1.6rem;
+		font-size: 1.3rem;
 		padding: 0 0.3em;
 	}
 	&__content {
@@ -239,6 +257,23 @@ const getPositon = (index) => {
 			color: var(--color-complement-text);
 			margin-top: 0.2 rem;
 		}
+	}
+	&__buttons {
+		color: var(--color-complement-text);
+		margin: 0 2rem;
+		display: flex;
+		justify-content: space-around;
+		margin-bottom: 0.5rem;
+	}
+	&__button {
+		color: var(--color-complement-text);
+		border: solid 1px var(--color-complement-text);
+		padding: 0 6px;
+		border-radius: 5px;
+	}
+	&__button.active {
+		color: #fff;
+		background-color: #ffffff2e;
 	}
 }
 

@@ -1,12 +1,74 @@
 {
 	"data": [
 		{
-			"name": "男生",
-			"data": 100
+			"year": "2018",
+			"count": 20928,
+			"data": [
+				{
+					"name": "man",
+					"count": 3087
+				},
+				{
+					"name": "woman",
+					"count": 17841
+				}
+			]
 		},
 		{
-			"name": "女生",
-			"data": 900
+			"year": "2019",
+			"count": 20129,
+			"data": [
+				{
+					"name": "man",
+					"count": 3129
+				},
+				{
+					"name": "woman",
+					"count": 17000
+				}
+			]
+		},
+		{
+			"year": "2020",
+			"count": 19489,
+			"data": [
+				{
+					"name": "man",
+					"count": 3056
+				},
+				{
+					"name": "woman",
+					"count": 16433
+				}
+			]
+		},
+		{
+			"year": "2021",
+			"count": 20754,
+			"data": [
+				{
+					"name": "man",
+					"count": 3610
+				},
+				{
+					"name": "woman",
+					"count": 17144
+				}
+			]
+		},
+		{
+			"year": "2022",
+			"count": 22507,
+			"data": [
+				{
+					"name": "man",
+					"count": 5001
+				},
+				{
+					"name": "woman",
+					"count": 17506
+				}
+			]
 		}
 	]
 }
