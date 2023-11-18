@@ -141,7 +141,10 @@ export const useMapStore = defineStore("map", {
 				"bike_green",
 				"bike_orange",
 				"bike_red",
-				"temple",
+				'icon-less',
+				'icon-middle',
+				'icon-full',
+				'icon-house'
 			];
 			images.forEach((element) => {
 				this.map.loadImage(
@@ -612,7 +615,7 @@ export const useMapStore = defineStore("map", {
 			let mrt_click = clickFeatureDatas[0]["properties"]["name"];
 			let layer_id = clickFeatureDatas[0]["layer"]["id"];
 
-			if (layer_id === "mrt_and_spot_new-symbol") {
+			if (layer_id === "mrt_nearby_child_care_center-symbol") {
 				this.map.setFilter(layer_id, [
 					"any",
 					["==", ["get", "tpye"], "MRT_STATION"],
