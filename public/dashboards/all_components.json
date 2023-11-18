@@ -6716,9 +6716,9 @@
 								"point_count"
 							],
 							"red",
-							20,
+							15,
 							"blue",
-							50,
+							30,
 							"yellow"
 						],
 						"circle-radius": [
@@ -6784,8 +6784,10 @@
 						]
 					],
 					"paint": {
-						"circle-radius": 6,
-						"circle-color": "#FF00F0"
+						"circle-radius": 4,
+						"circle-stroke-width": 1,
+						"circle-stroke-color": "green",
+						"circle-color": "green"
 					}
 				}
 			],

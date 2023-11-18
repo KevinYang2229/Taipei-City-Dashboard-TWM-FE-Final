@@ -238,6 +238,7 @@ export const useMapStore = defineStore("map", {
 			this.map.addLayer({
 				id: map_config.layerId,
 				type: map_config.type,
+				filter: map_config.filter,
 				paint: {
 					...maplayerCommonPaint[`${map_config.type}`],
 					...extra_paint_configs,
@@ -380,11 +381,6 @@ export const useMapStore = defineStore("map", {
 		addPopup(event) {
 			// Gets the info that is contained in the coordinates that the user clicked on (only visible layers)
 
-			this.currentVisibleLayers = this.currentVisibleLayers.filter(
-				(ele) =>
-					ele === "collisions-circle" ? "collisions-circle" : ele
-			);
-
 			const clickFeatureDatas = this.map.queryRenderedFeatures(
 				event.point,
 				{
@@ -408,18 +404,7 @@ export const useMapStore = defineStore("map", {
 				previousParsedLayer = clickFeatureDatas[i].layer.id;
 				mapConfigs.push(this.mapConfigs[clickFeatureDatas[i].layer.id]);
 
-				parsedPopupContent.push({
-					properties: clickFeatureDatas[i].properties,
-				});
-				/*
-				if (clickFeatureDatas[i].layer.id === 'collisions-circle') {
-					parsedPopupContent.push({
-						properties: clickFeatureDatas[i].properties,
-					})
-				} else {
-					parsedPopupContent.push(`clickFeatureDatas`[i])
-				}
-				*/
+				parsedPopupContent.push({ properties: clickFeatureDatas[i].properties });
 			}
 
 			/*if (!!event.lngLat && mapConfigs[0].layerId === 'collisions-circle') {
