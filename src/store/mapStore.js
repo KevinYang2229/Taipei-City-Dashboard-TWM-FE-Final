@@ -76,6 +76,10 @@ export const useMapStore = defineStore("map", {
 						}
 					);
 
+					if (event.lngLat) {
+						this.flyTo(event.lngLat);
+					}
+
 					if (!clickDatas[0]?.properties?.cluster) {
 						if (this.popup) {
 							this.popup = null;
@@ -83,6 +87,9 @@ export const useMapStore = defineStore("map", {
 						this.addPopup(event);
 						this.addFilter(event);
 					}
+				})
+				.on("dblclick", () => {
+					this.flyTo("", 12);
 				})
 				.on("idle", () => {
 					this.loadingLayers = this.loadingLayers.filter(
@@ -155,7 +162,7 @@ export const useMapStore = defineStore("map", {
 			const layerCount = map_config.length;
 
 			map_config.forEach((element) => {
-				let mapLayerId = '';
+				let mapLayerId = "";
 
 				if (layerCount > 2 && element?.layer3Id) {
 					mapLayerId = `${element.index}-${element.type}-${element.layer3Id}`;
@@ -267,7 +274,7 @@ export const useMapStore = defineStore("map", {
 			if (map_config?.filter !== undefined) {
 				layerConfig.filter = map_config.filter;
 			}
-			
+
 			this.map.addLayer(layerConfig);
 			this.currentLayers.push(map_config.layerId);
 			this.mapConfigs[map_config.layerId] = map_config;
@@ -374,18 +381,16 @@ export const useMapStore = defineStore("map", {
 		},
 		// 6. Turn off the visibility of an exisiting map layer but don't remove it completely
 		turnOffMapLayerVisibility(map_config) {
-
 			const layerCount = map_config.length;
 
 			map_config.forEach((element) => {
-
 				let mapLayerId = "";
 				if (layerCount > 2 && element?.layer3Id) {
 					mapLayerId = `${element.index}-${element.type}-${element.layer3Id}`;
 				} else {
 					mapLayerId = `${element.index}-${element.type}`;
 				}
-				
+
 				this.loadingLayers = this.loadingLayers.filter(
 					(el) => el !== mapLayerId
 				);
@@ -431,7 +436,9 @@ export const useMapStore = defineStore("map", {
 					continue;
 				previousParsedLayer = clickFeatureDatas[i].layer.id;
 				mapConfigs.push(this.mapConfigs[clickFeatureDatas[i].layer.id]);
-				parsedPopupContent.push({ properties: clickFeatureDatas[i].properties });
+				parsedPopupContent.push({
+					properties: clickFeatureDatas[i].properties,
+				});
 			}
 
 			/*if (!!event.lngLat && mapConfigs[0].layerId === 'collisions-circle') {
@@ -581,10 +588,10 @@ export const useMapStore = defineStore("map", {
 			}
 			this.marker = null;
 		},
-		flyTo(lnglat) {
+		flyTo(lnglat, zoom = 14) {
 			this.map.flyTo({
 				center: lnglat,
-				zoom: 14, // 指定的縮放級別
+				zoom: zoom, // 指定的縮放級別
 				essential: true, // 這確保平滑的地圖遷移
 			});
 		},
@@ -601,7 +608,7 @@ export const useMapStore = defineStore("map", {
 			if (clickFeatureDatas.length == 0) {
 				return;
 			}
-			
+
 			let mrt_click = clickFeatureDatas[0]["properties"]["name"];
 			let layer_id = clickFeatureDatas[0]["layer"]["id"];
 
