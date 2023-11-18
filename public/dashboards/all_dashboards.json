@@ -3,150 +3,79 @@
 		{
 			"name": "宜居臺北",
 			"index": "livable",
-			"components": [
-				"161",
-				"162",
-				"163",
-				"1808",
-				"1805",
-				"1303",
-				"3000",
-				"1301",
-				"1302"
-			],
+			"components": ["161", "162", "163", "1301", "1302", "1303", "1808", "1805"],
 			"icon": "cottage"
 		},
 		{
 			"name": "祝您好孕",
 			"index": "maternity",
-			"components": [
-				"2001",
-				"2002",
-				"2003",
-				"1809",
-				"2004",
-				"2000",
-				"2005",
-				"200"
-			],
+			"components": ["2001", "2002", "2003", "1809", "2004", "2000", "2005", "2006"],
 			"icon": "cottage"
 		},
 		{
 			"name": "步步為銀",
 			"index": "elder_friendly",
-			"components": [
-				"3001",
-				"3002",
-				"3003",
-				"1804",
-				"2005"
-			],
+			"components": ["3001", "3002", "3003", "1804", "2005", "3004", "3005"],
 			"icon": "cottage"
 		},
 		{
 			"name": "臺北歡迎您",
 			"index": "travel",
-			"components": [
-				"161",
-				"162",
-				"163",
-				"4001"
-			],
+			"components": ["161", "162", "163", "4001", "4002", "4003", "4004", "4005"],
+			"icon": "cottage"
+		},
+		{
+			"name": "備用",
+			"index": "replacement",
+			"components": ["1806", "1807"],
 			"icon": "cottage"
 		},
 		{
 			"name": "YouBike研究",
 			"index": "youbike",
-			"components": [
-				"60",
-				"142",
-				"143",
-				"144",
-				"145",
-				"146",
-				"147"
-			],
+			"components": ["60", "142", "143", "144", "145", "146", "147"],
 			"icon": "pedal_bike"
 		},
 		{
 			"name": "民情熱議",
 			"index": "public-opinion",
-			"components": [
-				"5",
-				"72"
-			],
+			"components": ["5", "72"],
 			"icon": "mic"
 		},
 		{
 			"name": "社會安全",
 			"index": "security",
-			"components": [
-				"8",
-				"7",
-				"83",
-				"22",
-				"107"
-			],
+			"components": ["8", "7", "83", "22", "107"],
 			"icon": "security"
 		},
 		{
 			"name": "交通運輸",
 			"index": "transport",
-			"components": [
-				"73",
-				"116",
-				"114",
-				"79",
-				"60",
-				"57",
-				"26"
-			],
+			"components": ["73", "116", "114", "79", "60", "57", "26"],
 			"icon": "train"
 		},
 		{
 			"name": "城市建設",
 			"index": "construction",
-			"components": [
-				"140",
-				"34",
-				"42",
-				"108",
-				"20",
-				"28",
-				"33"
-			],
+			"components": ["140", "34", "42", "108", "20", "28", "33"],
 			"icon": "construction"
 		},
 		{
 			"name": "生態環境",
 			"index": "environment",
-			"components": [
-				"141",
-				"110",
-				"103",
-				"104",
-				"111",
-				"43",
-				"59"
-			],
+			"components": ["141", "110", "103", "104", "111", "43", "59"],
 			"icon": "forest"
 		},
 		{
 			"name": "社會福利",
 			"index": "welfare",
-			"components": [
-				"90",
-				"82",
-				"29"
-			],
+			"components": ["90", "82", "29"],
 			"icon": "handshake"
 		},
 		{
 			"name": "測試組件",
 			"index": "testing",
 			"components": [
-				"152",
-				"153",
 				"1801",
 				"1802",
 				"1803",
@@ -157,22 +86,15 @@
 				"118",
 				"61",
 				"74",
-				"200",
-				"5000",
-				"9000"
+				"200", 
+				"2000"
 			],
 			"icon": "bug_report"
 		},
 		{
 			"name": "收藏組件",
 			"index": "favorites",
-			"components": [
-				"108",
-				"22",
-				"79",
-				"60",
-				"107"
-			],
+			"components": ["108", "22", "79", "60", "107"],
 			"icon": "favorite"
 		},
 		{

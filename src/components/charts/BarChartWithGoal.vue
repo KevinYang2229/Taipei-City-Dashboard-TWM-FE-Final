@@ -1,54 +1,59 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { computed, ref } from 'vue'
-import { useMapStore } from '../../store/mapStore'
+import { computed, ref } from "vue";
+import { useMapStore } from "../../store/mapStore";
 
 const props = defineProps([
-	'chart_config',
-	'activeChart',
-	'series',
-	'map_config',
-])
-const mapStore = useMapStore()
+	"chart_config",
+	"activeChart",
+	"series",
+	"map_config",
+]);
+const mapStore = useMapStore();
 
-const goalColor = '#fff'
-const defaultLabels = ['實際數值', '期望數值']
+const goalColor = "#fff";
+const defaultLabels = ["實際數值", "期望數值"];
 
 const parseSeries = computed(() => {
 	if (props.series[0].data[0].goal) {
-		let parsedSeries = []
-		let colors = []
-		const inputData = props.series[0].data
+		let parsedSeries = [];
+		let colors = [];
+		let allGoalsNotMet = true;
+		const inputData = props.series[0].data;
 		for (let i = 0; i < inputData.length; i++) {
-			const item = inputData[i]
+			const item = inputData[i];
 			const goalItem = {
-				name: '目標',
+				name: "目標",
 				value: item.goal,
 				strokeWidth: 4,
 				strokeColor: goalColor,
-			}
+			};
 
 			const parsedItem = {
 				x: item.x,
 				y: item.y,
 				goals: [goalItem],
+			};
+			parsedSeries.push(parsedItem);
+			if (item.y > item.goal) {
+				allGoalsNotMet = false;
+				colors.push(props.chart_config.color[1]);
+			} else {
+				colors.push(props.chart_config.color[0]);
 			}
-			parsedSeries.push(parsedItem)
-			colors.push(
-				item.y > item.goal
-					? props.chart_config.color[1]
-					: props.chart_config.color[0]
-			)
+		}
+		if (allGoalsNotMet) {
+			colors = props.chart_config.color;
 		}
 		return {
 			colors,
-			series: [{ name: '', data: parsedSeries }],
-		}
+			series: [{ name: "", data: parsedSeries }],
+		};
 	} else {
-		return { series: props.series }
+		return { series: props.series };
 	}
-})
+});
 
 const chartOptions = ref({
 	chart: {
@@ -87,16 +92,18 @@ const chartOptions = ref({
 	// The class "chart-tooltip" could be edited in /assets/styles/chartStyles.css
 	tooltip: {
 		custom: function ({ series, seriesIndex, dataPointIndex, w }) {
-			const label = w.globals.labels[dataPointIndex]
-			const category1 = props.chart_config.categories?.[0] ?? defaultLabels[0]
-			const category2 = props.chart_config.categories?.[1] ?? defaultLabels[1]
-			const value = series[seriesIndex][dataPointIndex]
+			const label = w.globals.labels[dataPointIndex];
+			const category1 =
+				props.chart_config.categories?.[0] ?? defaultLabels[0];
+			const category2 =
+				props.chart_config.categories?.[1] ?? defaultLabels[1];
+			const value = series[seriesIndex][dataPointIndex];
 			const goalValue =
-				w.globals.seriesGoals[seriesIndex][dataPointIndex]?.[0]?.value
+				w.globals.seriesGoals[seriesIndex][dataPointIndex]?.[0]?.value;
 
 			const goalHtml = goalValue
 				? `<td><span>${goalValue} ${props.chart_config.unit}</span></td>`
-				: ''
+				: "";
 
 			return `
         <div class="chart-tooltip">
@@ -112,7 +119,7 @@ const chartOptions = ref({
             </tr>
           </table>
         </div>
-      `
+      `;
 		},
 		followCursor: true,
 	},
@@ -126,39 +133,39 @@ const chartOptions = ref({
 		labels: {
 			show: true,
 		},
-		type: 'category',
+		type: "category",
 	},
 	yaxis: {
 		labels: {
 			formatter: function (value) {
-				return value.length > 7 ? value.slice(0, 6) + '...' : value
+				return value.length > 7 ? value.slice(0, 6) + "..." : value;
 			},
 		},
 	},
-})
+});
 
 const chartHeight = computed(() => {
-	const height = 80 + props.series[0].data.length * 36
-	return `${Math.min(height, 260)}`
-})
-const selectedIndex = ref(null)
+	const height = 80 + props.series[0].data.length * 36;
+	return `${Math.min(height, 260)}`;
+});
+const selectedIndex = ref(null);
 
 function handleDataSelection(e, chartContext, config) {
 	if (!props.chart_config.map_filter) {
-		return
+		return;
 	}
 	if (config.dataPointIndex !== selectedIndex.value) {
 		mapStore.addLayerFilter(
 			`${props.map_config[0].index}-${props.map_config[0].type}`,
 			props.chart_config.map_filter[0],
 			props.chart_config.map_filter[1][config.dataPointIndex]
-		)
-		selectedIndex.value = config.dataPointIndex
+		);
+		selectedIndex.value = config.dataPointIndex;
 	} else {
 		mapStore.clearLayerFilter(
 			`${props.map_config[0].index}-${props.map_config[0].type}`
-		)
-		selectedIndex.value = null
+		);
+		selectedIndex.value = null;
 	}
 }
 </script>
