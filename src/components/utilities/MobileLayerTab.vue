@@ -18,7 +18,7 @@ function handleToggle() {
 		return;
 	}
 	if (checked.value) {
-		mapStore.addToMapLayerList(props.content.map_config);
+		mapStore.addToMapLayerList(props.content.map_config, props.content.map_source);
 	} else {
 		mapStore.turnOffMapLayerVisibility(props.content.map_config);
 	}

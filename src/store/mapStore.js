@@ -10,7 +10,6 @@ https://docs.mapbox.com/mapbox-gl-js/guides/
 import { createApp, defineComponent, nextTick, ref } from "vue";
 import { defineStore } from "pinia";
 import { useAuthStore } from "./authStore";
-import { useDialogStore } from "./dialogStore";
 import mapboxGl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import axios from "axios";
@@ -47,12 +46,15 @@ export const useMapStore = defineStore("map", {
 		savedLocations: savedLocations,
 		// Store currently loading layers,
 		loadingLayers: [],
+		maker: null,
 	}),
 	getters: {},
 	actions: {
 		/* Initialize Mapbox */
 		// 1. Creates the mapbox instance and passes in initial configs
 		initializeMapBox() {
+			// eslint-disable-next-line no-console
+			//console.log(this)
 			this.map = null;
 			const MAPBOXTOKEN = import.meta.env.VITE_MAPBOXTOKEN;
 			mapboxGl.accessToken = MAPBOXTOKEN;
@@ -71,6 +73,7 @@ export const useMapStore = defineStore("map", {
 						this.popup = null;
 					}
 					this.addPopup(event);
+					this.addFilter(event);
 				})
 				.on("idle", () => {
 					this.loadingLayers = this.loadingLayers.filter(
@@ -122,6 +125,7 @@ export const useMapStore = defineStore("map", {
 				"bike_green",
 				"bike_orange",
 				"bike_red",
+				"temple",
 			];
 			images.forEach((element) => {
 				this.map.loadImage(
@@ -136,7 +140,8 @@ export const useMapStore = defineStore("map", {
 
 		/* Adding Map Layers */
 		// 1. Passes in the map_config (an Array of Objects) of a component and adds all layers to the map layer list
-		addToMapLayerList(map_config) {
+		addToMapLayerList(map_config, map_source) {
+			// eslint-disable-next-line no-console
 			map_config.forEach((element) => {
 				let mapLayerId = `${element.index}-${element.type}`;
 				// 1-1. If the layer exists, simply turn on the visibility and add it to the visible layers list
@@ -158,23 +163,26 @@ export const useMapStore = defineStore("map", {
 				appendLayerId.layerId = mapLayerId;
 				// 1-2. If the layer doesn't exist, call an API to get the layer data
 				this.loadingLayers.push(appendLayerId.layerId);
-				this.fetchLocalGeoJson(appendLayerId);
+				this.fetchLocalGeoJson(appendLayerId, map_source);
 			});
 		},
 		// 2. Call an API to get the layer data
-		fetchLocalGeoJson(map_config) {
+		fetchLocalGeoJson(map_config, map_source) {
 			axios
 				.get(`${BASE_URL}/mapData/${map_config.index}.geojson`)
 				.then((rs) => {
-					this.addMapLayerSource(map_config, rs.data);
+					this.addMapLayerSource(map_config, map_source, rs.data);
 				})
 				.catch((e) => console.error(e));
 		},
 		// 3. Add the layer data as a source in mapbox
-		addMapLayerSource(map_config, data) {
+		addMapLayerSource(map_config, map_source, data) {
 			this.map.addSource(`${map_config.layerId}-source`, {
 				type: "geojson",
 				data: { ...data },
+				cluster: map_source?.cluster || false,
+				clusterMaxZoom: map_source?.clusterMaxZoom || 0,
+				clusterRadius: map_source?.clusterMaxZoom || 0,
 			});
 			if (map_config.type === "arc") {
 				this.AddArcMapLayer(map_config, data);
@@ -182,9 +190,12 @@ export const useMapStore = defineStore("map", {
 				this.addMapLayer(map_config);
 			}
 		},
+
 		// 4-1. Using the mapbox source and map config, create a new layer
 		// The styles and configs can be edited in /assets/configs/mapbox/mapConfig.js
 		addMapLayer(map_config) {
+			//console.log(map_config)
+			// eslint-disable-next-line no-console
 			let extra_paint_configs = {};
 			let extra_layout_configs = {};
 			if (map_config.icon) {
@@ -214,6 +225,7 @@ export const useMapStore = defineStore("map", {
 				};
 			}
 			this.loadingLayers.push("rendering");
+			// eslint-disable-next-line no-console
 			this.map.addLayer({
 				id: map_config.layerId,
 				type: map_config.type,
@@ -225,6 +237,7 @@ export const useMapStore = defineStore("map", {
 				layout: {
 					...maplayerCommonLayout[`${map_config.type}`],
 					...extra_layout_configs,
+					...map_config.layout,
 				},
 				source: `${map_config.layerId}-source`,
 			});
@@ -353,17 +366,23 @@ export const useMapStore = defineStore("map", {
 			});
 			this.removePopup();
 		},
-
 		/* Popup Related Functions */
 		// Adds a popup when the user clicks on a item. The event will be passed in.
 		addPopup(event) {
 			// Gets the info that is contained in the coordinates that the user clicked on (only visible layers)
+
+			this.currentVisibleLayers = this.currentVisibleLayers.filter(
+				(ele) =>
+					ele === "collisions-circle" ? "collisions-circle" : ele
+			);
+
 			const clickFeatureDatas = this.map.queryRenderedFeatures(
 				event.point,
 				{
 					layers: this.currentVisibleLayers,
 				}
 			);
+
 			// Return if there is no info in the click
 			if (!clickFeatureDatas || clickFeatureDatas.length === 0) {
 				return;
@@ -379,8 +398,25 @@ export const useMapStore = defineStore("map", {
 					continue;
 				previousParsedLayer = clickFeatureDatas[i].layer.id;
 				mapConfigs.push(this.mapConfigs[clickFeatureDatas[i].layer.id]);
-				parsedPopupContent.push(clickFeatureDatas[i]);
+
+				parsedPopupContent.push({
+					properties: clickFeatureDatas[i].properties,
+				});
+				/*
+				if (clickFeatureDatas[i].layer.id === 'collisions-circle') {
+					parsedPopupContent.push({
+						properties: clickFeatureDatas[i].properties,
+					})
+				} else {
+					parsedPopupContent.push(`clickFeatureDatas`[i])
+				}
+				*/
 			}
+
+			/*if (!!event.lngLat && mapConfigs[0].layerId === 'collisions-circle') {
+				this.flyTo(event.lngLat)
+			}*/
+
 			// Create a new mapbox popup
 			this.popup = new mapboxGl.Popup()
 				.setLngLat(event.lngLat)
@@ -449,8 +485,7 @@ export const useMapStore = defineStore("map", {
 		/* Map Filtering */
 		// Add a filter based on a property on a map layer
 		addLayerFilter(layer_id, property, key, map_config) {
-			const dialogStore = useDialogStore();
-			if (!this.map || dialogStore.dialogs.moreInfo) {
+			if (!this.map) {
 				return;
 			}
 			if (map_config && map_config.type === "arc") {
@@ -469,8 +504,7 @@ export const useMapStore = defineStore("map", {
 		},
 		// Remove any filters on a map layer
 		clearLayerFilter(layer_id, map_config) {
-			const dialogStore = useDialogStore();
-			if (!this.map || dialogStore.dialogs.moreInfo) {
+			if (!this.map) {
 				return;
 			}
 			if (map_config && map_config.type === "arc") {
@@ -505,6 +539,33 @@ export const useMapStore = defineStore("map", {
 			this.map = null;
 			this.currentVisibleLayers = [];
 			this.removePopup();
+		},
+		flyTo(lnglat) {
+			this.map.flyTo({
+				center: lnglat,
+				zoom: 14, // 指定的縮放級別
+				essential: true, // 這確保平滑的地圖遷移
+			});
+		},
+
+		addFilter(event) {
+			// Gets the info that is contained in the coordinates that the user clicked on (only visible layers)
+			const clickFeatureDatas = this.map.queryRenderedFeatures(
+				event.point,
+				{
+					layers: this.currentVisibleLayers,
+				}
+			);
+			let mrt_click = clickFeatureDatas[0]["properties"]["name"];
+			let layer_id = clickFeatureDatas[0]["layer"]["id"];
+
+			if (layer_id === "mrt_and_spot_new-symbol") {
+				this.map.setFilter(layer_id, [
+					"any",
+					["==", ["get", "tpye"], "MRT_STATION"],
+					["in", mrt_click, ["get", "closed_mrt_station_name"]],
+				]);
+			}
 		},
 	},
 });

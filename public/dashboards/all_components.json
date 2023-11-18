@@ -4077,6 +4077,155 @@
 				"https://github.com/tpe-doit/YouBike-Optimization"
 			],
 			"contributors": ["tuic"]
+		},
+		"5000": {
+			"id": 5000,
+			"index": "test",
+			"history_data": false,
+			"chart_config": {
+				"categories": [
+					"北投區",
+					"士林區",
+					"內湖區",
+					"南港區",
+					"松山區"
+				],
+				"map_filter": [
+					"dist",
+					[
+						"北投區",
+						"士林區",
+						"內湖區",
+						"南港區",
+						"松山區"
+					]
+				],
+				"types": [
+					"BarChart",
+					"PolarAreaChart"
+				],
+				"unit": "件"
+			},
+			"map_config": [
+				{
+					"id": "clusters",
+					"index": "collisions",
+					"type": "circle",
+					"filter": [
+						"has",
+						"point_count"
+					],
+					"paint": {
+						"circle-color": [
+							"step",
+							[
+								"get",
+								"point_count"
+							],
+							"red",
+							20,
+							"blue",
+							50,
+							"yellow"
+						],
+						"circle-radius": [
+							"step",
+							[
+								"get",
+								"point_count"
+							],
+							20,
+							20,
+							30,
+							50,
+							40
+						],
+						"circle-opacity": 0.6
+					},
+					"property": [
+						{
+							"key": "city",
+							"name": "縣市"
+						},
+						{
+							"key": "dist",
+							"name": "地區"
+						},
+						{
+							"key": "addr",
+							"name": "地址"
+						},
+						{
+							"key": "name",
+							"name": "位置"
+						},
+						{
+							"key": "Hour",
+							"name": "時間"
+						}
+					],
+					"title": "Cluster功能展示"
+				},
+				{
+					"id": "cluster-count",
+					"index": "collisions",
+					"type": "symbol",
+					"filter": [
+						"has",
+						"point_count"
+					],
+					"layout": {
+						"text-field": [
+							"get",
+							"point_count_abbreviated"
+						],
+						"text-font": [
+							"DIN Offc Pro Medium",
+							"Arial Unicode MS Bold"
+						],
+						"text-size": 12
+					},
+					"title": "Cluster進度說明",
+					"property": []
+				},
+				{
+					"id": "unclustered-point",
+					"type": "circle",
+					"index": "collisions",
+					"filter": [
+						"!",
+						[
+							"has",
+							"point_count"
+						]
+					],
+					"paint": {
+						"circle-radius": 6,
+						"circle-color": "#FF00F0"
+					}
+				}
+			],
+			"map_source": {
+				"cluster": true,
+				"clusterMaxZoom": 100,
+				"clusterRadius": 100
+			},
+			"name": "【加分項開發中】地圖cluster功能",
+			"source": "測試來源",
+			"time_from": "2023-01-01T23:59:59+08:00",
+			"time_to": "2023-05-01T23:59:59+08:00",
+			"update_freq": 1,
+			"update_freq_unit": "month",
+			"short_desc": "測試測試測試測試測試",
+			"long_desc": "測試測試測試測試測試測試測試測試測試測試。",
+			"use_case": "測試測試測試測試測試測試測試。",
+			"links": [
+				"https://data.taipei/dataset/detail?id=dc7e246a-a88e-42f8-8cd6-9739209af774"
+			],
+			"tags": [],
+			"contributors": [
+				"tuic"
+			]
 		}
 	}
 }
