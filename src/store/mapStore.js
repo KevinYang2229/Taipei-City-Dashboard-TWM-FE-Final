@@ -7,15 +7,15 @@ The mapStore controls the map and includes methods to modify it.
 !! PLEASE BE SURE TO REFERENCE THE MAPBOX DOCUMENTATION IF ANYTHING IS UNCLEAR !!
 https://docs.mapbox.com/mapbox-gl-js/guides/
 */
-import { createApp, defineComponent, nextTick, ref } from "vue";
-import { defineStore } from "pinia";
-import { useAuthStore } from "./authStore";
-import mapboxGl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
-import axios from "axios";
-import { Threebox } from "threebox-plugin";
+import { createApp, defineComponent, nextTick, ref } from 'vue'
+import { defineStore } from 'pinia'
+import { useAuthStore } from './authStore'
+import mapboxGl from 'mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
+import axios from 'axios'
+import { Threebox } from 'threebox-plugin'
 
-import mapStyle from "../assets/configs/mapbox/mapStyle.js";
+import mapStyle from '../assets/configs/mapbox/mapStyle.js'
 import {
 	MapObjectConfig,
 	TaipeiTown,
@@ -23,14 +23,14 @@ import {
 	TaipeiBuilding,
 	maplayerCommonPaint,
 	maplayerCommonLayout,
-} from "../assets/configs/mapbox/mapConfig.js";
-import { savedLocations } from "../assets/configs/mapbox/savedLocations.js";
-import { calculateGradientSteps } from "../assets/configs/mapbox/arcGradient";
-import MapPopup from "../components/map/MapPopup.vue";
+} from '../assets/configs/mapbox/mapConfig.js'
+import { savedLocations } from '../assets/configs/mapbox/savedLocations.js'
+import { calculateGradientSteps } from '../assets/configs/mapbox/arcGradient'
+import MapPopup from '../components/map/MapPopup.vue'
 
-const { BASE_URL } = import.meta.env;
+const { BASE_URL } = import.meta.env
 
-export const useMapStore = defineStore("map", {
+export const useMapStore = defineStore('map', {
 	state: () => ({
 		// Array of layer IDs that are in the map
 		currentLayers: [],
@@ -55,87 +55,87 @@ export const useMapStore = defineStore("map", {
 		initializeMapBox() {
 			// eslint-disable-next-line no-console
 			//console.log(this)
-			this.map = null;
-			const MAPBOXTOKEN = import.meta.env.VITE_MAPBOXTOKEN;
-			mapboxGl.accessToken = MAPBOXTOKEN;
+			this.map = null
+			const MAPBOXTOKEN = import.meta.env.VITE_MAPBOXTOKEN
+			mapboxGl.accessToken = MAPBOXTOKEN
 			this.map = new mapboxGl.Map({
 				...MapObjectConfig,
 				style: mapStyle,
-			});
-			this.map.addControl(new mapboxGl.NavigationControl());
-			this.map.doubleClickZoom.disable();
+			})
+			this.map.addControl(new mapboxGl.NavigationControl())
+			this.map.doubleClickZoom.disable()
 			this.map
-				.on("style.load", () => {
-					this.initializeBasicLayers();
+				.on('style.load', () => {
+					this.initializeBasicLayers()
 				})
-				.on("click", (event) => {
+				.on('click', (event) => {
 					if (this.popup) {
-						this.popup = null;
+						this.popup = null
 					}
-					this.addPopup(event);
-					this.addFilter(event);
+					this.addPopup(event)
+					this.addFilter(event)
 				})
-				.on("idle", () => {
+				.on('idle', () => {
 					this.loadingLayers = this.loadingLayers.filter(
-						(el) => el !== "rendering"
-					);
-				});
+						(el) => el !== 'rendering',
+					)
+				})
 		},
 		// 2. Adds three basic layers to the map (Taipei District, Taipei Village labels, and Taipei 3D Buildings)
 		// Due to performance concerns, Taipei 3D Buildings won't be added in the mobile version
 		initializeBasicLayers() {
-			const authStore = useAuthStore();
+			const authStore = useAuthStore()
 			fetch(`${BASE_URL}/mapData/taipei_town.geojson`)
 				.then((response) => response.json())
 				.then((data) => {
 					this.map
-						.addSource("taipei_town", {
-							type: "geojson",
+						.addSource('taipei_town', {
+							type: 'geojson',
 							data: data,
 						})
-						.addLayer(TaipeiTown);
-				});
+						.addLayer(TaipeiTown)
+				})
 			fetch(`${BASE_URL}/mapData/taipei_village.geojson`)
 				.then((response) => response.json())
 				.then((data) => {
 					this.map
-						.addSource("taipei_village", {
-							type: "geojson",
+						.addSource('taipei_village', {
+							type: 'geojson',
 							data: data,
 						})
-						.addLayer(TaipeiVillage);
-				});
+						.addLayer(TaipeiVillage)
+				})
 			if (!authStore.isMobileDevice) {
 				this.map
-					.addSource("taipei_building_3d_source", {
-						type: "vector",
+					.addSource('taipei_building_3d_source', {
+						type: 'vector',
 						url: import.meta.env.VITE_MAPBOXTILE,
 					})
-					.addLayer(TaipeiBuilding);
+					.addLayer(TaipeiBuilding)
 			}
 
-			this.addSymbolSources();
+			this.addSymbolSources()
 		},
 		// 3. Adds symbols that will be used by some map layers
 		addSymbolSources() {
 			const images = [
-				"metro",
-				"triangle_green",
-				"triangle_white",
-				"bike_green",
-				"bike_orange",
-				"bike_red",
-				"temple",
-			];
+				'metro',
+				'triangle_green',
+				'triangle_white',
+				'bike_green',
+				'bike_orange',
+				'bike_red',
+				'temple',
+			]
 			images.forEach((element) => {
 				this.map.loadImage(
 					`${BASE_URL}/images/map/${element}.png`,
 					(error, image) => {
-						if (error) throw error;
-						this.map.addImage(element, image);
-					}
-				);
-			});
+						if (error) throw error
+						this.map.addImage(element, image)
+					},
+				)
+			})
 		},
 
 		/* Adding Map Layers */
@@ -143,51 +143,47 @@ export const useMapStore = defineStore("map", {
 		addToMapLayerList(map_config, map_source) {
 			// eslint-disable-next-line no-console
 			map_config.forEach((element) => {
-				let mapLayerId = `${element.index}-${element.type}`;
+				let mapLayerId = `${element.index}-${element.type}`
 				// 1-1. If the layer exists, simply turn on the visibility and add it to the visible layers list
-				if (
-					this.currentLayers.find((element) => element === mapLayerId)
-				) {
-					this.loadingLayers.push("rendering");
-					this.turnOnMapLayerVisibility(mapLayerId);
+				if (this.currentLayers.find((element) => element === mapLayerId)) {
+					this.loadingLayers.push('rendering')
+					this.turnOnMapLayerVisibility(mapLayerId)
 					if (
-						!this.currentVisibleLayers.find(
-							(element) => element === mapLayerId
-						)
+						!this.currentVisibleLayers.find((element) => element === mapLayerId)
 					) {
-						this.currentVisibleLayers.push(mapLayerId);
+						this.currentVisibleLayers.push(mapLayerId)
 					}
-					return;
+					return
 				}
-				let appendLayerId = { ...element };
-				appendLayerId.layerId = mapLayerId;
+				let appendLayerId = { ...element }
+				appendLayerId.layerId = mapLayerId
 				// 1-2. If the layer doesn't exist, call an API to get the layer data
-				this.loadingLayers.push(appendLayerId.layerId);
-				this.fetchLocalGeoJson(appendLayerId, map_source);
-			});
+				this.loadingLayers.push(appendLayerId.layerId)
+				this.fetchLocalGeoJson(appendLayerId, map_source)
+			})
 		},
 		// 2. Call an API to get the layer data
 		fetchLocalGeoJson(map_config, map_source) {
 			axios
 				.get(`${BASE_URL}/mapData/${map_config.index}.geojson`)
 				.then((rs) => {
-					this.addMapLayerSource(map_config, map_source, rs.data);
+					this.addMapLayerSource(map_config, map_source, rs.data)
 				})
-				.catch((e) => console.error(e));
+				.catch((e) => console.error(e))
 		},
 		// 3. Add the layer data as a source in mapbox
 		addMapLayerSource(map_config, map_source, data) {
 			this.map.addSource(`${map_config.layerId}-source`, {
-				type: "geojson",
+				type: 'geojson',
 				data: { ...data },
 				cluster: map_source?.cluster || false,
 				clusterMaxZoom: map_source?.clusterMaxZoom || 0,
 				clusterRadius: map_source?.clusterMaxZoom || 0,
-			});
-			if (map_config.type === "arc") {
-				this.AddArcMapLayer(map_config, data);
+			})
+			if (map_config.type === 'arc') {
+				this.AddArcMapLayer(map_config, data)
 			} else {
-				this.addMapLayer(map_config);
+				this.addMapLayer(map_config)
 			}
 		},
 
@@ -196,35 +192,27 @@ export const useMapStore = defineStore("map", {
 		addMapLayer(map_config) {
 			//console.log(map_config)
 			// eslint-disable-next-line no-console
-			let extra_paint_configs = {};
-			let extra_layout_configs = {};
+			let extra_paint_configs = {}
+			let extra_layout_configs = {}
 			if (map_config.icon) {
 				extra_paint_configs = {
-					...maplayerCommonPaint[
-						`${map_config.type}-${map_config.icon}`
-					],
-				};
+					...maplayerCommonPaint[`${map_config.type}-${map_config.icon}`],
+				}
 				extra_layout_configs = {
-					...maplayerCommonLayout[
-						`${map_config.type}-${map_config.icon}`
-					],
-				};
+					...maplayerCommonLayout[`${map_config.type}-${map_config.icon}`],
+				}
 			}
 			if (map_config.size) {
 				extra_paint_configs = {
 					...extra_paint_configs,
-					...maplayerCommonPaint[
-						`${map_config.type}-${map_config.size}`
-					],
-				};
+					...maplayerCommonPaint[`${map_config.type}-${map_config.size}`],
+				}
 				extra_layout_configs = {
 					...extra_layout_configs,
-					...maplayerCommonLayout[
-						`${map_config.type}-${map_config.size}`
-					],
-				};
+					...maplayerCommonLayout[`${map_config.type}-${map_config.size}`],
+				}
 			}
-			this.loadingLayers.push("rendering");
+			this.loadingLayers.push('rendering')
 			// eslint-disable-next-line no-console
 			this.map.addLayer({
 				id: map_config.layerId,
@@ -240,168 +228,158 @@ export const useMapStore = defineStore("map", {
 					...map_config.layout,
 				},
 				source: `${map_config.layerId}-source`,
-			});
-			this.currentLayers.push(map_config.layerId);
-			this.mapConfigs[map_config.layerId] = map_config;
-			this.currentVisibleLayers.push(map_config.layerId);
+			})
+			this.currentLayers.push(map_config.layerId)
+			this.mapConfigs[map_config.layerId] = map_config
+			this.currentVisibleLayers.push(map_config.layerId)
 			this.loadingLayers = this.loadingLayers.filter(
-				(el) => el !== map_config.layerId
-			);
+				(el) => el !== map_config.layerId,
+			)
 		},
 		// 4-2. Add Map Layer for Arc Maps
 		AddArcMapLayer(map_config, data) {
-			const authStore = useAuthStore();
-			const lines = [...JSON.parse(JSON.stringify(data.features))];
-			const arcInterval = 20;
+			const authStore = useAuthStore()
+			const lines = [...JSON.parse(JSON.stringify(data.features))]
+			const arcInterval = 20
 
-			this.loadingLayers.push("rendering");
+			this.loadingLayers.push('rendering')
 
 			for (let i = 0; i < lines.length; i++) {
-				let line = [];
+				let line = []
 				let lngDif =
 					lines[i].geometry.coordinates[1][0] -
-					lines[i].geometry.coordinates[0][0];
-				let lngInterval = lngDif / arcInterval;
+					lines[i].geometry.coordinates[0][0]
+				let lngInterval = lngDif / arcInterval
 				let latDif =
 					lines[i].geometry.coordinates[1][1] -
-					lines[i].geometry.coordinates[0][1];
-				let latInterval = latDif / arcInterval;
+					lines[i].geometry.coordinates[0][1]
+				let latInterval = latDif / arcInterval
 
-				let maxElevation =
-					Math.pow(Math.abs(lngDif * latDif), 0.5) * 80000;
+				let maxElevation = Math.pow(Math.abs(lngDif * latDif), 0.5) * 80000
 
 				for (let j = 0; j < arcInterval + 1; j++) {
 					let waypointElevation =
-						Math.sin((Math.PI * j) / arcInterval) * maxElevation;
+						Math.sin((Math.PI * j) / arcInterval) * maxElevation
 					line.push([
 						lines[i].geometry.coordinates[0][0] + lngInterval * j,
 						lines[i].geometry.coordinates[0][1] + latInterval * j,
 						waypointElevation,
-					]);
+					])
 				}
 
-				lines[i].geometry.coordinates = [...line];
+				lines[i].geometry.coordinates = [...line]
 			}
 
 			const tb = (window.tb = new Threebox(
 				this.map,
-				this.map.getCanvas().getContext("webgl"), //get the context from the map canvas
-				{ defaultLights: true }
-			));
+				this.map.getCanvas().getContext('webgl'), //get the context from the map canvas
+				{ defaultLights: true },
+			))
 
-			const delay = authStore.isMobileDevice ? 2000 : 500;
+			const delay = authStore.isMobileDevice ? 2000 : 500
 
 			setTimeout(() => {
 				this.map.addLayer({
 					id: map_config.layerId,
-					type: "custom",
-					renderingMode: "3d",
+					type: 'custom',
+					renderingMode: '3d',
 					onAdd: function () {
 						const paintSettings = map_config.paint
 							? map_config.paint
-							: { "arc-color": ["#ffffff"] };
+							: { 'arc-color': ['#ffffff'] }
 						const gradientSteps = calculateGradientSteps(
-							paintSettings["arc-color"][0],
-							paintSettings["arc-color"][1]
-								? paintSettings["arc-color"][1]
-								: paintSettings["arc-color"][0],
-							arcInterval + 1
-						);
+							paintSettings['arc-color'][0],
+							paintSettings['arc-color'][1]
+								? paintSettings['arc-color'][1]
+								: paintSettings['arc-color'][0],
+							arcInterval + 1,
+						)
 						for (let line of lines) {
 							let lineOptions = {
 								geometry: line.geometry.coordinates,
 								color: 0xffffff,
-								width: paintSettings["arc-width"]
-									? paintSettings["arc-width"]
+								width: paintSettings['arc-width']
+									? paintSettings['arc-width']
 									: 2,
 								opacity:
-									paintSettings["arc-opacity"] ||
-									paintSettings["arc-opacity"] === 0
-										? paintSettings["arc-opacity"]
+									paintSettings['arc-opacity'] ||
+									paintSettings['arc-opacity'] === 0
+										? paintSettings['arc-opacity']
 										: 0.5,
-							};
+							}
 
-							let lineMesh = tb.line(lineOptions);
-							lineMesh.geometry.setColors(gradientSteps);
-							lineMesh.material.vertexColors = true;
+							let lineMesh = tb.line(lineOptions)
+							lineMesh.geometry.setColors(gradientSteps)
+							lineMesh.material.vertexColors = true
 
-							tb.add(lineMesh);
+							tb.add(lineMesh)
 						}
 					},
 					render: function () {
-						tb.update(); //update Threebox scene
+						tb.update() //update Threebox scene
 					},
-				});
-				this.currentLayers.push(map_config.layerId);
-				this.mapConfigs[map_config.layerId] = map_config;
-				this.currentVisibleLayers.push(map_config.layerId);
+				})
+				this.currentLayers.push(map_config.layerId)
+				this.mapConfigs[map_config.layerId] = map_config
+				this.currentVisibleLayers.push(map_config.layerId)
 				this.loadingLayers = this.loadingLayers.filter(
-					(el) => el !== map_config.layerId
-				);
-			}, delay);
+					(el) => el !== map_config.layerId,
+				)
+			}, delay)
 		},
 		//  5. Turn on the visibility for a exisiting map layer
 		turnOnMapLayerVisibility(mapLayerId) {
-			this.map.setLayoutProperty(mapLayerId, "visibility", "visible");
+			this.map.setLayoutProperty(mapLayerId, 'visibility', 'visible')
 		},
 		// 6. Turn off the visibility of an exisiting map layer but don't remove it completely
 		turnOffMapLayerVisibility(map_config) {
 			map_config.forEach((element) => {
-				let mapLayerId = `${element.index}-${element.type}`;
+				let mapLayerId = `${element.index}-${element.type}`
 				this.loadingLayers = this.loadingLayers.filter(
-					(el) => el !== mapLayerId
-				);
+					(el) => el !== mapLayerId,
+				)
 
 				if (this.map.getLayer(mapLayerId)) {
-					this.map.setFilter(mapLayerId, null);
-					this.map.setLayoutProperty(
-						mapLayerId,
-						"visibility",
-						"none"
-					);
+					this.map.setFilter(mapLayerId, null)
+					this.map.setLayoutProperty(mapLayerId, 'visibility', 'none')
 				}
 				this.currentVisibleLayers = this.currentVisibleLayers.filter(
-					(element) => element !== mapLayerId
-				);
-			});
-			this.removePopup();
+					(element) => element !== mapLayerId,
+				)
+			})
+			this.removePopup()
 		},
 		/* Popup Related Functions */
 		// Adds a popup when the user clicks on a item. The event will be passed in.
 		addPopup(event) {
 			// Gets the info that is contained in the coordinates that the user clicked on (only visible layers)
 
-			this.currentVisibleLayers = this.currentVisibleLayers.filter(
-				(ele) =>
-					ele === "collisions-circle" ? "collisions-circle" : ele
-			);
+			this.currentVisibleLayers = this.currentVisibleLayers.filter((ele) =>
+				ele === 'collisions-circle' ? 'collisions-circle' : ele,
+			)
 
-			const clickFeatureDatas = this.map.queryRenderedFeatures(
-				event.point,
-				{
-					layers: this.currentVisibleLayers,
-				}
-			);
+			const clickFeatureDatas = this.map.queryRenderedFeatures(event.point, {
+				layers: this.currentVisibleLayers,
+			})
 
 			// Return if there is no info in the click
 			if (!clickFeatureDatas || clickFeatureDatas.length === 0) {
-				return;
+				return
 			}
 			// Parse clickFeatureDatas to get the first 3 unique layer datas, skip over already included layers
-			const mapConfigs = [];
-			const parsedPopupContent = [];
-			let previousParsedLayer = "";
+			const mapConfigs = []
+			const parsedPopupContent = []
+			let previousParsedLayer = ''
 
 			for (let i = 0; i < clickFeatureDatas.length; i++) {
-				if (mapConfigs.length === 3) break;
-				if (previousParsedLayer === clickFeatureDatas[i].layer.id)
-					continue;
-				previousParsedLayer = clickFeatureDatas[i].layer.id;
-				mapConfigs.push(this.mapConfigs[clickFeatureDatas[i].layer.id]);
+				if (mapConfigs.length === 3) break
+				if (previousParsedLayer === clickFeatureDatas[i].layer.id) continue
+				previousParsedLayer = clickFeatureDatas[i].layer.id
+				mapConfigs.push(this.mapConfigs[clickFeatureDatas[i].layer.id])
 
 				parsedPopupContent.push({
 					properties: clickFeatureDatas[i].properties,
-				});
+				})
 				/*
 				if (clickFeatureDatas[i].layer.id === 'collisions-circle') {
 					parsedPopupContent.push({
@@ -421,7 +399,7 @@ export const useMapStore = defineStore("map", {
 			this.popup = new mapboxGl.Popup()
 				.setLngLat(event.lngLat)
 				.setHTML('<div id="vue-popup-content"></div>')
-				.addTo(this.map);
+				.addTo(this.map)
 			// Mount a vue component (MapPopup) to the id "vue-popup-content" and pass in data
 			const PopupComponent = defineComponent({
 				extends: MapPopup,
@@ -431,32 +409,32 @@ export const useMapStore = defineStore("map", {
 						popupContent: parsedPopupContent,
 						mapConfigs: mapConfigs,
 						activeTab: ref(0),
-					};
+					}
 				},
-			});
+			})
 			// This helps vue determine the most optimal time to mount the component
 			nextTick(() => {
-				const app = createApp(PopupComponent);
-				app.mount("#vue-popup-content");
-			});
+				const app = createApp(PopupComponent)
+				app.mount('#vue-popup-content')
+			})
 		},
 		// Remove the current popup
 		removePopup() {
 			if (this.popup) {
-				this.popup.remove();
+				this.popup.remove()
 			}
-			this.popup = null;
+			this.popup = null
 		},
 
 		/* Functions that change the viewing experience of the map */
 
 		// Add new saved location that users can quickly zoom to
 		addNewSavedLocation(name) {
-			const coordinates = this.map.getCenter();
-			const zoom = this.map.getZoom();
-			const pitch = this.map.getPitch();
-			const bearing = this.map.getBearing();
-			this.savedLocations.push([coordinates, zoom, pitch, bearing, name]);
+			const coordinates = this.map.getCenter()
+			const zoom = this.map.getZoom()
+			const pitch = this.map.getPitch()
+			const bearing = this.map.getBearing()
+			this.savedLocations.push([coordinates, zoom, pitch, bearing, name])
 		},
 		// Zoom to a location
 		// [[lng, lat], zoom, pitch, bearing, savedLocationName]
@@ -467,18 +445,18 @@ export const useMapStore = defineStore("map", {
 				duration: 4000,
 				pitch: location_array[2],
 				bearing: location_array[3],
-			});
+			})
 		},
 		// Remove a saved location
 		removeSavedLocation(index) {
-			this.savedLocations.splice(index, 1);
+			this.savedLocations.splice(index, 1)
 		},
 		// Force map to resize after sidebar collapses
 		resizeMap() {
 			if (this.map) {
 				setTimeout(() => {
-					this.map.resize();
-				}, 200);
+					this.map.resize()
+				}, 200)
 			}
 		},
 
@@ -486,37 +464,37 @@ export const useMapStore = defineStore("map", {
 		// Add a filter based on a property on a map layer
 		addLayerFilter(layer_id, property, key, map_config) {
 			if (!this.map) {
-				return;
+				return
 			}
-			if (map_config && map_config.type === "arc") {
-				this.map.removeLayer(layer_id);
+			if (map_config && map_config.type === 'arc') {
+				this.map.removeLayer(layer_id)
 				let toBeFiltered = {
 					...this.map.getSource(`${layer_id}-source`)._data,
-				};
+				}
 				toBeFiltered.features = toBeFiltered.features.filter(
-					(el) => el.properties[property] === key
-				);
-				map_config.layerId = layer_id;
-				this.AddArcMapLayer(map_config, toBeFiltered);
-				return;
+					(el) => el.properties[property] === key,
+				)
+				map_config.layerId = layer_id
+				this.AddArcMapLayer(map_config, toBeFiltered)
+				return
 			}
-			this.map.setFilter(layer_id, ["==", ["get", property], key]);
+			this.map.setFilter(layer_id, ['==', ['get', property], key])
 		},
 		// Remove any filters on a map layer
 		clearLayerFilter(layer_id, map_config) {
 			if (!this.map) {
-				return;
+				return
 			}
-			if (map_config && map_config.type === "arc") {
-				this.map.removeLayer(layer_id);
+			if (map_config && map_config.type === 'arc') {
+				this.map.removeLayer(layer_id)
 				let toRestore = {
 					...this.map.getSource(`${layer_id}-source`)._data,
-				};
-				map_config.layerId = layer_id;
-				this.AddArcMapLayer(map_config, toRestore);
-				return;
+				}
+				map_config.layerId = layer_id
+				this.AddArcMapLayer(map_config, toRestore)
+				return
 			}
-			this.map.setFilter(layer_id, null);
+			this.map.setFilter(layer_id, null)
 		},
 
 		/* Clearing the map */
@@ -524,48 +502,63 @@ export const useMapStore = defineStore("map", {
 		// Called when the user is switching between maps
 		clearOnlyLayers() {
 			this.currentLayers.forEach((element) => {
-				this.map.removeLayer(element);
-				this.map.removeSource(`${element}-source`);
-			});
-			this.currentLayers = [];
-			this.mapConfigs = {};
-			this.currentVisibleLayers = [];
-			this.removePopup();
+				this.map.removeLayer(element)
+				this.map.removeSource(`${element}-source`)
+			})
+			this.currentLayers = []
+			this.mapConfigs = {}
+			this.currentVisibleLayers = []
+			this.removePopup()
 		},
 		// Called when user navigates away from the map
 		clearEntireMap() {
-			this.currentLayers = [];
-			this.mapConfigs = {};
-			this.map = null;
-			this.currentVisibleLayers = [];
-			this.removePopup();
+			this.currentLayers = []
+			this.mapConfigs = {}
+			this.map = null
+			this.currentVisibleLayers = []
+			this.removePopup()
+		},
+		customPopup(lngLat) {
+			const el = document.createElement('div')
+			const width = 60
+			const height = 60
+			el.className = 'marker'
+			el.style.backgroundImage = `url(./public/images/map/customMaker.svg)`
+			el.style.width = `${width}px`
+			el.style.height = `${height}px`
+			el.style.backgroundSize = '100%'
+
+			this.marker = new mapboxGl.Marker(el).setLngLat(lngLat).addTo(this.map)
+		},
+		clearMaker() {
+			if (this.marker) {
+				this.marker.remove()
+			}
+			this.marker = null
 		},
 		flyTo(lnglat) {
 			this.map.flyTo({
 				center: lnglat,
 				zoom: 14, // 指定的縮放級別
 				essential: true, // 這確保平滑的地圖遷移
-			});
+			})
 		},
 
 		addFilter(event) {
 			// Gets the info that is contained in the coordinates that the user clicked on (only visible layers)
-			const clickFeatureDatas = this.map.queryRenderedFeatures(
-				event.point,
-				{
-					layers: this.currentVisibleLayers,
-				}
-			);
-			let mrt_click = clickFeatureDatas[0]["properties"]["name"];
-			let layer_id = clickFeatureDatas[0]["layer"]["id"];
+			const clickFeatureDatas = this.map.queryRenderedFeatures(event.point, {
+				layers: this.currentVisibleLayers,
+			})
+			let mrt_click = clickFeatureDatas[0]['properties']['name']
+			let layer_id = clickFeatureDatas[0]['layer']['id']
 
-			if (layer_id === "mrt_and_spot_new-symbol") {
+			if (layer_id === 'mrt_and_spot_new-symbol') {
 				this.map.setFilter(layer_id, [
-					"any",
-					["==", ["get", "tpye"], "MRT_STATION"],
-					["in", mrt_click, ["get", "closed_mrt_station_name"]],
-				]);
+					'any',
+					['==', ['get', 'tpye'], 'MRT_STATION'],
+					['in', mrt_click, ['get', 'closed_mrt_station_name']],
+				])
 			}
 		},
 	},
-});
+})

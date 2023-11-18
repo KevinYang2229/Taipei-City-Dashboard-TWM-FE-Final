@@ -1,44 +1,44 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { ref } from 'vue';
-import { useDialogStore } from '../../store/dialogStore';
-import { useContentStore } from '../../store/contentStore';
+import { ref } from 'vue'
+import { useContentStore } from '../../store/contentStore'
+import { useDialogStore } from '../../store/dialogStore'
 
-import DialogContainer from './DialogContainer.vue';
-import CustomCheckBox from '../utilities/CustomCheckBox.vue';
-import { validateStrInput } from '../../assets/utilityFunctions/validate';
+import { validateStrInput } from '../../assets/utilityFunctions/validate'
+import CustomCheckBox from '../utilities/CustomCheckBox.vue'
+import DialogContainer from './DialogContainer.vue'
 
-const dialogStore = useDialogStore();
-const contentStore = useContentStore();
+const dialogStore = useDialogStore()
+const contentStore = useContentStore()
 
 // Stores the user inputted new name
-const newName = ref('');
-const errorMessage = ref(null);
+const newName = ref('')
+const errorMessage = ref(null)
 // Stores whether the user confirmed to enable the delete dashboard function
-const deleteConfirm = ref(false);
+const deleteConfirm = ref(false)
 
 function handleSubmit() {
 	if (validateStrInput(newName.value) !== true) {
-		errorMessage.value = validateStrInput(newName.value);
-		return;
+		errorMessage.value = validateStrInput(newName.value)
+		return
 	}
 	// changeCurrentDashboardName is currently a dummy function to demonstrate what changing a dashboard's name would look like
 	// Connect a backend to actually implement the function or remove altogether
-	contentStore.changeCurrentDashboardName(newName.value);
-	handleClose();
+	contentStore.changeCurrentDashboardName(newName.value)
+	handleClose()
 }
 function handleClose() {
-	newName.value = '';
-	errorMessage.value = null;
-	deleteConfirm.value = false;
-	dialogStore.hideAllDialogs();
+	newName.value = ''
+	errorMessage.value = null
+	deleteConfirm.value = false
+	dialogStore.hideAllDialogs()
 }
 function handleDelete() {
 	// deleteCurrentDashboard is currently a dummy function to demonstrate what deleting a dashboard
 	// Connect a backend to actually implement the function or remove altogether
-	contentStore.deleteCurrentDashboard();
-	handleClose();
+	contentStore.deleteCurrentDashboard()
+	handleClose()
 }
 </script>
 
@@ -48,19 +48,41 @@ function handleDelete() {
 			<h2>儀表板設定</h2>
 			<div class="dashboardsettings-input">
 				<p v-if="errorMessage">{{ errorMessage }}</p>
-				<label for="name">
-					更改名稱
-				</label>
-				<input name="name" v-model="newName" :placeholder="contentStore.currentDashboard.name" />
+				<label for="name"> 更改名稱 </label>
+				<input
+					name="name"
+					v-model="newName"
+					:placeholder="contentStore.currentDashboard.name"
+				/>
 				<div>
-					<input type="checkbox" id="delete" :value="true" v-model="deleteConfirm" class="custom-check-input" />
+					<input
+						type="checkbox"
+						id="delete"
+						:value="true"
+						v-model="deleteConfirm"
+						class="custom-check-input"
+					/>
 					<CustomCheckBox for="delete">啟動刪除儀表板功能</CustomCheckBox>
 				</div>
 			</div>
 			<div class="dashboardsettings-control">
-				<button class="dashboardsettings-control-cancel" @click="handleClose">取消</button>
-				<button v-if="newName" class="dashboardsettings-control-confirm" @click="handleSubmit">確定更改</button>
-				<button v-if="deleteConfirm" class="dashboardsettings-control-delete" @click="handleDelete">刪除儀表板</button>
+				<button class="dashboardsettings-control-cancel" @click="handleClose">
+					取消
+				</button>
+				<button
+					v-if="newName"
+					class="dashboardsettings-control-confirm"
+					@click="handleSubmit"
+				>
+					確定更改
+				</button>
+				<button
+					v-if="deleteConfirm"
+					class="dashboardsettings-control-delete"
+					@click="handleDelete"
+				>
+					刪除儀表板
+				</button>
 			</div>
 		</div>
 	</DialogContainer>
@@ -108,12 +130,12 @@ function handleDelete() {
 			input {
 				display: none;
 
-				&:checked+label {
-					color: white
+				&:checked + label {
+					color: white;
 				}
 
-				&:hover+label {
-					color: var(--color-highlight)
+				&:hover + label {
+					color: var(--color-highlight);
 				}
 			}
 		}

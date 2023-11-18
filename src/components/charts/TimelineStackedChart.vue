@@ -1,9 +1,9 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue'
 
-const props = defineProps(["chart_config", "activeChart", "series"]);
+const props = defineProps(['chart_config', 'activeChart', 'series'])
 
 const chartOptions = ref({
 	chart: {
@@ -34,7 +34,7 @@ const chartOptions = ref({
 	},
 	stroke: {
 		colors: props.chart_config.color,
-		curve: "smooth",
+		curve: 'smooth',
 		show: true,
 		width: 2,
 	},
@@ -43,24 +43,22 @@ const chartOptions = ref({
 			// The class "chart-tooltip" could be edited in /assets/styles/chartStyles.css
 			return (
 				'<div class="chart-tooltip">' +
-				"<h6>" +
-				`${parseTime(
-					w.config.series[seriesIndex].data[dataPointIndex].x
-				)}` +
+				'<h6>' +
+				`${parseTime(w.config.series[seriesIndex].data[dataPointIndex].x)}` +
 				` - ${w.globals.seriesNames[seriesIndex]}` +
-				"</h6>" +
-				"<span>" +
+				'</h6>' +
+				'<span>' +
 				series[seriesIndex][dataPointIndex] +
 				` ${props.chart_config.unit}` +
-				"</span>" +
-				"</div>"
-			);
+				'</span>' +
+				'</div>'
+			)
 		},
 	},
 	xaxis: {
 		axisBorder: {
-			color: "#555",
-			height: "0.8",
+			color: '#555',
+			height: '0.8',
 		},
 		axisTicks: {
 			show: false,
@@ -71,12 +69,12 @@ const chartOptions = ref({
 		tooltip: {
 			enabled: false,
 		},
-		type: "datetime",
+		type: 'datetime',
 	},
-});
+})
 
 function parseTime(time) {
-	return time.replace("T", " ").replace("+08:00", " ");
+	return time.replace('T', ' ').slice(0, -4)
 }
 </script>
 

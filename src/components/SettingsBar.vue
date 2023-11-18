@@ -4,36 +4,39 @@
 <!-- Adding new components and settings is disabled in the map layer dashboard and the mobile version -->
 
 <script setup>
-import { ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { useContentStore } from '../store/contentStore';
-import { useDialogStore } from '../store/dialogStore';
+import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useContentStore } from '../store/contentStore'
+import { useDialogStore } from '../store/dialogStore'
 
-import AddComponent from './dialogs/AddComponent.vue';
-import DashboardSettings from './dialogs/DashboardSettings.vue';
-import MobileNavigation from './dialogs/MobileNavigation.vue';
+import AddComponent from './dialogs/AddComponent.vue'
+import DashboardSettings from './dialogs/DashboardSettings.vue'
+import MobileNavigation from './dialogs/MobileNavigation.vue'
 
-const route = useRoute();
-const router = useRouter();
-const contentStore = useContentStore();
-const dialogStore = useDialogStore();
+const route = useRoute()
+const router = useRouter()
+const contentStore = useContentStore()
+const dialogStore = useDialogStore()
 
 // The following are controls for the mobile version to toggle between dashboard and mapview
-const isDashboard = ref(false);
+const isDashboard = ref(false)
 
 watch(route, (newRoute) => {
 	if (newRoute.path === '/dashboard') {
-		isDashboard.value = false;
+		isDashboard.value = false
 	} else {
-		isDashboard.value = true;
+		isDashboard.value = true
 	}
-});
+})
 
 function handleToggle() {
 	if (isDashboard.value) {
-		router.replace({ name: 'mapview', query: { index: route.query.index } });
+		router.replace({ name: 'mapview', query: { index: route.query.index } })
 	} else {
-		router.replace({ name: 'dashboard', query: { index: route.query.index } });
+		router.replace({
+			name: 'dashboard',
+			query: { index: route.query.index },
+		})
 	}
 }
 </script>
@@ -42,19 +45,28 @@ function handleToggle() {
 	<div class="settingsbar">
 		<div class="settingsbar-title">
 			<span>{{ contentStore.currentDashboard.icon }}</span>
-			<h2>{{ contentStore.currentDashboard.name }}
-			</h2>
-			<button @click="dialogStore.showDialog('mobileNavigation')" class="show-if-mobile">
+			<h2>{{ contentStore.currentDashboard.name }}</h2>
+			<button
+				@click="dialogStore.showDialog('mobileNavigation')"
+				class="show-if-mobile"
+			>
 				<span class="settingsbar-title-navigation">arrow_drop_down_circle</span>
 			</button>
 			<MobileNavigation />
-			<div class="settingsbar-settings hide-if-mobile"
-				v-if="contentStore.currentDashboard.index !== 'map-layers' && contentStore.currentDashboard.index !== 'favorites'">
-				<button @click="dialogStore.showDialog('addComponent')"><span>add_chart</span>
+			<div
+				class="settingsbar-settings hide-if-mobile"
+				v-if="
+					contentStore.currentDashboard.index !== 'map-layers' &&
+					contentStore.currentDashboard.index !== 'favorites'
+				"
+			>
+				<button @click="dialogStore.showDialog('addComponent')">
+					<span>add_chart</span>
 					<p>新增組件</p>
 				</button>
 				<AddComponent />
-				<button @click="dialogStore.showDialog('dashboardSettings')"><span>settings</span>
+				<button @click="dialogStore.showDialog('dashboardSettings')">
+					<span>settings</span>
 					<p>設定</p>
 				</button>
 				<DashboardSettings />
@@ -65,7 +77,7 @@ function handleToggle() {
 			<div>
 				<!-- The class "toggleswitch is slightly modified below, further changes could be made in /assets/styles/toggleswitch.css" -->
 				<label class="toggleswitch">
-					<input type="checkbox" @change="handleToggle" v-model="isDashboard">
+					<input type="checkbox" @change="handleToggle" v-model="isDashboard" />
 					<span class="toggleswitch-slider"></span>
 				</label>
 			</div>
@@ -76,7 +88,7 @@ function handleToggle() {
 
 <style scoped lang="scss">
 .settingsbar {
-	width: calc(100% - 2*var(--font-m));
+	width: calc(100% - 2 * var(--font-m));
 	min-height: 1.6rem;
 	display: flex;
 	justify-content: space-between;
@@ -129,7 +141,9 @@ function handleToggle() {
 				max-height: 1.2rem;
 				font-size: 0.8rem;
 				text-align: left;
-				transition: width 0.2s, color 0.2s;
+				transition:
+					width 0.2s,
+					color 0.2s;
 				overflow-x: hidden;
 			}
 
@@ -141,12 +155,10 @@ function handleToggle() {
 			span {
 				color: var(--color-complement-text);
 				transition: color 0.2s;
-
-
 			}
 
 			&:hover span {
-				color: var(--color-highlight)
+				color: var(--color-highlight);
 			}
 		}
 	}
@@ -158,27 +170,24 @@ function handleToggle() {
 		margin-left: var(--font-m);
 
 		p {
-			color: var(--color-complement-text)
+			color: var(--color-complement-text);
 		}
 	}
 }
-
-
-
 
 .toggleswitch {
 	margin: 0 4px;
 	align-self: baseline;
 
-	input:checked+&-slider {
+	input:checked + &-slider {
 		background-color: var(--color-complement-text);
 	}
 
-	input:focus+&-slider {
+	input:focus + &-slider {
 		box-shadow: 0 0 1px var(--color-complement-text);
 	}
 
-	input:checked+&-slider:before {
+	input:checked + &-slider:before {
 		background-color: var(--color-border);
 	}
 }

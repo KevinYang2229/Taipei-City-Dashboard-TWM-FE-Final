@@ -3,28 +3,31 @@
 <!-- This component has two modes "expanded" and "collapsed" which is controlled by the prop "expanded" -->
 
 <script setup>
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
-const route = useRoute();
+const route = useRoute()
 
 const props = defineProps({
 	icon: { type: String },
 	title: { type: String },
 	index: { type: String },
-	expanded: { type: Boolean }
-});
+	expanded: { type: Boolean },
+})
 
 const tabLink = computed(() => {
-	return `${route.path}?index=${props.index}`;
-});
+	return `${route.path}?index=${props.index}`
+})
 const linkActiveOrNot = computed(() => {
-	return route.query.index === props.index ? true : false;
-});
+	return route.query.index === props.index ? true : false
+})
 </script>
 
 <template>
-	<router-link :to="tabLink" :class="{ sidebartab: true, 'sidebartab-active': linkActiveOrNot }">
+	<router-link
+		:to="tabLink"
+		:class="{ sidebartab: true, 'sidebartab-active': linkActiveOrNot }"
+	>
 		<span>{{ icon }}</span>
 		<h3 v-if="expanded">{{ title }}</h3>
 	</router-link>

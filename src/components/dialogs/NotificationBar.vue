@@ -3,28 +3,42 @@
 <!-- This component has two modes "success" and "fail". The modes are controlled via the mapStore -->
 
 <script setup>
-import { useDialogStore } from '../../store/dialogStore';
+import { useDialogStore } from '../../store/dialogStore'
 
-const dialogStore = useDialogStore();
+const dialogStore = useDialogStore()
 
 const statusToIcon = {
 	success: 'check_circle',
 	fail: 'error',
-	info: 'lightbulb'
-};
+	info: 'lightbulb',
+}
 </script>
 
 <template>
 	<Teleport to="body">
 		<Transition name="notification">
-			<div class="notificationcontainer" v-if="dialogStore.dialogs.notificationBar">
+			<div
+				class="notificationcontainer"
+				v-if="dialogStore.dialogs.notificationBar"
+			>
 				<div class="notificationcontainer-notification">
 					<span
-						:class="{ success: dialogStore.notification.status === 'success', fail: dialogStore.notification.status === 'fail', info: dialogStore.notification.status === 'info' }">{{
-							statusToIcon[dialogStore.notification.status] }}</span>
+						:class="{
+							success: dialogStore.notification.status === 'success',
+							fail: dialogStore.notification.status === 'fail',
+							info: dialogStore.notification.status === 'info',
+						}"
+						>{{ statusToIcon[dialogStore.notification.status] }}</span
+					>
 					<h5
-						:class="{ success: dialogStore.notification.status === 'success', fail: dialogStore.notification.status === 'fail', info: dialogStore.notification.status === 'info' }">
-						{{ dialogStore.notification.message }}</h5>
+						:class="{
+							success: dialogStore.notification.status === 'success',
+							fail: dialogStore.notification.status === 'fail',
+							info: dialogStore.notification.status === 'info',
+						}"
+					>
+						{{ dialogStore.notification.message }}
+					</h5>
 				</div>
 			</div>
 		</Transition>
@@ -72,7 +86,7 @@ const statusToIcon = {
 }
 
 .info {
-	color: var(--color-highlight)
+	color: var(--color-highlight);
 }
 
 // Classes that are provided by vue transitions. Read the official docs for more instructions.
