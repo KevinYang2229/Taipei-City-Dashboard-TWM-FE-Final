@@ -23,7 +23,7 @@
 				<button
 					@click="
 						() => {
-							activeTab = index
+							activeTab = index;
 						}
 					"
 				>
@@ -31,7 +31,7 @@
 						activeTab === index
 							? mapConfig.title
 							: mapConfig.title.length > 5
-							? mapConfig.title.slice(0, 4) + '...'
+							? mapConfig.title.slice(0, 4) + "..."
 							: mapConfig.title
 					}}
 				</button>
@@ -65,30 +65,30 @@
 
 .mapboxgl-popup-content {
 	padding: 0 !important;
-	border: solid 2px var(--color-popup-border);
+	border: solid 2px var(--color-border);
 	box-shadow: 0px 0px 10px rgb(35, 35, 35) !important;
 	border-radius: 6px !important;
-	background-color: var(--color-popup-background) !important;
+	background-color: var(--color-component-background) !important;
 }
 
 .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
 .mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
 .mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
-	border-top-color: var(--color-popup-border) !important;
+	border-top-color: var(--color-border) !important;
 }
 
 .mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
 .mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
 .mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
-	border-bottom-color: var(--color-popup-border) !important;
+	border-bottom-color: var(--color-border) !important;
 }
 
 .mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
-	border-right-color: var(--color-popup-border) !important;
+	border-right-color: var(--color-border) !important;
 }
 
 .mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
-	border-left-color: var(--color-popup-border) !important;
+	border-left-color: var(--color-border) !important;
 }
 
 .mapboxgl-popup-close-button {
@@ -124,9 +124,7 @@
 			color: var(--color-complement-text);
 			font-size: var(--font-s);
 			text-align: center;
-			transition:
-				color 0.2s,
-				opacity 0.2s;
+			transition: color 0.2s, opacity 0.2s;
 			user-select: none;
 
 			&:hover {
