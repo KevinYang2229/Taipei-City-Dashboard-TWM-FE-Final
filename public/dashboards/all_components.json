@@ -86,10 +86,7 @@
 					"#fb8c8c",
 					"#C53E5E"
 				],
-				"types": [
-					"BarChart",
-					"DonutChart"
-				],
+				"types": ["BarChart", "DonutChart"],
 				"unit": "件"
 			},
 			"history_data": true,
@@ -841,10 +838,7 @@
 					"#9b976c",
 					"#fbf3ac"
 				],
-				"types": [
-					"DonutChart",
-					"BarChart"
-				],
+				"types": ["DonutChart", "BarChart"],
 				"unit": "件"
 			},
 			"name": "都市更新案件",
@@ -923,10 +917,7 @@
 					"#c2651c",
 					"#a65818"
 				],
-				"types": [
-					"DonutChart",
-					"BarChart"
-				],
+				"types": ["DonutChart", "BarChart"],
 				"unit": "棟",
 				"map_filter": [
 					"progress",
@@ -2848,12 +2839,7 @@
 				"unit": "km²",
 				"map_filter": [
 					"type",
-					[
-						"公園",
-						"河濱公園",
-						"公園生態化",
-						"校園綠化"
-					]
+					["公園", "河濱公園", "公園生態化", "校園綠化"]
 				]
 			},
 			"name": "公園綠地",
@@ -3032,10 +3018,7 @@
 							13,
 							[
 								"match",
-								[
-									"get",
-									"type"
-								],
+								["get", "type"],
 								"診所",
 								2.5,
 								"醫院",
@@ -3449,13 +3432,8 @@
 							16,
 							[
 								"interpolate",
-								[
-									"linear"
-								],
-								[
-									"get",
-									"diameter"
-								],
+								["linear"],
+								["get", "diameter"],
 								0,
 								2,
 								2,
@@ -3677,12 +3655,7 @@
 				"unit": "m²",
 				"map_filter": [
 					"type",
-					[
-						"小田園",
-						"快樂農園",
-						"綠屋頂",
-						"市民農園"
-					]
+					["小田園", "快樂農園", "綠屋頂", "市民農園"]
 				]
 			},
 			"name": "田園城市",
@@ -4725,18 +4698,10 @@
 					"DonutChart"
 				],
 				"unit": "站",
-				"color": [
-					"#a8f8ff",
-					"#4cd2ff",
-					"#00a6ff"
-				],
+				"color": ["#a8f8ff", "#4cd2ff", "#00a6ff"],
 				"map_filter": [
 					"category",
-					[
-						"替代站<=5",
-						"替代站5~10",
-						"替代站>10"
-					]
+					["替代站<=5", "替代站5~10", "替代站>10"]
 				]
 			},
 			"map_config": [
@@ -5174,10 +5139,87 @@
 			},
 			"map_config": [
 				{
-					"index": "youbike_sub_stn_1",
-					"type": "symbol",
-					"icon": "triangle_green",
-					"title": "長照機構"
+					"id": "people-heat",
+					"index": "woman_children_alert_shingdong_weekday",
+					"type": "heatmap",
+					"condition": {
+						"field": "hr",
+						"unit": "小時",
+						"step": "1",
+						"min": "1",
+						"max": "24"
+					},
+					"maxzoom": 15,
+					"paint": {
+						"heatmap-weight": [
+							"interpolate",
+							["linear"],
+							["get", "n_uq_mob"],
+							1000,
+							0,
+							2000,
+							1,
+							3000,
+							2
+						],
+						"heatmap-intensity": [
+							"interpolate",
+							["linear"],
+							["zoom"],
+							0,
+							1,
+							9,
+							2
+						],
+						"heatmap-color": [
+							"interpolate",
+							["linear"],
+							["heatmap-density"],
+							0,
+							"rgba(186, 206, 219, 0)",
+							0.2,
+							"rgb(64, 116, 185)",
+							0.4,
+							"rgb(112, 195, 132)",
+							0.6,
+							"rgb(233, 179, 77)",
+							0.8,
+							"rgb(241, 125, 47)",
+							1,
+							"rgb(207, 87, 59)"
+						],
+						"heatmap-radius": [
+							"interpolate",
+							["linear"],
+							["zoom"],
+							0,
+							2,
+							9,
+							15
+						],
+						"heatmap-opacity": {
+							"default": 1,
+							"stops": [
+								[14, 1],
+								[15, 0.5]
+							]
+						}
+					},
+					"property": [
+						{
+							"key": "site_name",
+							"name": "地區名稱"
+						},
+						{
+							"key": "danger_place",
+							"name": "危險地區"
+						},
+						{
+							"key": "weekday_type",
+							"name": "時段"
+						}
+					],
+					"title": "婦幼警示"
 				}
 			],
 			"name": "長照機構",
@@ -5210,9 +5252,7 @@
 					"#00a9e0",
 					"#9F11FC"
 				],
-				"types": [
-					"PolarAreaChart"
-				],
+				"types": ["PolarAreaChart"],
 				"unit": "件",
 				"categories": [
 					"東北",
@@ -6021,9 +6061,94 @@
 		},
 		"2001": {
 			"id": 2001,
-			"index": "traffic_todaywork",
-			"map_config": null,
+			"index": "child_hospital",
 			"history_data": false,
+			"map_config": [
+				{
+					"id": "clusters",
+					"index": "child_hospital",
+					"type": "circle",
+					"filter": ["has", "point_count"],
+					"paint": {
+						"circle-color": [
+							"step",
+							["get", "point_count"],
+							"#6588B1",
+							10,
+							"#D6B059",
+							40,
+							"#B95C5D"
+						],
+						"circle-radius": [
+							"step",
+							["get", "point_count"],
+							20,
+							10,
+							30,
+							40,
+							40
+						],
+						"circle-opacity": 0.8
+					},
+					"property": [],
+					"title": "兒童醫療補助"
+				},
+				{
+					"id": "cluster-count",
+					"index": "child_hospital",
+					"type": "symbol",
+					"filter": ["has", "point_count"],
+					"paint": {
+						"text-color": "#ffffff"
+					},
+					"layout": {
+						"text-field": ["get", "point_count_abbreviated"],
+						"text-font": [
+							"DIN Offc Pro Medium",
+							"Arial Unicode MS Bold"
+						],
+						"text-size": 12
+					},
+					"title": "",
+					"property": []
+				},
+				{
+					"id": "unclustered-point",
+					"type": "circle",
+					"index": "child_hospital",
+					"layer3Id": "unclustered",
+					"filter": ["!", ["has", "point_count"]],
+					"paint": {
+						"circle-radius": 4,
+						"circle-stroke-width": 1,
+						"circle-stroke-color": "#FFFFFF",
+						"circle-color": "#7EBCBB"
+					},
+					"property": [
+						{
+							"key": "city",
+							"name": "縣市"
+						},
+						{
+							"key": "dist",
+							"name": "地區"
+						},
+						{
+							"key": "addr",
+							"name": "地址"
+						},
+						{
+							"key": "name",
+							"name": "位置"
+						}
+					]
+				}
+			],
+			"map_source": {
+				"cluster": true,
+				"clusterMaxZoom": 50,
+				"clusterRadius": 50
+			},
 			"chart_config": {
 				"color": [
 					"#D68D35",
@@ -6054,6 +6179,7 @@
 					]
 				]
 			},
+
 			"name": "【醫療】臺北市兒童醫療補助特約院所",
 			"source": "衛生局",
 			"time_from": "2023-07-25 17:05:44+08:00",
@@ -6409,6 +6535,126 @@
 			"contributors": [
 				"tuic"
 			]
+		},
+		"5000": {
+			"id": 5000,
+			"index": "test",
+			"history_data": false,
+			"chart_config": {
+				"categories": [
+					"北投區",
+					"士林區",
+					"內湖區",
+					"南港區",
+					"松山區"
+				],
+				"map_filter": [
+					"dist",
+					["北投區", "士林區", "內湖區", "南港區", "松山區"]
+				],
+				"types": ["BarChart", "PolarAreaChart"],
+				"unit": "件"
+			},
+			"map_config": [
+				{
+					"id": "clusters",
+					"index": "collisions",
+					"type": "circle",
+					"filter": ["has", "point_count"],
+					"paint": {
+						"circle-color": [
+							"step",
+							["get", "point_count"],
+							"#6588B1",
+							10,
+							"#D6B059",
+							40,
+							"#B95C5D"
+						],
+						"circle-radius": [
+							"step",
+							["get", "point_count"],
+							20,
+							10,
+							30,
+							40,
+							40
+						],
+						"circle-opacity": 0.8
+					},
+					"property": [],
+					"title": "兒童醫療補助"
+				},
+				{
+					"id": "cluster-count",
+					"index": "collisions",
+					"type": "symbol",
+					"filter": ["has", "point_count"],
+					"paint": {
+						"text-color": "#ffffff"
+					},
+					"layout": {
+						"text-field": ["get", "point_count_abbreviated"],
+						"text-font": [
+							"DIN Offc Pro Medium",
+							"Arial Unicode MS Bold"
+						],
+						"text-size": 12
+					},
+					"title": "",
+					"property": []
+				},
+				{
+					"id": "unclustered-point",
+					"type": "circle",
+					"index": "collisions",
+					"layer3Id": "unclustered",
+					"filter": ["!", ["has", "point_count"]],
+					"paint": {
+						"circle-radius": 4,
+						"circle-stroke-width": 1,
+						"circle-stroke-color": "#FFFFFF",
+						"circle-color": "#7EBCBB"
+					},
+					"property": [
+						{
+							"key": "city",
+							"name": "縣市"
+						},
+						{
+							"key": "dist",
+							"name": "地區"
+						},
+						{
+							"key": "addr",
+							"name": "地址"
+						},
+						{
+							"key": "name",
+							"name": "位置"
+						}
+					]
+				}
+			],
+			"map_source": {
+				"cluster": true,
+				"clusterMaxZoom": 14,
+				"clusterRadius": 50
+			},
+			"name": "【育兒】兒童醫療補助",
+			"source": "測試來源",
+			"time_from": "2023-01-01T23:59:59+08:00",
+			"time_to": "2023-05-01T23:59:59+08:00",
+			"update_freq": 1,
+			"update_freq_unit": "month",
+			"short_desc": "測試測試測試測試測試",
+			"long_desc": "測試測試測試測試測試測試測試測試測試測試。",
+			"use_case": "測試測試測試測試測試測試測試。",
+			"links": [
+				"https://data.taipei/dataset/detail?id=dc7e246a-a88e-42f8-8cd6-9739209af774"
+			],
+			"tags": [],
+			"contributors": ["tuic"]
 		},
 		"3001": {
 			"id": 3001,
