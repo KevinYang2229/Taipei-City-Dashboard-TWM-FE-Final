@@ -6716,21 +6716,58 @@
 								"point_count"
 							],
 							"red",
-							15,
+							10,
 							"blue",
-							30,
+							40,
 							"yellow"
 						],
 						"circle-radius": [
 							 "step",
 							["get", "point_count"],
 							20,
-							20,
+							10,
 							30,
-							50,
+							40,
 							40
 						],
 						"circle-opacity": 0.6
+					},
+					"property": [],
+					"title": "Cluster功能展示"
+				},
+				{
+					"id": "cluster-count",
+					"index": "collisions",
+					"type": "symbol",
+					"filter": [
+						"has",
+						"point_count"
+					],
+					"layout": {
+						"text-field": ["get", "point_count_abbreviated"],
+						"text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+						"text-size": 12
+					},
+					"title": "",
+					"property": []
+				},
+				{
+					"id": "unclustered-point",
+					"type": "circle",
+					"index": "collisions",
+					"layer3Id": "unclustered",
+					"filter": [
+						"!",
+						[
+							"has",
+							"point_count"
+						]
+					],
+					"paint": {
+						"circle-radius": 4,
+						"circle-stroke-width": 1,
+						"circle-stroke-color": "green",
+						"circle-color": "green"
 					},
 					"property": [
 						{
@@ -6748,47 +6785,9 @@
 						{
 							"key": "name",
 							"name": "位置"
-						},
-						{
-							"key": "Hour",
-							"name": "時間"
 						}
 					],
 					"title": "Cluster功能展示"
-				},
-				{
-					"id": "cluster-count",
-					"index": "collisions",
-					"type": "symbol",
-					"filter": [
-						"has",
-						"point_count"
-					],
-					"layout": {
-						"text-field": ["get", "point_count_abbreviated"],
-						"text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-						"text-size": 12
-					},
-					"title": "Cluster進度說明",
-					"property": []
-				},
-				{
-					"id": "unclustered-point",
-					"type": "circle",
-					"index": "collisions",
-					"filter": [
-						"!",
-						[
-							"has",
-							"point_count"
-						]
-					],
-					"paint": {
-						"circle-radius": 4,
-						"circle-stroke-width": 1,
-						"circle-stroke-color": "green",
-						"circle-color": "green"
-					}
 				}
 			],
 			"map_source": {
