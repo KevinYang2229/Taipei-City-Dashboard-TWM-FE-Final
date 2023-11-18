@@ -61,7 +61,13 @@
 			"index": "crimehotspot",
 			"map_config": null,
 			"chart_config": {
-				"color": ["#F3847E", "#e06666", "#fdb7ba", "#fb8c8c", "#C53E5E"],
+				"color": [
+					"#F3847E",
+					"#e06666",
+					"#fdb7ba",
+					"#fb8c8c",
+					"#C53E5E"
+				],
 				"types": ["BarChart", "DonutChart"],
 				"unit": "件"
 			},
@@ -741,7 +747,13 @@
 				}
 			],
 			"chart_config": {
-				"color": ["#67baca", "#5a8965", "#477653", "#9b976c", "#fbf3ac"],
+				"color": [
+					"#67baca",
+					"#5a8965",
+					"#477653",
+					"#9b976c",
+					"#fbf3ac"
+				],
 				"types": ["DonutChart", "BarChart"],
 				"unit": "件"
 			},
@@ -807,7 +819,13 @@
 				}
 			],
 			"chart_config": {
-				"color": ["#fff495", "#ddb11f", "#e3863a", "#c2651c", "#a65818"],
+				"color": [
+					"#fff495",
+					"#ddb11f",
+					"#e3863a",
+					"#c2651c",
+					"#a65818"
+				],
 				"types": ["DonutChart", "BarChart"],
 				"unit": "棟",
 				"map_filter": [
@@ -2423,7 +2441,10 @@
 				"color": ["#D2EE90", "#90EE90", "#4caf50", "#CAF245"],
 				"types": ["TreemapChart", "BarChart"],
 				"unit": "km²",
-				"map_filter": ["type", ["公園", "河濱公園", "公園生態化", "校園綠化"]]
+				"map_filter": [
+					"type",
+					["公園", "河濱公園", "公園生態化", "校園綠化"]
+				]
 			},
 			"name": "公園綠地",
 			"source": "工務局",
@@ -2481,7 +2502,12 @@
 				"unit": "km²",
 				"map_filter": [
 					"type",
-					["都市計畫保護區", "都市計畫農業區", "野雁保護區", "自然保留區"]
+					[
+						"都市計畫保護區",
+						"都市計畫農業區",
+						"野雁保護區",
+						"自然保留區"
+					]
 				]
 			},
 			"name": "都市綠地",
@@ -2568,7 +2594,15 @@
 							12.99,
 							2,
 							13,
-							["match", ["get", "type"], "診所", 2.5, "醫院", 5, 3],
+							[
+								"match",
+								["get", "type"],
+								"診所",
+								2.5,
+								"醫院",
+								5,
+								3
+							],
 							18,
 							["match", ["get", "type"], "診所", 6, "醫院", 14, 8]
 						]
@@ -2883,7 +2917,15 @@
 							14,
 							2,
 							16,
-							["interpolate", ["linear"], ["get", "diameter"], 0, 2, 2, 4]
+							[
+								"interpolate",
+								["linear"],
+								["get", "diameter"],
+								0,
+								2,
+								2,
+								4
+							]
 						]
 					},
 					"property": [
@@ -3080,7 +3122,10 @@
 				"types": ["TreemapChart", "BarChart"],
 				"color": ["#13b3a6", "#99E1E3", "#38BDC0", "#bdedee"],
 				"unit": "m²",
-				"map_filter": ["type", ["小田園", "快樂農園", "綠屋頂", "市民農園"]]
+				"map_filter": [
+					"type",
+					["小田園", "快樂農園", "綠屋頂", "市民農園"]
+				]
 			},
 			"name": "田園城市",
 			"source": "工務局",
@@ -3164,7 +3209,11 @@
 				"color": ["#2e999b", "#80e3d4", "#1f9b85"],
 				"types": ["GuageChart", "BarPercentChart"],
 				"unit": "個",
-				"categories": ["汽車車位使用量", "機車車位使用量", "充電站使用量"]
+				"categories": [
+					"汽車車位使用量",
+					"機車車位使用量",
+					"充電站使用量"
+				]
 			},
 			"history_data": false,
 			"source": "交通局",
@@ -3399,7 +3448,11 @@
 				"color": ["#2e999b", "#80e3d4", "#1f9b85"],
 				"types": ["GuageChart", "BarPercentChart"],
 				"unit": "個",
-				"categories": ["汽車車位使用量", "機車車位使用量", "充電站使用量"]
+				"categories": [
+					"汽車車位使用量",
+					"機車車位使用量",
+					"充電站使用量"
+				]
 			},
 			"history_data": false,
 			"source": "交通局",
@@ -3531,7 +3584,11 @@
 				"color": ["#2e999b", "#80e3d4", "#1f9b85"],
 				"types": ["GuageChart", "BarPercentChart"],
 				"unit": "個",
-				"categories": ["汽車車位使用量", "機車車位使用量", "充電站使用量"]
+				"categories": [
+					"汽車車位使用量",
+					"機車車位使用量",
+					"充電站使用量"
+				]
 			},
 			"history_data": false,
 			"source": "交通局",
@@ -3928,7 +3985,10 @@
 				"types": ["DonutChart"],
 				"unit": "站",
 				"color": ["#a8f8ff", "#4cd2ff", "#00a6ff"],
-				"map_filter": ["category", ["替代站<=5", "替代站5~10", "替代站>10"]]
+				"map_filter": [
+					"category",
+					["替代站<=5", "替代站5~10", "替代站>10"]
+				]
 			},
 			"map_config": [
 				{
@@ -4318,7 +4378,13 @@
 			"map_config": null,
 			"history_data": false,
 			"chart_config": {
-				"color": ["#FC9F11", "#e06666", "#1f9b85", "#00a9e0", "#9F11FC"],
+				"color": [
+					"#FC9F11",
+					"#e06666",
+					"#1f9b85",
+					"#00a9e0",
+					"#9F11FC"
+				],
 				"types": ["PolarAreaChart"],
 				"unit": "件",
 				"categories": ["東北", "東南", "西南", "西北"]
@@ -4901,9 +4967,9 @@
 			"index": "customized_chart",
 			"map_config": null,
 			"chart_config": {
-				"color": ["#2EA9DF", "#db4d6d"],
+				"color": ["#4B96FA", "#F1C40F"],
 				"types": ["SingleIconPercentageChart", "IconPercentageChart"],
-				"categories": ["男生", "女生"],
+				"categories": ["普通人", "老人"],
 				"itemPrimaryPercentage": 30,
 				"unit": "%"
 			},
@@ -5205,7 +5271,7 @@
 			"index": "customized_chart",
 			"map_config": null,
 			"chart_config": {
-				"color": ["#2EA9DF", "#db4d6d"],
+				"color": ["#4B96FA", "#F1C40F"],
 				"types": ["IconPercentageChart", "SingleIconPercentageChart"],
 				"categories": ["男生", "女生"],
 				"itemPrimaryPercentage": 13.4,
@@ -5416,7 +5482,13 @@
 			"index": "test",
 			"history_data": false,
 			"chart_config": {
-				"categories": ["北投區", "士林區", "內湖區", "南港區", "松山區"],
+				"categories": [
+					"北投區",
+					"士林區",
+					"內湖區",
+					"南港區",
+					"松山區"
+				],
 				"map_filter": [
 					"dist",
 					["北投區", "士林區", "內湖區", "南港區", "松山區"]
@@ -5496,7 +5568,10 @@
 					"icon": "text",
 					"layout": {
 						"text-field": ["get", "point_count"],
-						"text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+						"text-font": [
+							"DIN Offc Pro Medium",
+							"Arial Unicode MS Bold"
+						],
 						"text-size": 12
 					},
 					"title": "Cluster進度說明",
