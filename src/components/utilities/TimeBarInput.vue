@@ -13,7 +13,9 @@
 			<button
 				:class="[
 					'condition-btn',
-					dateTimeSelection === 'month' ? 'condition-btn--active' : '',
+					dateTimeSelection === 'month'
+						? 'condition-btn--active'
+						: '',
 				]"
 				@click="dateTimeClickHandler('month')"
 			>
@@ -50,20 +52,21 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useDialogStore } from '../../store/dialogStore'
+import { ref } from "vue";
+import { useDialogStore } from "../../store/dialogStore";
 
-const props = defineProps(['step', 'unit', 'min', 'max'])
-const emit = defineEmits(['adjust'])
-const dialogStore = useDialogStore()
+const props = defineProps(["step", "unit", "min", "max"]);
+const emit = defineEmits(["adjust"]);
+const dialogStore = useDialogStore();
 
 // day or month or hour
-const dateTimeSelection = ref('hour')
+const dateTimeSelection = ref("hour");
 // curren value
-const modelValue = ref(props.min)
+const modelValue = ref(props.min);
 
+// eslint-disable-next-line no-unused-vars
 const dateTimeClickHandler = (target) => {
-	dialogStore.showNotification('info', '本組件預留選項，但尚未有資料符合')
+	dialogStore.showNotification("info", "本組件預留選項，但尚未有資料符合");
 	// dateTimeSelection.value = target
 	// modelValue.value = 0
 	// if (target === 'hour') {
@@ -78,11 +81,11 @@ const dateTimeClickHandler = (target) => {
 	// 	maxValue.value = 12
 	// 	unit.value = '月'
 	// }
-}
+};
 
 const inputHandler = (e) => {
-	emit('adjust', e.target.value)
-}
+	emit("adjust", e.target.value);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -113,23 +116,23 @@ const inputHandler = (e) => {
 // 	accent-color: #dac38e;
 // }
 
-[type='range'] {
+[type="range"] {
 	-webkit-appearance: none;
 	appearance: none;
 	margin: 0;
 	outline: 0;
 	background-color: transparent;
 }
-[type='range']::-webkit-slider-runnable-track {
+[type="range"]::-webkit-slider-runnable-track {
 	height: 4px;
 	background: #d68d35;
 }
-[type='range']::-webkit-slider-container {
+[type="range"]::-webkit-slider-container {
 	height: 20px;
 	overflow: hidden;
 }
 
-[type='range']::-webkit-slider-thumb {
+[type="range"]::-webkit-slider-thumb {
 	position: relative;
 	-webkit-appearance: none;
 	appearance: none;
@@ -139,8 +142,8 @@ const inputHandler = (e) => {
 	background-color: #dac38e;
 	border: 1px solid transparent;
 	margin-top: -8px;
-	border-image: linear-gradient(#dac38e, #dac38e) 0 fill / 8 20 8 0 / 0px 0px 0
-		2000px;
+	border-image: linear-gradient(#dac38e, #dac38e) 0 fill / 8 20 8 0 / 0px 0px
+		0 2000px;
 }
 
 .inputGroup {
