@@ -86,6 +86,13 @@ const getPositon = (index) => {
 	return `${iconPositionX},${iconPositionY}`;
 };
 
+// const dataRebuild = () => {
+// 	let data = [...props.series];
+
+// 	const percentageData = data;
+// 	return data;
+// };
+
 // const counter = ref(0);
 // const targetValue = 10;
 // const animationDuration = 2000; // in milliseconds
@@ -115,23 +122,39 @@ const getPositon = (index) => {
 		class="iconPercentageChart"
 	>
 		<div class="iconPercentageChart__title">
-			<!-- <p class="number">{{ counter }}</p> -->
-			<h2 class="iconPercentageChart__content">
-				{{ iconNamePrimary
-				}}<span
-					class="iconPercentageChart__percentage"
-					:style="{ color: iconColorPrimary }"
-					>{{ primaryPercentage }}</span
-				>%
-			</h2>
-			<h2 class="iconPercentageChart__content">
-				{{ iconNameSecondary
-				}}<span
-					class="iconPercentageChart__percentage"
-					:style="{ color: iconColorSecondary }"
-					>{{ secondaryPercentage }}</span
-				>%
-			</h2>
+			<!-- <div v-for="(item, index) in series" key="index">
+				<h2 class="iconPercentageChart__content">
+					{{ iconNamePrimary
+					}}<span
+						class="iconPercentageChart__percentage"
+						:style="{ color: iconColorPrimary }"
+						>{{ primaryPercentage }}</span
+					>%
+				</h2>
+				<p>{{ item.data }}</p>
+			</div> -->
+			<div class="iconPercentageChart__content">
+				<h2>
+					{{ iconNamePrimary
+					}}<span
+						class="iconPercentageChart__percentage"
+						:style="{ color: iconColorPrimary }"
+						>{{ primaryPercentage }}</span
+					>%
+				</h2>
+				<p>總人數：{{ series[0].data }}</p>
+			</div>
+			<div class="iconPercentageChart__content">
+				<h2>
+					{{ iconNameSecondary
+					}}<span
+						class="iconPercentageChart__percentage"
+						:style="{ color: iconColorSecondary }"
+						>{{ secondaryPercentage }}</span
+					>%
+				</h2>
+				<p>總人數：{{ series[1].data }}</p>
+			</div>
 		</div>
 		<div class="iconPercentageChart__chart">
 			<svg
@@ -159,8 +182,7 @@ const getPositon = (index) => {
 						v-if="index < primaryIconNumber"
 						icon-name="man"
 					></chart-icon>
-					<!-- <chart-icon v-else icon-name="woman"></chart-icon> -->
-					<chart-icon v-else icon-name="oldman"></chart-icon>
+					<chart-icon v-else icon-name="woman"></chart-icon>
 				</g>
 			</svg>
 
@@ -200,6 +222,16 @@ const getPositon = (index) => {
 	&__percentage {
 		font-size: 1.6rem;
 		padding: 0 0.3em;
+	}
+	&__content {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		p {
+			color: var(--color-complement-text);
+			margin-top: 0.2 rem;
+		}
 	}
 }
 
