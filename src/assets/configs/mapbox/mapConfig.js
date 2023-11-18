@@ -402,4 +402,42 @@ export const maplayerCommonLayout = {
 			0.9,
 		],
 	},
+	"symbol-metro-child-care-center": {
+		"icon-image": [
+			"case",
+			["==", ["get", "type"], "SPOT"],
+			"icon-house",
+			[
+				"all",
+				["==", ["get", "tpye"], "MRT_STATION"],
+				["<", ["get", "closed_spot_cnt"], 3]
+			],
+			"icon-less",
+			[
+				"all",
+				["==", ["get", "tpye"], "MRT_STATION"],
+				[">=", ["get", "closed_spot_cnt"], 3],
+				["<", ["get", "closed_spot_cnt"], 9]
+			],
+			"icon-middle",
+			[
+				"all",
+				["==", ["get", "tpye"], "MRT_STATION"],
+				[">=", ["get", "closed_spot_cnt"], 9]
+			],
+			"icon-full",
+			"icon-house",
+		],
+		"icon-size": [
+			"interpolate",
+			["linear"],
+			["zoom"],
+			11.99,
+			0.2,
+			14,
+			0.4,
+			22,
+			0.9,
+		],
+	}
 };
