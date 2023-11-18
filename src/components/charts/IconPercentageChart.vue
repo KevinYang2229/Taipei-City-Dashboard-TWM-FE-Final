@@ -36,8 +36,6 @@ const secondaryPercentage = computed(() => {
 
 // calculate how much icon number in chart
 const primaryIconNumber = computed(() => {
-	console.log(primaryPercentage.value, "primaryPercentage.value");
-	console.log(activeData.value.count, "activeData.value.count");
 	return Math.round((primaryPercentage.value * chartIconTotal) / 100);
 });
 const secondaryIconNumber = computed(() => {
@@ -240,7 +238,7 @@ const updateChartData = (year) => {
 	}
 	color: var(--iconPercentageChartFontColor);
 	&__title {
-		margin: 1rem 0;
+		margin-bottom: 1rem;
 		display: flex;
 		justify-content: space-around;
 	}
