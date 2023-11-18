@@ -151,8 +151,18 @@ export const useMapStore = defineStore("map", {
 		// 1. Passes in the map_config (an Array of Objects) of a component and adds all layers to the map layer list
 		addToMapLayerList(map_config, map_source) {
 			// eslint-disable-next-line no-console
+
+			const layerCount = map_config.length;
+
 			map_config.forEach((element) => {
-				let mapLayerId = `${element.index}-${element.type}`;
+				let mapLayerId = '';
+
+				if (layerCount > 2 && element?.layer3Id) {
+					mapLayerId = `${element.index}-${element.type}-${element.layer3Id}`;
+				} else {
+					mapLayerId = `${element.index}-${element.type}`;
+				}
+
 				// 1-1. If the layer exists, simply turn on the visibility and add it to the visible layers list
 				if (
 					this.currentLayers.find((element) => element === mapLayerId)
@@ -207,6 +217,8 @@ export const useMapStore = defineStore("map", {
 			// eslint-disable-next-line no-console
 			let extra_paint_configs = {};
 			let extra_layout_configs = {};
+			let layerConfig = {};
+
 			if (map_config.icon) {
 				extra_paint_configs = {
 					...maplayerCommonPaint[
@@ -234,11 +246,11 @@ export const useMapStore = defineStore("map", {
 				};
 			}
 			this.loadingLayers.push("rendering");
+
 			// eslint-disable-next-line no-console
-			this.map.addLayer({
+			layerConfig = {
 				id: map_config.layerId,
 				type: map_config.type,
-				filter: map_config.filter,
 				paint: {
 					...maplayerCommonPaint[`${map_config.type}`],
 					...extra_paint_configs,
@@ -250,7 +262,13 @@ export const useMapStore = defineStore("map", {
 					...map_config.layout,
 				},
 				source: `${map_config.layerId}-source`,
-			});
+			};
+
+			if (map_config?.filter !== undefined) {
+				layerConfig.filter = map_config.filter;
+			}
+			
+			this.map.addLayer(layerConfig);
 			this.currentLayers.push(map_config.layerId);
 			this.mapConfigs[map_config.layerId] = map_config;
 			this.currentVisibleLayers.push(map_config.layerId);
@@ -356,8 +374,18 @@ export const useMapStore = defineStore("map", {
 		},
 		// 6. Turn off the visibility of an exisiting map layer but don't remove it completely
 		turnOffMapLayerVisibility(map_config) {
+
+			const layerCount = map_config.length;
+
 			map_config.forEach((element) => {
-				let mapLayerId = `${element.index}-${element.type}`;
+
+				let mapLayerId = "";
+				if (layerCount > 2 && element?.layer3Id) {
+					mapLayerId = `${element.index}-${element.type}-${element.layer3Id}`;
+				} else {
+					mapLayerId = `${element.index}-${element.type}`;
+				}
+				
 				this.loadingLayers = this.loadingLayers.filter(
 					(el) => el !== mapLayerId
 				);
@@ -403,7 +431,6 @@ export const useMapStore = defineStore("map", {
 					continue;
 				previousParsedLayer = clickFeatureDatas[i].layer.id;
 				mapConfigs.push(this.mapConfigs[clickFeatureDatas[i].layer.id]);
-
 				parsedPopupContent.push({ properties: clickFeatureDatas[i].properties });
 			}
 
@@ -570,6 +597,11 @@ export const useMapStore = defineStore("map", {
 					layers: this.currentVisibleLayers,
 				}
 			);
+
+			if (clickFeatureDatas.length == 0) {
+				return;
+			}
+			
 			let mrt_click = clickFeatureDatas[0]["properties"]["name"];
 			let layer_id = clickFeatureDatas[0]["layer"]["id"];
 
