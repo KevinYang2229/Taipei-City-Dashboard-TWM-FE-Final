@@ -6124,7 +6124,7 @@
 				}
 			],
 			"chart_config": {
-				"color": ["#3A69A0", "#D68D35", "#BF672B", "#955DB6"],
+				"color": ["#3A69A0", "#D68D35", "#488887", "#955DB6"],
 				"types": ["SingleIconPercentageChart"],
 				"unit": "人",
 				"categories": ["孕前檢查", "婦產科", "產後護理", "哺乳室"],
