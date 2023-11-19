@@ -5034,7 +5034,7 @@
 			"chart_config": {
 				"color": ["#488887", "#D68D35"],
 				"types": ["MixedColumnLineChart"],
-				"units": ["人次", "元"]
+				"units": ["萬人次", "億"]
 			},
 			"history_data": true,
 			"source": "社會局",
@@ -5216,7 +5216,7 @@
 			"chart_config": {
 				"color": ["#3A69A0", "#D68D35"],
 				"types": ["MixedColumnLineChart"],
-				"units": ["人次", "元"],
+				"units": ["萬人次", "萬元"],
 				"history_unit": "元/人次"
 			},
 			"history_data": true,
@@ -5412,7 +5412,7 @@
 					"大安區",
 					"文山區"
 				],
-				"types": ["BarChart", "DistrictChart", "DonutChart"],
+				"types": ["DonutChart", "BarChart", "DistrictChart"],
 				"color": ["#3A69A0", "#8CA9CB", "#D68D35", "#D1A384"],
 				"unit": "處設施",
 				"icon": "playground",
@@ -5434,7 +5434,7 @@
 					]
 				]
 			},
-			"name": "【環境】共融式遊戲場",
+			"name": "【生活環境】共融式遊戲場",
 			"source": "社會局",
 			"time_from": "2023-10-11T17:40:13+08:00",
 			"update_freq": 1,
@@ -6125,7 +6125,7 @@
 			"time_to": null,
 			"update_freq": 10,
 			"update_freq_unit": "minute",
-			"name": "【其他】交通事故",
+			"name": "【安全】交通事故",
 			"short_desc": "顯示當前全市公共停車場汽車、機車、充電站的使用情況",
 			"long_desc": "顯示當前全市公共停車場汽車、機車、充電站的使用情況，資料來源為台北市交通局公開資料，每10分鐘更新。",
 			"use_case": "了解公共停車場汽車、機車及充電站的使用情況，有助於掌握當前全市公共停車設施的使用情況，以便提供更優化的交通規劃。",
@@ -6221,7 +6221,7 @@
 					]
 				]
 			},
-			"name": "【育兒環境】捷運臨近托育中心",
+			"name": "【生活環境】捷運臨近托育中心",
 			"source": "社會局",
 			"time_from": "2023-07-28T00:00:00+08:00",
 			"update_freq": null,
@@ -6232,6 +6232,54 @@
 			"links": [
 				"https://data.taipei/dataset/detail?id=fd4779d0-827d-4ab3-8f65-2a356abad6d9",
 				"https://data.taipei/dataset/detail?id=7262cdae-18e7-4d33-a842-4978cbc84d43",
+				"https://data.taipei/dataset/detail?id=41c729ce-c848-492a-b7a6-db468f06c17c",
+				"https://data.taipei/dataset/detail?id=a7462972-0380-4987-99fb-2071e798ce66",
+				"https://data.taipei/dataset/detail?id=7c66efcd-d073-401c-b18a-7a46728776c4",
+				"https://data.taipei/dataset/detail?id=9c9a3f77-8340-48d8-bc0e-f9155521b758",
+				"https://data.taipei/dataset/detail?id=081df75e-85c7-464c-b125-546920911c5c",
+				"https://data.taipei/dataset/detail?id=01ac5a1d-dfc3-44c7-84a7-6d76bcb2879b"
+			],
+			"tags": [],
+			"contributors": ["tuic"]
+		},
+		"2007": {
+			"id": 2007,
+			"index": "maternal_ratio",
+			"map_config": null,
+			"history_data": false,
+			"chart_config": {
+				"color": ["#2f9ca1"],
+				"types": ["DistrictChart", "BarChart"],
+				"unit": "人",
+				"map_filter": [
+					"c_name",
+					[
+						"北投",
+						"士林",
+						"內湖",
+						"南港",
+						"松山",
+						"信義",
+						"中山",
+						"大同",
+						"中正",
+						"萬華",
+						"大安",
+						"文山"
+					]
+				]
+			},
+			"name": "【育兒】各行政區托嬰資源壓力指數",
+			"source": "衛生局",
+			"time_from": "2023-07-25 17:05:44+08:00",
+			"time_to": null,
+			"update_freq": null,
+			"update_freq_unit": null,
+			"short_desc": "各行政區每個托嬰支持機構平均需要服務的嬰兒人數(0~2歲)。",
+			"long_desc": "各行政區每個托嬰支持機構平均需要服務的嬰兒人數(0~2歲)。",
+			"use_case": "各行政區每個托嬰支持機構平均需要服務的嬰兒人數(0~2歲)。",
+			"links": [
+				"https://data.taipei/dataset/detail?id=64c8a3a0-3b9a-4f49-a13a-fb1eb2ffa4b1",
 				"https://data.taipei/dataset/detail?id=41c729ce-c848-492a-b7a6-db468f06c17c",
 				"https://data.taipei/dataset/detail?id=a7462972-0380-4987-99fb-2071e798ce66",
 				"https://data.taipei/dataset/detail?id=7c66efcd-d073-401c-b18a-7a46728776c4",
