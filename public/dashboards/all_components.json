@@ -6143,10 +6143,10 @@
 			"time_from": "2023-02-13T10:34:27+08:00",
 			"update_freq": 1,
 			"update_freq_unit": "year",
-			"name": "[育兒]幼兒園招生概況",
-			"short_desc": "[育兒]幼兒園招生概況時間數列統計資料。",
-			"long_desc": "[育兒]幼兒園招生概況時間數列統計資料。",
-			"use_case": "[育兒]幼兒園招生概況時間數列統計資料。",
+			"name": "【育兒】幼兒園招生概況",
+			"short_desc": "【育兒】幼兒園招生概況時間數列統計資料。",
+			"long_desc": "【育兒】幼兒園招生概況時間數列統計資料。",
+			"use_case": "【育兒】幼兒園招生概況時間數列統計資料。",
 			"links": [
 				"https://data.taipei/dataset/detail?id=266f4210-93e1-4d8c-9cff-055776db9fa6"
 			],
