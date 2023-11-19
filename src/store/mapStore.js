@@ -141,10 +141,11 @@ export const useMapStore = defineStore("map", {
 				"bike_green",
 				"bike_orange",
 				"bike_red",
-				'icon-less',
-				'icon-middle',
-				'icon-full',
-				'icon-house'
+				"icon-less",
+				"icon-middle",
+				"icon-full",
+				"icon-house",
+				"icon-dock"
 			];
 			images.forEach((element) => {
 				this.map.loadImage(
