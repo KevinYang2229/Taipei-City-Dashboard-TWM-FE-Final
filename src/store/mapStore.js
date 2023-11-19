@@ -27,6 +27,7 @@ import {
 import { savedLocations } from "../assets/configs/mapbox/savedLocations.js";
 import { calculateGradientSteps } from "../assets/configs/mapbox/arcGradient";
 import MapPopup from "../components/map/MapPopup.vue";
+import MapPopupSpecial from "../components/map/MapPopupSpecial.vue";
 
 const { BASE_URL } = import.meta.env;
 
@@ -466,10 +467,31 @@ export const useMapStore = defineStore("map", {
 					};
 				},
 			});
+
+			const PopupComponentSpecial = defineComponent({
+				extends: MapPopupSpecial,
+				setup() {
+					// Only show the data of the topmost layer
+					return {
+						popupContent: parsedPopupContent,
+						mapConfigs: mapConfigs,
+						activeTab: ref(0),
+					};
+				},
+			});
+
+
 			// This helps vue determine the most optimal time to mount the component
 			nextTick(() => {
-				const app = createApp(PopupComponent);
-				app.mount("#vue-popup-content");
+				if(clickFeatureDatas[0]["layer"]["id"] === "mrt_nearby_child_care_center-symbol"){
+					//console.log('Special Click Popup event')
+					const app = createApp(PopupComponentSpecial);
+					app.mount("#vue-popup-content");
+				}else{
+					const app = createApp(PopupComponent);
+					app.mount("#vue-popup-content");
+				}
+
 			});
 		},
 		// Remove the current popup
