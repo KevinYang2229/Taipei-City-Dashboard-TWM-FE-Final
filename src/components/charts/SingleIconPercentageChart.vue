@@ -101,17 +101,6 @@ function handleDataSelection(index) {
 					<span>{{ item.type }}</span>
 				</div>
 			</div>
-
-			<Teleport to="body">
-				<div
-					v-if="targetItem"
-					class="iconPercentageChart__chart-info chart-tooltip"
-					:style="tooltipPosition"
-				>
-					<h6>{{ targetData.name }}比例</h6>
-					<span>{{ targetData.value }}{{ unit }}</span>
-				</div>
-			</Teleport>
 		</div>
 	</div>
 </template>
@@ -125,33 +114,16 @@ function handleDataSelection(index) {
 	max-height: 100%;
 	position: relative;
 	overflow-y: scroll;
-	&__chart-info {
-		position: fixed;
-		z-index: 20;
-	}
 	color: var(--iconPercentageChartFontColor);
-	&__title {
-		margin: 1rem 0;
-		display: flex;
-		justify-content: space-around;
-	}
-	&__percentage {
-		color: #db4d6d;
-		font-size: 1.6rem;
-		padding: 0 0.3em;
-	}
-	&__content {
-		&:first-child {
-			.iconPercentageChart__percentage {
-				color: #2ea9df;
-			}
-		}
+	&__chart {
+		margin: 0 auto;
 	}
 	&__items {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		flex-wrap: wrap;
+		max-width: 355px;
 	}
 	&__item {
 		padding: 0.5rem 2rem;
@@ -162,7 +134,7 @@ function handleDataSelection(index) {
 	&__symbols {
 		display: flex;
 		justify-content: space-around;
-		margin: 1.5rem 1.5rem 0;
+		margin: 0.2rem 1.5rem 0;
 		color: var(--color-complement-text);
 		font-size: var(--font-s);
 		font-weight: 400;
@@ -171,6 +143,7 @@ function handleDataSelection(index) {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		cursor: pointer;
 	}
 	&__indicator {
 		width: 1em;
@@ -185,9 +158,6 @@ function handleDataSelection(index) {
 	opacity: 0;
 }
 
-// .active-item {
-// 	transform: translateY(-5px);
-// }
 @keyframes ease-in {
 	0% {
 		opacity: 0;

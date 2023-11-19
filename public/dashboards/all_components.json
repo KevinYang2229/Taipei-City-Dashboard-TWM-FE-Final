@@ -4912,17 +4912,17 @@
 				"unit": "%"
 			},
 			"name": "【育兒】育嬰假性別比例",
-			"history_data": false,
+			"history_data": true,
 			"source": "主計處",
-			"time_from": "2023-01-01T08:00:18+08:00",
-			"time_to": null,
-			"update_freq": null,
-			"update_freq_unit": null,
+			"time_from": "2018-12-31T08:00:18+08:00",
+			"time_to": "2022-12-31T08:00:18+08:00",
+			"update_freq": 1,
+			"update_freq_unit": "year",
 			"short_desc": "顯示兩種不同類型的樣本比例",
 			"long_desc": "顯示兩種不同類型的樣本比例不定期更新。",
 			"use_case": "顯示男女比例",
 			"links": [
-				"https://data.taipei/dataset/detail?id=ecf39112-832c-4b9d-9376-1ec3636d3c7f",
+				"https://data.taipei/dataset/detail?id=48eb75e3-8694-433d-87cd-01b08668bcc7",
 				"https://www.bli.gov.tw/0013465.html"
 			],
 			"tags": [],
@@ -6113,16 +6113,20 @@
 				"categories": ["孕前檢查", "婦產科", "產後護理", "哺乳室"]
 			},
 			"history_data": false,
-			"source": "Pandaa",
-			"time_from": "2023-02-13T10:34:27+08:00",
-			"update_freq": 1,
-			"update_freq_unit": "year",
-			"name": "單項圖形",
-			"short_desc": "臺北市幼兒園招生概況時間數列統計資料。",
-			"long_desc": "臺北市幼兒園招生概況時間數列統計資料。",
-			"use_case": "臺北市幼兒園招生概況時間數列統計資料。",
+			"source": "衛生局",
+			"time_from": "2023-03-02T10:34:27+08:00",
+			"time_to": "2023-08-16T10:34:27+08:00",
+			"update_freq": null,
+			"update_freq_unit": null,
+			"name": "【育產】孕婦支持資源",
+			"short_desc": "盤點臺北市孕前、孕中、孕後的護理資源數量。",
+			"long_desc": "盤點臺北市孕前、孕中、孕後的護理資源數量。",
+			"use_case": "用於確認臺北市孕前、孕中、孕後的護理資源數量。",
 			"links": [
-				"https://data.taipei/dataset/detail?id=266f4210-93e1-4d8c-9cff-055776db9fa6"
+				"https://data.taipei/dataset/detail?id=83dc0502-245a-4d77-99f4-786127cedea2",
+				"https://data.taipei/dataset/detail?id=b940e63f-cde7-498a-9e59-a5de859c5ca3",
+				"https://data.taipei/dataset/detail?id=5d1d34d8-1b81-4162-87b6-05e0896af958",
+				"https://health.gov.taipei/cp.aspx?n=BB1D7E05DE9C88C0&s=EEC410A9F61AE56C"
 			],
 			"tags": [],
 			"contributors": ["tuic"]
