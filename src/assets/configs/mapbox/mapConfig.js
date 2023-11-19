@@ -441,7 +441,18 @@ export const maplayerCommonLayout = {
 		],
 	},
 	"symbol-pregnant_facility": {
-		"icon-image": ["bike_green"],
+		"icon-image": [
+			"case",
+			["==", ["get", "type"], "孕前檢查"],
+			"icon-hospital-map",
+			["==", ["get", "type"], "產後護理"],
+			"icon-h-house-map",
+			["==", ["get", "type"], "婦產科"],
+			"icon-Pregnant-map",
+			["==", ["get", "type"], "哺乳室"],
+			"icon-nurse-map",
+			"icon-house",
+		],
 		"icon-size": [
 			"interpolate",
 			["linear"],
