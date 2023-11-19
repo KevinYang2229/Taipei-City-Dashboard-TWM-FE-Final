@@ -86,7 +86,10 @@
 					"#fb8c8c",
 					"#C53E5E"
 				],
-				"types": ["BarChart", "DonutChart"],
+				"types": [
+					"BarChart",
+					"DonutChart"
+				],
 				"unit": "件"
 			},
 			"history_data": true,
@@ -838,7 +841,10 @@
 					"#9b976c",
 					"#fbf3ac"
 				],
-				"types": ["DonutChart", "BarChart"],
+				"types": [
+					"DonutChart",
+					"BarChart"
+				],
 				"unit": "件"
 			},
 			"name": "都市更新案件",
@@ -917,7 +923,10 @@
 					"#c2651c",
 					"#a65818"
 				],
-				"types": ["DonutChart", "BarChart"],
+				"types": [
+					"DonutChart",
+					"BarChart"
+				],
 				"unit": "棟",
 				"map_filter": [
 					"progress",
@@ -2839,7 +2848,12 @@
 				"unit": "km²",
 				"map_filter": [
 					"type",
-					["公園", "河濱公園", "公園生態化", "校園綠化"]
+					[
+						"公園",
+						"河濱公園",
+						"公園生態化",
+						"校園綠化"
+					]
 				]
 			},
 			"name": "公園綠地",
@@ -3018,7 +3032,10 @@
 							13,
 							[
 								"match",
-								["get", "type"],
+								[
+									"get",
+									"type"
+								],
 								"診所",
 								2.5,
 								"醫院",
@@ -3432,8 +3449,13 @@
 							16,
 							[
 								"interpolate",
-								["linear"],
-								["get", "diameter"],
+								[
+									"linear"
+								],
+								[
+									"get",
+									"diameter"
+								],
 								0,
 								2,
 								2,
@@ -3655,7 +3677,12 @@
 				"unit": "m²",
 				"map_filter": [
 					"type",
-					["小田園", "快樂農園", "綠屋頂", "市民農園"]
+					[
+						"小田園",
+						"快樂農園",
+						"綠屋頂",
+						"市民農園"
+					]
 				]
 			},
 			"name": "田園城市",
@@ -4698,10 +4725,18 @@
 					"DonutChart"
 				],
 				"unit": "站",
-				"color": ["#a8f8ff", "#4cd2ff", "#00a6ff"],
+				"color": [
+					"#a8f8ff",
+					"#4cd2ff",
+					"#00a6ff"
+				],
 				"map_filter": [
 					"category",
-					["替代站<=5", "替代站5~10", "替代站>10"]
+					[
+						"替代站<=5",
+						"替代站5~10",
+						"替代站>10"
+					]
 				]
 			},
 			"map_config": [
@@ -5153,8 +5188,13 @@
 					"paint": {
 						"heatmap-weight": [
 							"interpolate",
-							["linear"],
-							["get", "n_uq_mob"],
+							[
+								"linear"
+							],
+							[
+								"get",
+								"n_uq_mob"
+							],
 							1000,
 							0,
 							2000,
@@ -5164,8 +5204,12 @@
 						],
 						"heatmap-intensity": [
 							"interpolate",
-							["linear"],
-							["zoom"],
+							[
+								"linear"
+							],
+							[
+								"zoom"
+							],
 							0,
 							1,
 							9,
@@ -5173,8 +5217,12 @@
 						],
 						"heatmap-color": [
 							"interpolate",
-							["linear"],
-							["heatmap-density"],
+							[
+								"linear"
+							],
+							[
+								"heatmap-density"
+							],
 							0,
 							"rgba(186, 206, 219, 0)",
 							0.2,
@@ -5190,8 +5238,12 @@
 						],
 						"heatmap-radius": [
 							"interpolate",
-							["linear"],
-							["zoom"],
+							[
+								"linear"
+							],
+							[
+								"zoom"
+							],
 							0,
 							2,
 							9,
@@ -5200,8 +5252,14 @@
 						"heatmap-opacity": {
 							"default": 1,
 							"stops": [
-								[14, 1],
-								[15, 0.5]
+								[
+									14,
+									1
+								],
+								[
+									15,
+									0.5
+								]
 							]
 						}
 					},
@@ -5252,7 +5310,9 @@
 					"#00a9e0",
 					"#9F11FC"
 				],
-				"types": ["PolarAreaChart"],
+				"types": [
+					"PolarAreaChart"
+				],
 				"unit": "件",
 				"categories": [
 					"東北",
@@ -6068,11 +6128,17 @@
 					"id": "clusters",
 					"index": "child_hospital",
 					"type": "circle",
-					"filter": ["has", "point_count"],
+					"filter": [
+						"has",
+						"point_count"
+					],
 					"paint": {
 						"circle-color": [
 							"step",
-							["get", "point_count"],
+							[
+								"get",
+								"point_count"
+							],
 							"#6588B1",
 							10,
 							"#D6B059",
@@ -6081,7 +6147,10 @@
 						],
 						"circle-radius": [
 							"step",
-							["get", "point_count"],
+							[
+								"get",
+								"point_count"
+							],
 							20,
 							10,
 							30,
@@ -6097,12 +6166,18 @@
 					"id": "cluster-count",
 					"index": "child_hospital",
 					"type": "symbol",
-					"filter": ["has", "point_count"],
+					"filter": [
+						"has",
+						"point_count"
+					],
 					"paint": {
 						"text-color": "#ffffff"
 					},
 					"layout": {
-						"text-field": ["get", "point_count_abbreviated"],
+						"text-field": [
+							"get",
+							"point_count_abbreviated"
+						],
 						"text-font": [
 							"DIN Offc Pro Medium",
 							"Arial Unicode MS Bold"
@@ -6117,7 +6192,13 @@
 					"type": "circle",
 					"index": "child_hospital",
 					"layer3Id": "unclustered",
-					"filter": ["!", ["has", "point_count"]],
+					"filter": [
+						"!",
+						[
+							"has",
+							"point_count"
+						]
+					],
 					"paint": {
 						"circle-radius": 4,
 						"circle-stroke-width": 1,
@@ -6179,8 +6260,7 @@
 					]
 				]
 			},
-
-			"name": "【醫療】臺北市兒童醫療補助特約院所",
+			"name": "【醫療】兒童醫療補助特約院所",
 			"source": "衛生局",
 			"time_from": "2023-07-25 17:05:44+08:00",
 			"time_to": null,
@@ -6361,7 +6441,7 @@
 							"name": "機構名稱"
 						},
 						{
-							"key": "adress",
+							"key": "address",
 							"name": "地址"
 						},
 						{
@@ -6471,6 +6551,26 @@
 					"type": "circle",
 					"size": null,
 					"icon": null
+				},
+				{
+					"index": "playground",
+					"type": "symbol",
+					"icon": "playground-duck",
+					"property": [
+						{
+							"key": "district",
+							"name": "行政區"
+						},
+						{
+							"key": "location",
+							"name": "名稱"
+						},
+						{
+							"key": "address",
+							"name": "地址"
+						}
+					],
+					"title": "共融式遊戲場地圖"
 				}
 			],
 			"history_data": false,
@@ -6501,7 +6601,7 @@
 					"#D1A384"
 				],
 				"unit": "處設施",
-				"icon": "playground",
+				"icon": "triangle_green",
 				"map_filter": [
 					"district",
 					[
@@ -6550,9 +6650,18 @@
 				],
 				"map_filter": [
 					"dist",
-					["北投區", "士林區", "內湖區", "南港區", "松山區"]
+					[
+						"北投區",
+						"士林區",
+						"內湖區",
+						"南港區",
+						"松山區"
+					]
 				],
-				"types": ["BarChart", "PolarAreaChart"],
+				"types": [
+					"BarChart",
+					"PolarAreaChart"
+				],
 				"unit": "件"
 			},
 			"map_config": [
@@ -6560,11 +6669,17 @@
 					"id": "clusters",
 					"index": "collisions",
 					"type": "circle",
-					"filter": ["has", "point_count"],
+					"filter": [
+						"has",
+						"point_count"
+					],
 					"paint": {
 						"circle-color": [
 							"step",
-							["get", "point_count"],
+							[
+								"get",
+								"point_count"
+							],
 							"#6588B1",
 							10,
 							"#D6B059",
@@ -6573,7 +6688,10 @@
 						],
 						"circle-radius": [
 							"step",
-							["get", "point_count"],
+							[
+								"get",
+								"point_count"
+							],
 							20,
 							10,
 							30,
@@ -6589,12 +6707,18 @@
 					"id": "cluster-count",
 					"index": "collisions",
 					"type": "symbol",
-					"filter": ["has", "point_count"],
+					"filter": [
+						"has",
+						"point_count"
+					],
 					"paint": {
 						"text-color": "#ffffff"
 					},
 					"layout": {
-						"text-field": ["get", "point_count_abbreviated"],
+						"text-field": [
+							"get",
+							"point_count_abbreviated"
+						],
 						"text-font": [
 							"DIN Offc Pro Medium",
 							"Arial Unicode MS Bold"
@@ -6609,7 +6733,13 @@
 					"type": "circle",
 					"index": "collisions",
 					"layer3Id": "unclustered",
-					"filter": ["!", ["has", "point_count"]],
+					"filter": [
+						"!",
+						[
+							"has",
+							"point_count"
+						]
+					],
 					"paint": {
 						"circle-radius": 4,
 						"circle-stroke-width": 1,
@@ -6654,7 +6784,9 @@
 				"https://data.taipei/dataset/detail?id=dc7e246a-a88e-42f8-8cd6-9739209af774"
 			],
 			"tags": [],
-			"contributors": ["tuic"]
+			"contributors": [
+				"tuic"
+			]
 		},
 		"3001": {
 			"id": 3001,
@@ -7242,6 +7374,243 @@
 			"use_case": "臺北市幼兒園招生概況時間數列統計資料。",
 			"links": [
 				"https://data.taipei/dataset/detail?id=266f4210-93e1-4d8c-9cff-055776db9fa6"
+			],
+			"tags": [],
+			"contributors": [
+				"tuic"
+			]
+		},
+		"2010": {
+			"id": 2010,
+			"index": "traffic_accident",
+			"map_config": [
+				{
+					"index": "traffic_accident",
+					"condition": {
+						"field": "hour",
+						"unit": "小時",
+						"step": "1",
+						"min": "1",
+						"max": "24"
+					},
+					"paint": {
+						"circle-radius": [
+							"interpolate",
+							[
+								"linear"
+							],
+							[
+								"number",
+								[
+									"get",
+									"casuality"
+								]
+							],
+							0,
+							1,
+							3,
+							20,
+							5,
+							40
+						],
+						"circle-color": [
+							"interpolate",
+							[
+								"linear"
+							],
+							[
+								"number",
+								[
+									"get",
+									"casuality"
+								]
+							],
+							0,
+							"#2DC4B2",
+							1,
+							"#3BB3C3",
+							2,
+							"#669EC4",
+							3,
+							"#8B88B6",
+							4,
+							"#A2719B",
+							5,
+							"#AA5E79"
+						],
+						"circle-opacity": 0.8
+					},
+					"property": [
+						{
+							"key": "hour",
+							"name": "時間"
+						},
+						{
+							"key": "casuality",
+							"name": "車禍數量"
+						}
+					],
+					"type": "circle",
+					"size": null,
+					"icon": null,
+					"title": "交通事故"
+				}
+			],
+			"chart_config": {
+				"color": [
+					"#2e999b",
+					"#80e3d4",
+					"#1f9b85"
+				],
+				"types": [
+					"TimelineStackedChart"
+				],
+				"map_filter": [
+					"hour"
+				],
+				"unit": "個"
+			},
+			"history_data": false,
+			"source": "交通局",
+			"time_from": "2023-05-11T08:00:00+08:00",
+			"time_to": null,
+			"update_freq": 10,
+			"update_freq_unit": "minute",
+			"name": "交通事故",
+			"short_desc": "顯示當前全市公共停車場汽車、機車、充電站的使用情況",
+			"long_desc": "顯示當前全市公共停車場汽車、機車、充電站的使用情況，資料來源為台北市交通局公開資料，每10分鐘更新。",
+			"use_case": "了解公共停車場汽車、機車及充電站的使用情況，有助於掌握當前全市公共停車設施的使用情況，以便提供更優化的交通規劃。",
+			"links": [
+				"https://data.taipei/dataset/detail?id=d5c0656b-5250-4179-a491-c94daa56ef2c"
+			],
+			"tags": [],
+			"contributors": [
+				"tuic"
+			]
+		},
+		"9443": {
+			"id": 9443,
+			"index": "child_care_center",
+			"map_config": [
+				{
+					"color": "#555",
+					"index": "traffic_metro_line",
+					"paint": {
+						"line-color": [
+							"match",
+							[
+								"get",
+								"mrtid"
+							],
+							[
+								"BL"
+							],
+							"#0070bd",
+							[
+								"O"
+							],
+							"#f8b61c",
+							[
+								"G"
+							],
+							"#008659",
+							[
+								"R"
+							],
+							"#e3002c",
+							[
+								"BR"
+							],
+							"#c48c31",
+							[
+								"Y"
+							],
+							"#ffdb00",
+							"#505050"
+						]
+					},
+					"property": [
+						{
+							"key": "mrtsys",
+							"name": "系統"
+						},
+						{
+							"key": "mrtid",
+							"name": "代號"
+						},
+						{
+							"key": "mrtcode",
+							"name": "路線"
+						}
+					],
+					"type": "line",
+					"size": null,
+					"icon": null,
+					"title": "捷運路線"
+				},
+				{
+					"index": "mrt_nearby_child_care_center",
+					"property": [
+						{
+							"key": "name",
+							"name": "名稱"
+						},
+						{
+							"key": "closed_spot_cnt",
+							"name": "附近的托育中心數量"
+						}
+					],
+					"type": "symbol",
+					"icon": "metro-child-care-center",
+					"size": null,
+					"title": "托育中心"
+				}
+			],
+			"history_data": false,
+			"chart_config": {
+				"color": [
+					"#2f9ca1"
+				],
+				"types": [
+					"BarChart",
+					"DistrictChart"
+				],
+				"unit": "家",
+				"map_filter": [
+					"c_name",
+					[
+						"北投",
+						"士林",
+						"內湖",
+						"南港",
+						"松山",
+						"信義",
+						"中山",
+						"大同",
+						"中正",
+						"萬華",
+						"大安",
+						"文山"
+					]
+				]
+			},
+			"name": "【育兒環境】捷運臨近托育中心",
+			"source": "社會局",
+			"time_from": "2023-07-28T00:00:00+08:00",
+			"update_freq": null,
+			"update_freq_unit": null,
+			"short_desc": "顯示臺北市育兒支持資源統計。",
+			"long_desc": "顯示臺北市育兒支持資源統計。",
+			"use_case": "顯示臺北市育兒支持資源統計。",
+			"links": [
+				"https://data.taipei/dataset/detail?id=fd4779d0-827d-4ab3-8f65-2a356abad6d9",
+				"https://data.taipei/dataset/detail?id=7262cdae-18e7-4d33-a842-4978cbc84d43",
+				"https://data.taipei/dataset/detail?id=41c729ce-c848-492a-b7a6-db468f06c17c",
+				"https://data.taipei/dataset/detail?id=a7462972-0380-4987-99fb-2071e798ce66",
+				"https://data.taipei/dataset/detail?id=7c66efcd-d073-401c-b18a-7a46728776c4",
+				"https://data.taipei/dataset/detail?id=9c9a3f77-8340-48d8-bc0e-f9155521b758",
+				"https://data.taipei/dataset/detail?id=081df75e-85c7-464c-b125-546920911c5c",
+				"https://data.taipei/dataset/detail?id=01ac5a1d-dfc3-44c7-84a7-6d76bcb2879b"
 			],
 			"tags": [],
 			"contributors": [
