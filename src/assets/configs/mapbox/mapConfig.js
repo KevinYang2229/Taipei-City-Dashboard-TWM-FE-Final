@@ -454,4 +454,8 @@ export const maplayerCommonLayout = {
 			0.9,
 		],
 	},
+	"symbol-playground-duck": {
+		"icon-image": "icon-dock",
+		"icon-size": 0.3,
+	},
 };
