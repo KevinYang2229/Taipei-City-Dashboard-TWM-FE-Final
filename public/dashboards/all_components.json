@@ -5094,7 +5094,7 @@
 				"types": ["MixedColumnLineChart"],
 				"units": ["萬人次", "億"]
 			},
-			"history_data": true,
+			"history_data": false,
 			"source": "社會局",
 			"time_from": "2023-02-01T00:00:00+08:00",
 			"time_to": "2023-08-03T16:07:24+08:00",
@@ -6069,7 +6069,7 @@
 				"unit": "人",
 				"categories": ["實際招收人數", "核定招收人數"]
 			},
-			"history_data": false,
+			"history_data": true,
 			"source": "主計處",
 			"time_from": "2023-02-13T10:34:27+08:00",
 			"update_freq": 1,
@@ -6343,7 +6343,7 @@
 					]
 				]
 			},
-			"name": "【育兒】各行政區托嬰資源壓力指數",
+			"name": "【育兒】行政區托嬰資源壓力指數",
 			"source": "衛生局",
 			"time_from": "2023-07-25 17:05:44+08:00",
 			"time_to": null,
