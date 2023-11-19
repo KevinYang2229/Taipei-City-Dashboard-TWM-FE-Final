@@ -146,7 +146,11 @@ export const useMapStore = defineStore("map", {
 				'icon-middle',
 				'icon-full',
 				'icon-house',
-				'icon-baby'
+				'icon-baby',
+				'icon-h-house-map',
+				'icon-hospital-map',
+				'icon-nurse-map',
+				'icon-Pregnant-map'
 			];
 			images.forEach((element) => {
 				this.map.loadImage(
@@ -279,7 +283,7 @@ export const useMapStore = defineStore("map", {
 			if (map_config?.filter !== undefined) {
 				layerConfig.filter = map_config.filter;
 			}
-
+			console.log(layerConfig)
 			this.map.addLayer(layerConfig);
 			this.currentLayers.push(map_config.layerId);
 			this.mapConfigs[map_config.layerId] = map_config;

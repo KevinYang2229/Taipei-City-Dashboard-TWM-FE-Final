@@ -439,19 +439,21 @@ export const maplayerCommonLayout = {
 			22,
 			0.9,
 		],
-		"symbol-pregnant_facility": {
-			"icon-image": ["bike_green"],
-			"icon-size": [
-				"interpolate",
-				["linear"],
-				["zoom"],
-				11.99,
-				0.2,
-				14,
-				0.4,
-				22,
-				0.9,
-			],
-		},
+	},
+	"symbol-pregnant_facility": {
+		"icon-image": [
+			"icon-house"
+		],
+		"icon-size": [
+			"interpolate",
+			["linear"],
+			["zoom"],
+			11.99,
+			0.2,
+			14,
+			0.4,
+			22,
+			0.9,
+		],
 	},
 };

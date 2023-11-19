@@ -5987,9 +5987,17 @@
 			"index": "customized_chart",
 			"map_config": null,
 			"chart_config": {
-				"color": ["#4B96FA", "#F1C40F"],
-				"types": ["IconPercentageChart"],
-				"categories": ["男生", "女生"],
+				"color": [
+					"#4B96FA",
+					"#F1C40F"
+				],
+				"types": [
+					"IconPercentageChart"
+				],
+				"categories": [
+					"男生",
+					"女生"
+				],
 				"unit": "%"
 			},
 			"name": "【育兒】育嬰假性別比例",
@@ -6007,7 +6015,9 @@
 				"https://www.bli.gov.tw/0013465.html"
 			],
 			"tags": [],
-			"contributors": ["tuic"]
+			"contributors": [
+				"tuic"
+			]
 		},
 		"3000": {
 			"id": 3000,
@@ -6023,7 +6033,10 @@
 					"#3975b7",
 					"#223477"
 				],
-				"types": ["TreemapChart", "BarChart"],
+				"types": [
+					"TreemapChart",
+					"BarChart"
+				],
 				"unit": "件"
 			},
 			"name": "【治安】反詐資訊",
@@ -6036,9 +6049,13 @@
 			"short_desc": "xxx",
 			"long_desc": "xxx",
 			"use_case": "xxx",
-			"links": ["https://xxx"],
+			"links": [
+				"https://xxx"
+			],
 			"tags": [],
-			"contributors": ["tuic"]
+			"contributors": [
+				"tuic"
+			]
 		},
 		"1804": {
 			"id": 1804,
@@ -7458,7 +7475,7 @@
 		},
 		"2008": {
 			"id": 2008,
-			"index": "icon",
+			"index": "pregnant_facility",
 			"map_config": [
 				{
 					"index": "pregnant_facility",
@@ -7474,7 +7491,6 @@
 					],
 					"type": "symbol",
 					"icon": "pregnant_facility",
-					"size": null,
 					"title": "孕婦相關設施"
 				}
 			],
@@ -7512,49 +7528,6 @@
 			"contributors": [
 				"tuic"
 			]
-		},
-		"2008": {
-			"id": 2008,
-			"index": "icon",
-			"map_config": [
-				{
-					"index": "pregnant_facility",
-					"property": [
-						{
-							"key": "name",
-							"name": "名稱"
-						},
-						{
-							"key": "type",
-							"name": "種類"
-						}
-					],
-					"type": "symbol",
-					"icon": "pregnant_facility",
-					"size": null,
-					"title": "孕婦相關設施"
-				}
-			],
-			"chart_config": {
-				"color": ["#3A69A0", "#D68D35", "#BF672B", "#955DB6"],
-				"types": ["SingleIconPercentageChart"],
-				"unit": "人",
-				"categories": ["孕前檢查", "婦產科", "產後護理", "哺乳室"]
-			},
-			"history_data": false,
-			"source": "Pandaa",
-			"time_from": "2023-02-13T10:34:27+08:00",
-			"update_freq": 1,
-			"update_freq_unit": "year",
-			"name": "單項圖形",
-			"short_desc": "臺北市幼兒園招生概況時間數列統計資料。",
-			"long_desc": "臺北市幼兒園招生概況時間數列統計資料。",
-			"use_case": "臺北市幼兒園招生概況時間數列統計資料。",
-			"links": [
-				"https://data.taipei/dataset/detail?id=266f4210-93e1-4d8c-9cff-055776db9fa6"
-			],
-			"tags": [],
-			"contributors": ["tuic"]
 		},
 		"2010": {
 			"id": 2010,
