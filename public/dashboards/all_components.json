@@ -6204,7 +6204,7 @@
 			"long_desc": "顯示當前全市公共停車場汽車、機車、充電站的使用情況，資料來源為台北市交通局公開資料，每10分鐘更新。",
 			"use_case": "了解公共停車場汽車、機車及充電站的使用情況，有助於掌握當前全市公共停車設施的使用情況，以便提供更優化的交通規劃。",
 			"links": [
-				"https://data.taipei/dataset/detail?id=d5c0656b-5250-4179-a491-c94daa56ef2c"
+				"https://data.taipei/dataset/detail?id=2f238b4f-1b27-4085-93e9-d684ef0e2735"
 			],
 			"tags": [],
 			"contributors": ["tuic"]
@@ -6274,10 +6274,7 @@
 			],
 			"history_data": false,
 			"chart_config": {
-				"color": [
-					"#955DB6",
-					"#B78DD0"
-				],
+				"color": ["#955DB6", "#B78DD0"],
 				"types": ["BarChart", "DistrictChart"],
 				"unit": "家",
 				"map_filter": [
