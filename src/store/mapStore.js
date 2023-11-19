@@ -465,6 +465,7 @@ export const useMapStore = defineStore("map", {
 					};
 				},
 			});
+			
 			// This helps vue determine the most optimal time to mount the component
 			nextTick(() => {
 				const app = createApp(PopupComponent);
