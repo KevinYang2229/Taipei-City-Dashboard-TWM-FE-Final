@@ -6127,7 +6127,8 @@
 				"color": ["#3A69A0", "#D68D35", "#BF672B", "#955DB6"],
 				"types": ["SingleIconPercentageChart"],
 				"unit": "人",
-				"categories": ["孕前檢查", "婦產科", "產後護理", "哺乳室"]
+				"categories": ["孕前檢查", "婦產科", "產後護理", "哺乳室"],
+				"map_filter": ["type"]
 			},
 			"history_data": false,
 			"source": "衛生局",
