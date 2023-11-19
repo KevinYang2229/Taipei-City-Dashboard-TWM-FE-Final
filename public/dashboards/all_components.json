@@ -6274,7 +6274,10 @@
 			],
 			"history_data": false,
 			"chart_config": {
-				"color": ["#2f9ca1"],
+				"color": [
+					"#955DB6",
+					"#B78DD0"
+				],
 				"types": ["BarChart", "DistrictChart"],
 				"unit": "家",
 				"map_filter": [
@@ -6322,7 +6325,7 @@
 			"map_config": null,
 			"history_data": false,
 			"chart_config": {
-				"color": ["#2f9ca1"],
+				"color": ["#955DB6"],
 				"types": ["DistrictChart", "BarChart"],
 				"unit": "人",
 				"map_filter": [
