@@ -7651,10 +7651,7 @@
 					"#955DB6",
 					"#B78DD0"
 				],
-				"types": [
-					"BarChart",
-					"DistrictChart"
-				],
+				"types": ["BarChart", "DistrictChart"],
 				"unit": "家",
 				"map_filter": [
 					"c_name",
@@ -7703,13 +7700,8 @@
 			"map_config": null,
 			"history_data": false,
 			"chart_config": {
-				"color": [
-					"#955DB6"
-				],
-				"types": [
-					"DistrictChart",
-					"BarChart"
-				],
+				"color": ["#955DB6"],
+				"types": ["DistrictChart", "BarChart"],
 				"unit": "人",
 				"map_filter": [
 					"c_name",
