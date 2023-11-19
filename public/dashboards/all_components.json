@@ -4901,6 +4901,64 @@
 			"tags": [],
 			"contributors": ["tuic"]
 		},
+		"2000": {
+			"id": 2000,
+			"index": "customized_chart",
+			"map_config": null,
+			"chart_config": {
+				"color": ["#4B96FA", "#F1C40F"],
+				"types": ["IconPercentageChart"],
+				"categories": ["男生", "女生"],
+				"unit": "%"
+			},
+			"name": "【育兒】育嬰假性別比例",
+			"history_data": false,
+			"source": "主計處",
+			"time_from": "2023-01-01T08:00:18+08:00",
+			"time_to": null,
+			"update_freq": null,
+			"update_freq_unit": null,
+			"short_desc": "顯示兩種不同類型的樣本比例",
+			"long_desc": "顯示兩種不同類型的樣本比例不定期更新。",
+			"use_case": "顯示男女比例",
+			"links": [
+				"https://data.taipei/dataset/detail?id=ecf39112-832c-4b9d-9376-1ec3636d3c7f",
+				"https://www.bli.gov.tw/0013465.html"
+			],
+			"tags": [],
+			"contributors": ["tuic"]
+		},
+		"3000": {
+			"id": 3000,
+			"index": "anti-fraud",
+			"map_config": null,
+			"chart_config": {
+				"color": [
+					"#2d7b7d",
+					"#38b19f",
+					"#07a0d4",
+					"#27d5d7",
+					"#007aff",
+					"#3975b7",
+					"#223477"
+				],
+				"types": ["TreemapChart", "BarChart"],
+				"unit": "件"
+			},
+			"name": "【治安】反詐資訊",
+			"history_data": true,
+			"source": "台灣大哥大反詐戰警團隊",
+			"time_from": "2023-11-09T00:00:00+08:00",
+			"time_to": null,
+			"update_freq": 1,
+			"update_freq_unit": "day",
+			"short_desc": "xxx",
+			"long_desc": "xxx",
+			"use_case": "xxx",
+			"links": ["https://xxx"],
+			"tags": [],
+			"contributors": ["tuic"]
+		},
 		"1804": {
 			"id": 1804,
 			"index": "elder_taxi",
@@ -5231,33 +5289,6 @@
 			"use_case": "臺北市兒童醫療補助時間數列統計資料。",
 			"links": [
 				"https://data.taipei/dataset/detail?id=7b6b159f-d413-43f4-914d-d77d5fe63568"
-			],
-			"tags": [],
-			"contributors": ["tuic"]
-		},
-		"2000": {
-			"id": 2000,
-			"index": "customized_chart",
-			"map_config": null,
-			"chart_config": {
-				"color": ["#6588B1", "#CD9B5F"],
-				"types": ["IconPercentageChart"],
-				"categories": ["男生", "女生"],
-				"itemPrimaryPercentage": 13.4,
-				"unit": "%"
-			},
-			"name": "【育兒】育嬰假性別比例",
-			"history_data": false,
-			"source": "自定義source",
-			"time_from": "2023-01-01T08:00:18+08:00",
-			"time_to": null,
-			"update_freq": null,
-			"update_freq_unit": null,
-			"short_desc": "顯示兩種不同類型的樣本比例",
-			"long_desc": "顯示兩種不同類型的樣本比例不定期更新。",
-			"use_case": "顯示男女比例",
-			"links": [
-				"https://data.taipei/dataset/detail?id=ecf39112-832c-4b9d-9376-1ec3636d3c7f"
 			],
 			"tags": [],
 			"contributors": ["tuic"]
@@ -6044,6 +6075,49 @@
 			"update_freq": 1,
 			"update_freq_unit": "year",
 			"name": "臺北市幼兒園招生概況",
+			"short_desc": "臺北市幼兒園招生概況時間數列統計資料。",
+			"long_desc": "臺北市幼兒園招生概況時間數列統計資料。",
+			"use_case": "臺北市幼兒園招生概況時間數列統計資料。",
+			"links": [
+				"https://data.taipei/dataset/detail?id=266f4210-93e1-4d8c-9cff-055776db9fa6"
+			],
+			"tags": [],
+			"contributors": ["tuic"]
+		},
+		"2008": {
+			"id": 2008,
+			"index": "icon",
+			"map_config": [
+				{
+					"index": "pregnant_facility",
+					"property": [
+						{
+							"key": "name",
+							"name": "名稱"
+						},
+						{
+							"key": "type",
+							"name": "種類"
+						}
+					],
+					"type": "symbol",
+					"icon": "pregnant_facility",
+					"size": null,
+					"title": "孕婦相關設施"
+				}
+			],
+			"chart_config": {
+				"color": ["#3A69A0", "#D68D35", "#BF672B", "#955DB6"],
+				"types": ["SingleIconPercentageChart"],
+				"unit": "人",
+				"categories": ["孕前檢查", "婦產科", "產後護理", "哺乳室"]
+			},
+			"history_data": false,
+			"source": "Pandaa",
+			"time_from": "2023-02-13T10:34:27+08:00",
+			"update_freq": 1,
+			"update_freq_unit": "year",
+			"name": "單項圖形",
 			"short_desc": "臺北市幼兒園招生概況時間數列統計資料。",
 			"long_desc": "臺北市幼兒園招生概況時間數列統計資料。",
 			"use_case": "臺北市幼兒園招生概況時間數列統計資料。",
