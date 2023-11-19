@@ -4903,7 +4903,7 @@
 		},
 		"2000": {
 			"id": 2000,
-			"index": "customized_chart",
+			"index": "parental_leave",
 			"map_config": null,
 			"chart_config": {
 				"color": ["#4B96FA", "#F1C40F"],
@@ -6155,7 +6155,7 @@
 		},
 		"2008": {
 			"id": 2008,
-			"index": "icon",
+			"index": "pregnant_facility",
 			"map_config": [
 				{
 					"index": "pregnant_facility",

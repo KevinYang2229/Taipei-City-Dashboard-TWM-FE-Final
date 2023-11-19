@@ -1,7 +1,7 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { ref, onMounted, computed, reactive } from "vue";
+import { ref, computed } from "vue";
 import ChartIcon from "../utilities/ChartIcon.vue";
 const targetItem = ref(null);
 const mousePosition = ref({ x: null, y: null });
@@ -12,18 +12,12 @@ let targetData = { status: null };
 const { color, categories, unit } = props.chart_config;
 
 const activeData = ref({ ...props.series[props.series.length - 1] });
-// const activeData = reactive(props.series[props.series.length - 1]);
 
 const chartIconTotal = 50;
 let iconColorPrimary = color[0];
 let iconColorSecondary = color[1];
 let iconNamePrimary = categories[0];
 let iconNameSecondary = categories[1];
-
-// 資料總數
-// const chartDataTotalNumber = computed(() => {
-// 	return activeData.value;
-// });
 
 // calculate percentage
 const primaryPercentage = computed(() => {
@@ -41,16 +35,6 @@ const primaryIconNumber = computed(() => {
 });
 const secondaryIconNumber = computed(() => {
 	return activeData.value.count - primaryIconNumber.value;
-});
-
-onMounted(() => {});
-
-const yearArray = computed(() => {
-	let newArray = [];
-	props.series.forEach((element) => {
-		newArray.push(element.year);
-	});
-	return newArray;
 });
 
 const toggleActive = (e) => {
@@ -99,28 +83,6 @@ const updateChartData = (year) => {
 	activeData.value.year = newData.year;
 	activeData.value.data = newData.data;
 };
-
-// const counter = ref(0);
-// const targetValue = 10;
-// const animationDuration = 2000; // in milliseconds
-// let isAnimating = false;
-// let intervalId = null;
-
-// const startAnimation = () => {
-// 	if (!isAnimating) {
-// 		isAnimating = true;
-// 		intervalId = setInterval(animateNumber, animationDuration / 100);
-// 	}
-// };
-
-// const animateNumber = () => {
-// 	if (counter.value < targetValue) {
-// 		counter.value++;
-// 	} else {
-// 		isAnimating = false;
-// 		clearInterval(intervalId);
-// 	}
-// };
 </script>
 
 <template>
@@ -129,17 +91,6 @@ const updateChartData = (year) => {
 		class="iconPercentageChart"
 	>
 		<div class="iconPercentageChart__title">
-			<!-- <div v-for="(item, index) in series" key="index">
-				<h2 class="iconPercentageChart__content">
-					{{ iconNamePrimary
-					}}<span
-						class="iconPercentageChart__percentage"
-						:style="{ color: iconColorPrimary }"
-						>{{ primaryPercentage }}</span
-					>%
-				</h2>
-				<p>{{ item.data }}</p>
-			</div> -->
 			<div class="iconPercentageChart__content">
 				<h2>
 					{{ iconNamePrimary
@@ -269,6 +220,7 @@ const updateChartData = (year) => {
 		display: flex;
 		justify-content: space-around;
 		margin-bottom: 0.5rem;
+		transition: all 0.3s ease;
 	}
 	&__button {
 		color: var(--color-complement-text);
