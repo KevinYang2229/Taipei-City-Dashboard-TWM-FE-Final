@@ -415,6 +415,7 @@ export const useMapStore = defineStore("map", {
 					(element) => element !== mapLayerId
 				);
 			});
+			this.clearOnlyLayers();
 			this.removePopup();
 		},
 		/* Popup Related Functions */
