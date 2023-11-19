@@ -28,6 +28,7 @@ function toggleActiveToNull() {
 }
 onMounted(() => {});
 function handleDataSelection(index) {
+	console.log(index, "index");
 	if (!props.chart_config.map_filter) {
 		return;
 	}
@@ -69,7 +70,7 @@ function handleDataSelection(index) {
 								: 'grayscale(90%)',
 					}"
 					:key="item.name"
-					@click="handleDataSelection(0)"
+					@click="handleDataSelection(item.type)"
 					:class="{
 						'active-item':
 							targetItem === item.type || selectedIndex === 0,
@@ -153,7 +154,7 @@ function handleDataSelection(index) {
 		flex-wrap: wrap;
 	}
 	&__item {
-		padding: 0.5rem 4rem;
+		padding: 0.5rem 2rem;
 	}
 	&__count {
 		text-align: center;

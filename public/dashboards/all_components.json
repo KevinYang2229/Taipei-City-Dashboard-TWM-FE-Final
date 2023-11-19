@@ -6087,7 +6087,25 @@
 		"2007": {
 			"id": 2007,
 			"index": "icon",
-			"map_config": null,
+			"map_config": [
+				{
+					"index": "pregnant_facility",
+					"property": [
+						{
+							"key": "name",
+							"name": "名稱"
+						},
+						{
+							"key": "type",
+							"name": "種類"
+						}
+					],
+					"type": "symbol",
+					"icon": "pregnant_facility",
+					"size": null,
+					"title": "孕婦相關設施"
+				}
+			],
 			"chart_config": {
 				"color": ["#3A69A0", "#D68D35", "#BF672B", "#955DB6"],
 				"types": ["SingleIconPercentageChart"],
