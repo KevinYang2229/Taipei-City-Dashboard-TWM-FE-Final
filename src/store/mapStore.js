@@ -141,10 +141,15 @@ export const useMapStore = defineStore("map", {
 				"bike_green",
 				"bike_orange",
 				"bike_red",
-				'icon-less',
-				'icon-middle',
-				'icon-full',
-				'icon-house'
+				"icon-less",
+				"icon-middle",
+				"icon-full",
+				"icon-house",
+				"icon-dock",
+				"icon-nurse-map",
+				"icon-Pregnant-map",
+				"icon-h-house-map",
+				"icon-hospital-map",
 			];
 			images.forEach((element) => {
 				this.map.loadImage(
@@ -465,7 +470,7 @@ export const useMapStore = defineStore("map", {
 					};
 				},
 			});
-			
+
 			// This helps vue determine the most optimal time to mount the component
 			nextTick(() => {
 				const app = createApp(PopupComponent);

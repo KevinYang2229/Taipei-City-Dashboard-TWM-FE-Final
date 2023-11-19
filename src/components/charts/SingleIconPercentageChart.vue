@@ -1,16 +1,23 @@
 <!-- Developed by Taipei Urban Intelligence Center 2023 -->
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { computed, onMounted, ref } from "vue";
+import { useMapStore } from "../../store/mapStore";
 import ChartIcon from "../utilities/ChartIcon.vue";
+
 const targetItem = ref(null);
-const mousePosition = ref({ x: null, y: null });
 const selectedIndex = ref(null);
 
-const props = defineProps(["chart_config", "activeChart", "series"]);
-let targetData = { status: null };
+const mapStore = useMapStore();
 
-const { color, categories, unit, itemPrimaryPercentage } = props.chart_config;
+const props = defineProps([
+	"map_config",
+	"chart_config",
+	"activeChart",
+	"series",
+]);
+
+const { color } = props.chart_config;
 // get data
 const chartData = computed(() => {
 	const newData = props.series[0].data.map((item, index) => ({
@@ -28,7 +35,6 @@ function toggleActiveToNull() {
 }
 onMounted(() => {});
 function handleDataSelection(index) {
-	console.log(index, "index");
 	if (!props.chart_config.map_filter) {
 		return;
 	}
@@ -36,14 +42,14 @@ function handleDataSelection(index) {
 		mapStore.addLayerFilter(
 			`${props.map_config[0].index}-${props.map_config[0].type}`,
 			props.chart_config.map_filter[0],
-			props.chart_config.map_filter[1][index]
+			index
 		);
 		selectedIndex.value = index;
-		mapStore.map.flyTo({
-			center: props.chart_config.lngLat[0][index],
-			zoom: 14,
-			essential: true,
-		});
+		// mapStore.map.flyTo({
+		// 	center: props.chart_config.lngLat[0][index],
+		// 	zoom: 14,
+		// 	essential: true,
+		// });
 	} else {
 		mapStore.clearLayerFilter(
 			`${props.map_config[0].index}-${props.map_config[0].type}`
