@@ -6551,6 +6551,26 @@
 					"type": "circle",
 					"size": null,
 					"icon": null
+				},
+				{
+					"index": "playground",
+					"type": "symbol",
+					"icon": "playground-duck",
+					"property": [
+						{
+							"key": "district",
+							"name": "行政區"
+						},
+						{
+							"key": "location",
+							"name": "名稱"
+						},
+						{
+							"key": "address",
+							"name": "地址"
+						}
+					],
+					"title": "共融式遊戲場地圖"
 				}
 			],
 			"history_data": false,

@@ -79,7 +79,7 @@ export const useMapStore = defineStore("map", {
 					if (event.lngLat) {
 						this.flyTo(event.lngLat);
 					}
-
+					
 					if (!clickDatas[0]?.properties?.cluster) {
 						if (this.popup) {
 							this.popup = null;
@@ -141,10 +141,11 @@ export const useMapStore = defineStore("map", {
 				"bike_green",
 				"bike_orange",
 				"bike_red",
-				'icon-less',
-				'icon-middle',
-				'icon-full',
-				'icon-house'
+				"icon-less",
+				"icon-middle",
+				"icon-full",
+				"icon-house",
+				"icon-dock",
 			];
 			images.forEach((element) => {
 				this.map.loadImage(
@@ -416,14 +417,13 @@ export const useMapStore = defineStore("map", {
 		// Adds a popup when the user clicks on a item. The event will be passed in.
 		addPopup(event) {
 			// Gets the info that is contained in the coordinates that the user clicked on (only visible layers)
-
 			const clickFeatureDatas = this.map.queryRenderedFeatures(
 				event.point,
 				{
 					layers: this.currentVisibleLayers,
 				}
 			);
-
+			
 			// Return if there is no info in the click
 			if (!clickFeatureDatas || clickFeatureDatas.length === 0) {
 				return;
@@ -437,16 +437,13 @@ export const useMapStore = defineStore("map", {
 				if (mapConfigs.length === 3) break;
 				if (previousParsedLayer === clickFeatureDatas[i].layer.id)
 					continue;
+
 				previousParsedLayer = clickFeatureDatas[i].layer.id;
 				mapConfigs.push(this.mapConfigs[clickFeatureDatas[i].layer.id]);
 				parsedPopupContent.push({
 					properties: clickFeatureDatas[i].properties,
 				});
 			}
-
-			/*if (!!event.lngLat && mapConfigs[0].layerId === 'collisions-circle') {
-				this.flyTo(event.lngLat)
-			}*/
 
 			// Create a new mapbox popup
 			this.popup = new mapboxGl.Popup()
