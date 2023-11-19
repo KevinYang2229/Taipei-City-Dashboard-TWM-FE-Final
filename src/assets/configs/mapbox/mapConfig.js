@@ -410,20 +410,20 @@ export const maplayerCommonLayout = {
 			[
 				"all",
 				["==", ["get", "tpye"], "MRT_STATION"],
-				["<", ["get", "closed_spot_cnt"], 3]
+				["<", ["get", "closed_spot_cnt"], 3],
 			],
 			"icon-less",
 			[
 				"all",
 				["==", ["get", "tpye"], "MRT_STATION"],
 				[">=", ["get", "closed_spot_cnt"], 3],
-				["<", ["get", "closed_spot_cnt"], 9]
+				["<", ["get", "closed_spot_cnt"], 9],
 			],
 			"icon-middle",
 			[
 				"all",
 				["==", ["get", "tpye"], "MRT_STATION"],
-				[">=", ["get", "closed_spot_cnt"], 9]
+				[">=", ["get", "closed_spot_cnt"], 9],
 			],
 			"icon-full",
 			"icon-baby",
@@ -439,5 +439,19 @@ export const maplayerCommonLayout = {
 			22,
 			0.9,
 		],
-	}
+		"symbol-pregnant_facility": {
+			"icon-image": ["bike_green"],
+			"icon-size": [
+				"interpolate",
+				["linear"],
+				["zoom"],
+				11.99,
+				0.2,
+				14,
+				0.4,
+				22,
+				0.9,
+			],
+		},
+	},
 };
