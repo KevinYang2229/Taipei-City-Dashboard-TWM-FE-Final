@@ -73,7 +73,7 @@ function handleDataSelection(index) {
 						filter:
 							targetItem === item.type || !targetItem
 								? 'none'
-								: 'grayscale(90%)',
+								: 'grayscale(100%)',
 					}"
 					:key="item.name"
 					@click="handleDataSelection(item.type)"
@@ -130,9 +130,11 @@ function handleDataSelection(index) {
 		align-items: center;
 		flex-wrap: wrap;
 		max-width: 355px;
+		margin: auto;
 	}
 	&__item {
 		padding: 0.5rem 2rem;
+		transition: all 0.3s ease;
 	}
 	&__count {
 		text-align: center;
