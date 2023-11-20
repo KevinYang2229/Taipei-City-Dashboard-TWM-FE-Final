@@ -4,7 +4,7 @@
 			"name": "icon",
 			"data": [
 				{
-					"type": "孕前檢查",
+					"type": "孕前檢查機構",
 					"name": "prePregnancy",
 					"count": 63
 				},
@@ -14,7 +14,7 @@
 					"count": 143
 				},
 				{
-					"type": "產後護理",
+					"type": "產後護理機構",
 					"name": "postpartumCare",
 					"count": 53
 				},

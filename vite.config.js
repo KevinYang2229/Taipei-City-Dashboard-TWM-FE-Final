@@ -1,5 +1,5 @@
-import { defineConfig, splitVendorChunkPlugin } from "vite";
 import vue from "@vitejs/plugin-vue";
+import { defineConfig, splitVendorChunkPlugin } from "vite";
 import viteCompression from "vite-plugin-compression";
 
 // https://vitejs.dev/config/
@@ -25,7 +25,7 @@ export default defineConfig({
 		globals: true,
 		environment: "happy-dom",
 	},
-	base: "/dashboard-demo",
+	base: "/hack",
 	server: {
 		host: "0.0.0.0",
 		port: 80,
